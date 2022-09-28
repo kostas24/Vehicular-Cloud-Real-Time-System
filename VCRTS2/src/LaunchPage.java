@@ -28,7 +28,7 @@ public class LaunchPage implements ActionListener{
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setFocusable(true);
 		welcomeLabel = new JLabel("Welcome to VCRTS"); 
-		welcomeLabel.setBounds(105, 10, 300, 30); //Set location of label
+		welcomeLabel.setBounds(100, 10, 300, 30); //Set location of label
 		welcomeLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 30));
 		optionLabel = new JLabel("Please login or create an account below");
 		optionLabel.setBounds(105, 100, 300, 30); //Set location of label

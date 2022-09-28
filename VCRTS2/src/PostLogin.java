@@ -1,6 +1,6 @@
 import java.awt.*;
 import javax.swing.*;
-
+//test
 public class PostLogin {
 
     JFrame frame = new JFrame();
@@ -11,10 +11,10 @@ public class PostLogin {
 
 	private JLabel test;
 	private JPanel panel;
-	
+	//test
 	public PostLogin() {
 		test = new JLabel("Login Here. "); 
-		test.setBounds(0,0,300,50);
+		test.setBounds(200,10,350,50);
 		
 		test.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
 		
