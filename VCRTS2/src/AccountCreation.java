@@ -37,6 +37,7 @@ public class AccountCreation {
 		panel = new JPanel();
 
 		panel.setLayout(null);
+		panel.setBackground(Color.CYAN);
 		panel.add(test);
 
 		// adds to current object

@@ -36,6 +36,7 @@ public class PostLogin {
 	private void createPanel() {
 		panel = new JPanel();
 		panel.setLayout(null);
+		panel.setBackground(Color.CYAN);
 		panel.add(test);
 
 		// adds to current object
