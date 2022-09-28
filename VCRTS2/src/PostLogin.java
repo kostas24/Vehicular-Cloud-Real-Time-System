@@ -13,9 +13,8 @@ public class PostLogin {
 	private JPanel panel;
 	
 	public PostLogin() {
-		test = new JLabel("Login Here. "); 
-		test.setBounds(0,0,300,50);
-		
+		test = new JLabel("Login Here"); 
+		test.setBounds(200,10,300,50);
 		test.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
 		
 		createPanel();
@@ -32,6 +31,7 @@ public class PostLogin {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    frame.setVisible(true);
 	}
+
 	
 	private void createPanel() {
 		panel = new JPanel();
