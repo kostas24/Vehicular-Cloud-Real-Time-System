@@ -20,10 +20,12 @@ public class LaunchPage implements ActionListener{
 	//private JLabel loginLabel;
 	//private JLabel createAccountLabel;
 	private JPanel panel;
+	private Color lav = new Color(221,160,221);
 
 	public LaunchPage() {
-
-		frame.setBackground(Color.black); //Not working for some reason. Trying to set background color
+		//INPUTTING SIZE OF GUI from VARIABLES
+		frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setFocusable(true);
 		welcomeLabel = new JLabel("Welcome to VCRTS"); 
 		welcomeLabel.setBounds(105, 10, 300, 30); //Set location of label
@@ -35,17 +37,11 @@ public class LaunchPage implements ActionListener{
 		  loginLabel.setBounds(200, 200, 300, 30); 
 		  loginLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
 		  */
-			createButtonAccount(); 
-			createButtonLogin();
+		
+		createButtonAccount(); 
+		createButtonLogin();
 		createPanel();	
-		frame.setTitle("VCRTS"); //setting Title on top left corner of GUI
-		
-		//INPUTTING SIZE OF GUI from VARIABLES
-		frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
-
-	      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	      frame.setVisible(true);
-		
+		frame.setTitle("VCRTS"); //setting Title on top left corner of GUI	
 	}
 
 		public void actionPerformed(ActionEvent event) {
@@ -96,8 +92,9 @@ public class LaunchPage implements ActionListener{
 	private void createButtonAccount() {
 		ButtonAccount = new JButton("Create Account");
 		// Dimension size = ButtonAccount.getPreferredSize();
-		ButtonAccount.setBounds(180, 220, 140, 25); //Set location of button
-		  ButtonAccount.addActionListener(this);
+		ButtonAccount.setBounds(180, 220, 140, 25); //Set location of button\	
+		ButtonAccount.setBackground(lav);
+		ButtonAccount.addActionListener(this);
 
 	}
 
@@ -106,22 +103,24 @@ public class LaunchPage implements ActionListener{
 		ButtonLogin = new JButton("Login");
 		// Dimension size = ButtonLogin.getPreferredSize();
 		ButtonLogin.setBounds(180, 180, 140, 25); //Set location of button
-
-		  ButtonLogin.addActionListener(this);
+		ButtonLogin.setBackground(lav);
+		ButtonLogin.addActionListener(this);
 	}
 
 	// create a panel to show the labels/buttons on GUI
 	private void createPanel() {
 		panel = new JPanel();
-
 		panel.setLayout(null);
 		panel.add(ButtonAccount);
 		panel.add(ButtonLogin);
 		panel.add(welcomeLabel);
 		panel.add(optionLabel);
-
+		panel.setBackground(Color.CYAN); //panel color
+		frame.setVisible(true);
 		// adds to current object
 		frame.add(panel);
+		
+		
 	}
 
 }
