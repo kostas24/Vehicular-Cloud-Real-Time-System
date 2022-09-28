@@ -14,7 +14,7 @@ public class AccountCreation {
 	
 	public AccountCreation() {
 		test = new JLabel("Create Account Here"); 
-		test.setBounds(0,0,200,50);
+		test.setBounds(150,10,350,50);
 		
 		test.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
 		
