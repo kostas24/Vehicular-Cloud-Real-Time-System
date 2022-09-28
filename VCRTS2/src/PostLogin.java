@@ -11,12 +11,17 @@ public class PostLogin {
 
 	private JLabel test;
 	private JPanel panel;
+	private JTextField nameField;
 	
 	public PostLogin() {
 		test = new JLabel("Login Here. "); 
 		test.setBounds(200,10,350,50);
 		
 		test.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
+		
+		nameField = new JTextField("Name:");
+		nameField.setBounds(150, 50, 200, 25);
+		nameField.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
 		
 		createPanel();
 		
@@ -38,6 +43,7 @@ public class PostLogin {
 		panel.setLayout(null);
 		panel.setBackground(Color.CYAN);
 		panel.add(test);
+		panel.add(nameField);
 
 		// adds to current object
 		frame.add(panel);
