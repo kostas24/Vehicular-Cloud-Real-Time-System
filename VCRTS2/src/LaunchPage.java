@@ -40,11 +40,12 @@ public class LaunchPage implements ActionListener{
 
 		ImageIcon CloudComputingIcon = new ImageIcon("Cloud Computing.jpg");
 		frame.setIconImage(CloudComputingIcon.getImage()); //Changing Frame Icon to cloud computing icon
-	  frame.setVisible(true);
+	 
 		
 		createButtonAccount(); 
 		createButtonLogin();
 		createPanel();	
+		 frame.setVisible(true);
 		frame.setTitle("VCRTS"); //setting Title on top left corner of GUI	
 	}
 
