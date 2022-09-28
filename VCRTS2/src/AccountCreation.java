@@ -1,0 +1,42 @@
+import java.awt.*;
+import javax.swing.*;
+
+public class AccountCreation {
+
+    JFrame frame = new JFrame();
+   
+	private static final int FRAME_WIDTH = 500;
+	private static final int FRAME_HEIGHT = 500;
+
+
+	private JLabel test;
+	private JPanel panel;
+	
+	public AccountCreation() {
+		test = new JLabel("Create Account Here"); 
+		test.setBounds(0,0,200,50);
+		
+		test.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
+		
+		createPanel();
+		
+		
+		frame.setTitle("VCRTS"); //setting Title on top left corner of GUI
+		
+		//INPUTTING SIZE OF GUI from VARIABLES
+		frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
+
+		 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	      frame.setVisible(true);
+	}
+	
+	private void createPanel() {
+		panel = new JPanel();
+
+		panel.setLayout(null);
+		panel.add(test);
+
+		// adds to current object
+			frame.add(panel);
+	}
+}
