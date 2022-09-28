@@ -37,6 +37,10 @@ public class LaunchPage implements ActionListener{
 		  loginLabel.setBounds(200, 200, 300, 30); 
 		  loginLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
 		  */
+
+		ImageIcon CloudComputingIcon = new ImageIcon("Cloud Computing.jpg");
+		frame.setIconImage(CloudComputingIcon.getImage()); //Changing Frame Icon to cloud computing icon
+	  frame.setVisible(true);
 		
 		createButtonAccount(); 
 		createButtonLogin();
@@ -116,7 +120,6 @@ public class LaunchPage implements ActionListener{
 		panel.add(welcomeLabel);
 		panel.add(optionLabel);
 		panel.setBackground(Color.CYAN); //panel color
-		frame.setVisible(true);
 		// adds to current object
 		frame.add(panel);
 		
