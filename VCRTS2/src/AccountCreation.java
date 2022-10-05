@@ -5,6 +5,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalTime;
 import java.io.File;
 
 
@@ -184,7 +185,7 @@ public class AccountCreation implements ActionListener{
     private void createButtonCreateAccount() {
         createAccount = new JButton("Create Account");
     	createAccount.setFont(new Font("Comic Sans MS", Font.PLAIN, 32));
-		createAccount.setBounds(350, 655, 280, 50); //Set location of button
+		createAccount.setBounds(350, 675, 280, 50); //Set location of button
         createAccount.setBackground(lav);
         createAccount.addActionListener(this);
 
@@ -192,56 +193,52 @@ public class AccountCreation implements ActionListener{
     
     private void createBackButton() {
         createBack = new JButton("Back");
-        createBack.setFont(new Font("Comic Sans MS", Font.PLAIN, 32));
-        createBack.setBounds(700, 900, 240, 50); //Set location of button
+        createBack.setFont(new Font("Comic Sans MS", Font.PLAIN, 24));
+        createBack.setBounds(10, 10, 180, 50); //Set location of button
         createBack.setBackground(lav);
         createBack.addActionListener(this);
 
     }
     
     public void actionPerformed(ActionEvent e) {
-        name = nameField.getText().substring(6).trim();;
+        name = nameField.getText().substring(6).trim();
        // confirmLabel.setText(name);
-        email = emailField.getText().substring(7).trim();;
+        email = emailField.getText().substring(7).trim();
      //   confirmLabel.setText(email);
-        phoneNum = phoneNumField.getText().substring(14).trim();;
+        phoneNum = phoneNumField.getText().substring(14).trim();
       //  confirmLabel.setText(phoneNum);
-        ID = idNumberField.getText().substring(11).trim();;
+        ID = idNumberField.getText().substring(11).trim();
         
         if(e.getSource() == createBack)
 		{
 			frame.dispose();
 			LaunchPage launch = new LaunchPage();
 		}
-        else if(e.getSource() == createAccount)
-        {
-        	
-        }
-
         File registry = new File("VCRTSregistry.txt");
         
-        if(registry.isFile() == true) {
+        if(registry.isFile() == true && e.getSource() == createAccount) {
         try {
         	FileWriter fWriter = new FileWriter(registry, true);
         	fWriter.write(""+"\n");
+        	fWriter.write(LocalTime.now().toString() + "\n");
         	fWriter.write(name + "\n");
         	fWriter.write(email + "\n");
         	fWriter.write(phoneNum + "\n");
         	fWriter.write(ID + "\n");
         	
         	if(vehicleRenterCheckBox.isSelected()) {
-        		jobDuration = jobDurationField.getText().substring(25).trim();;
-        		jobDeadline = jobDeadlineField.getText().substring(14).trim();;
+        		jobDuration = jobDurationField.getText().substring(25).trim();
+        		jobDeadline = jobDeadlineField.getText().substring(14).trim();
         		fWriter.write(jobDuration + "\n");
         		fWriter.write(jobDeadline + "\n");
         	}
         	
         	if(vehicleOwnerCheckBox.isSelected()) {
-        		carMake = carMakeField.getText().substring(10).trim();;
-        		carModel = carModelField.getText().substring(11).trim();;
-        		carYear = carYearField.getText().substring(10).trim();;
+        		carMake = carMakeField.getText().substring(10).trim();
+        		carModel = carModelField.getText().substring(11).trim();
+        		carYear = carYearField.getText().substring(10).trim();
         		licensePlate = licensePlateField.getText().substring(17);
-        		residencyTime = residencyTimeField.getText().substring(26);
+        		residencyTime = residencyTimeField.getText().substring(27);
         		fWriter.write(carMake + "\n");
         		fWriter.write(carModel + "\n");
         		fWriter.write(carYear + "\n");
