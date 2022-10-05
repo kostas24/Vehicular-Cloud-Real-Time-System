@@ -75,8 +75,8 @@ public class PostLogin implements ActionListener{
 	
     private void createBackButton() {
         createBack = new JButton("Back");
-        createBack.setFont(new Font("Comic Sans MS", Font.PLAIN, 32));
-        createBack.setBounds(700, 900, 240, 50); //Set location of button
+        createBack.setFont(new Font("Comic Sans MS", Font.PLAIN, 24));
+        createBack.setBounds(10, 10, 180, 50); //Set location of button
         createBack.setBackground(lav);
         createBack.addActionListener(this);
 

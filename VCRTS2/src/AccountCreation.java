@@ -184,7 +184,7 @@ public class AccountCreation implements ActionListener{
     private void createButtonCreateAccount() {
         createAccount = new JButton("Create Account");
     	createAccount.setFont(new Font("Comic Sans MS", Font.PLAIN, 32));
-		createAccount.setBounds(350, 655, 280, 50); //Set location of button
+		createAccount.setBounds(350, 675, 280, 50); //Set location of button
         createAccount.setBackground(lav);
         createAccount.addActionListener(this);
 
@@ -192,8 +192,8 @@ public class AccountCreation implements ActionListener{
     
     private void createBackButton() {
         createBack = new JButton("Back");
-        createBack.setFont(new Font("Comic Sans MS", Font.PLAIN, 32));
-        createBack.setBounds(700, 900, 240, 50); //Set location of button
+        createBack.setFont(new Font("Comic Sans MS", Font.PLAIN, 24));
+        createBack.setBounds(10, 10, 180, 50); //Set location of button
         createBack.setBackground(lav);
         createBack.addActionListener(this);
 
@@ -241,7 +241,7 @@ public class AccountCreation implements ActionListener{
         		carModel = carModelField.getText().substring(11).trim();;
         		carYear = carYearField.getText().substring(10).trim();;
         		licensePlate = licensePlateField.getText().substring(17);
-        		residencyTime = residencyTimeField.getText().substring(26);
+        		residencyTime = residencyTimeField.getText().substring(27);
         		fWriter.write(carMake + "\n");
         		fWriter.write(carModel + "\n");
         		fWriter.write(carYear + "\n");
