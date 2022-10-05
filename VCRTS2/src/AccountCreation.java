@@ -1,11 +1,17 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.File;
+
 
 import javax.swing.*;
 
-public class AccountCreation {
+public class AccountCreation implements ActionListener{
 
     JFrame frame = new JFrame();
 
@@ -38,14 +44,17 @@ public class AccountCreation {
     //Labels and variables to hold user information; to be stored to file
     private boolean vehicleOwnerStatus;
     private boolean vehicleRenterStatus;
-    private String firstName;
-    private String idNumber;
+
     private String email;
     private String carMake;
     private String carModel;
-    private int carYear;
-    private int JobDuration;
-    private int JobDeadline;
+    private String carYear;
+    private String JobDuration;
+    private String JobDeadline;
+    private String name;
+    private String phoneNum;
+    private String ID;
+    private String licensePlate;
 
     public AccountCreation() {
         test = new JLabel("Create Account Here");
@@ -154,18 +163,57 @@ public class AccountCreation {
         createAccount.setBounds(200,510,150,25);
         createAccount.setBackground(lav);
 
+        createAccount.addActionListener(this);
+
     }
     public void actionPerformed(ActionEvent e) {
-        String name = nameField.getText();
-        confirmLabel.setText(name);
-        String email = emailField.getText();
-        confirmLabel.setText(email);
-        String phoneNum = phoneNumField.getText();
-        confirmLabel.setText(phoneNum);
-
-    }
-
-
+        name = nameField.getText();
+       // confirmLabel.setText(name);
+        email = emailField.getText();
+     //   confirmLabel.setText(email);
+        phoneNum = phoneNumField.getText();
+      //  confirmLabel.setText(phoneNum);
+        ID = idNumberField.getText();
+        
+        
+        
+        
+        File registry = new File("VCRTSregistry.txt");
+        
+        if(registry.isFile() == true) {
+        try {
+        	FileWriter fWriter = new FileWriter(registry, true);
+        	fWriter.write(name + "\n");
+        	fWriter.write(email + "\n");
+        	fWriter.write(phoneNum + "\n");
+        	fWriter.write(ID + "\n");
+        	
+        	if(vehicleRenterCheckBox.isSelected()) {
+        		JobDuration = JobDurationField.getText();
+        		JobDeadline = JobDeadlineField.getText();
+        		fWriter.write(JobDuration + "\n");
+        		fWriter.write(JobDeadline + "\n");
+        	}
+        	
+        	if(vehicleOwnerCheckBox.isSelected()) {
+        		carMake = carMakeField.getText();
+        		carModel = carModelField.getText();
+        		carYear = carYearField.getText();
+        		licensePlate = licensePlateField.getText();
+        		fWriter.write(carMake + "\n");
+        		fWriter.write(carModel + "\n");
+        		fWriter.write(carYear + "\n");
+        		fWriter.write(licensePlate + "\n");
+        	}
+        	fWriter.close();
+        	System.out.println("here");
+        } catch(IOException error) {
+        	System.out.println("An error has occured");
+        }
+        }
+    
+        } 
+ 
     private void createPanel() {
         panel = new JPanel();
 
