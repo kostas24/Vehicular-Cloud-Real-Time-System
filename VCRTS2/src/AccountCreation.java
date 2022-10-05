@@ -5,6 +5,8 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.security.Timestamp;
+import java.time.LocalTime;
 import java.io.File;
 
 
@@ -224,6 +226,7 @@ public class AccountCreation implements ActionListener{
         try {
         	FileWriter fWriter = new FileWriter(registry, true);
         	fWriter.write(""+"\n");
+        	fWriter.write(LocalTime.now().toString() + "\n");
         	fWriter.write(name + "\n");
         	fWriter.write(email + "\n");
         	fWriter.write(phoneNum + "\n");
