@@ -30,30 +30,30 @@ public class AccountCreation implements ActionListener{
     private JTextField carMakeField;
     private JTextField carModelField;
     private JTextField carYearField;
-    private JTextField JobDurationField;
-    private JTextField JobDeadlineField;
+    private JTextField jobDurationField;
+    private JTextField jobDeadlineField;
+    private JTextField residencyTimeField;
     private JButton createAccount;
     private JButton createBack;
     private JCheckBox vehicleOwnerCheckBox;
     private JCheckBox vehicleRenterCheckBox;
-    //private ItemListener vehicleOwnerListener;
-    //private ItemListener vehicleRenterListener;
     private Color lav = new Color(221, 160, 221);
 
     //Labels and variables to hold user information; to be stored to file
-    private boolean vehicleOwnerStatus;
-    private boolean vehicleRenterStatus;
+    private boolean vehicleOwnerStatus; //Not being used at this time
+    private boolean vehicleRenterStatus; //Not being used at this time
 
     private String email;
     private String carMake;
     private String carModel;
     private String carYear;
-    private String JobDuration;
-    private String JobDeadline;
+    private String jobDuration;
+    private String jobDeadline;
     private String name;
     private String phoneNum;
     private String ID;
     private String licensePlate;
+    private String residencyTime;
 
     public AccountCreation() {
         accounttextLabel = new JLabel("Create Account Here");
@@ -90,12 +90,16 @@ public class AccountCreation implements ActionListener{
         carYearField = new JTextField("Car Year: ");
         carYearField.setBounds(320, 585, 350, 40);
         carYearField.setFont(new Font("Comic Sans MS", Font.PLAIN, 24));
+        residencyTimeField = new JTextField("Residency Time (In Hours): ");
+        residencyTimeField.setBounds(320, 630,350, 40);
+        residencyTimeField.setFont(new Font("Comic Sans MS", Font.PLAIN, 24));
 
         //Setting fields to not be visible unless checkbox is clicked
         carMakeField.setVisible(false);
         carModelField.setVisible(false);
         carYearField.setVisible(false);
         licensePlateField.setVisible(false);
+        residencyTimeField.setVisible(false);
 
         //Check boxes with their default values set to false
         vehicleOwnerCheckBox = new JCheckBox("Vehicle Owner", false);
@@ -112,7 +116,8 @@ public class AccountCreation implements ActionListener{
                     carModelField.setVisible(true);
                     carYearField.setVisible(true);
                     licensePlateField.setVisible(true);
-                    createAccount.setBounds(350, 655, 280, 50); //Set location of button
+                    residencyTimeField.setVisible(true);
+                    createAccount.setBounds(350, 675, 280, 50); //Set location of button
                 }
                 else if(!vehicleOwnerCheckBox.isSelected())
                 {
@@ -122,21 +127,21 @@ public class AccountCreation implements ActionListener{
                     carModelField.setVisible(false);
                     carYearField.setVisible(false);
                     licensePlateField.setVisible(false);
-                    
+                    residencyTimeField.setVisible(false);
                 }
             }
         });
         //Setting up fields for if user wants to register as Vehicle Renter
-        JobDurationField = new JTextField("Job Duration (In Hours): ");
-        JobDurationField.setBounds(320, 450, 350, 40);
-        JobDurationField.setFont(new Font("Comic Sans MS", Font.PLAIN, 24));
-        JobDeadlineField = new JTextField("Job Deadline: ");
-        JobDeadlineField.setBounds(320, 495, 350, 40);
-        JobDeadlineField.setFont(new Font("Comic Sans MS", Font.PLAIN, 24));
+        jobDurationField = new JTextField("Job Duration (In Hours): ");
+        jobDurationField.setBounds(320, 450, 350, 40);
+        jobDurationField.setFont(new Font("Comic Sans MS", Font.PLAIN, 24));
+        jobDeadlineField = new JTextField("Job Deadline: ");
+        jobDeadlineField.setBounds(320, 495, 350, 40);
+        jobDeadlineField.setFont(new Font("Comic Sans MS", Font.PLAIN, 24));
 
         //Setting fields to not be visible unless checkbox is clicked
-        JobDeadlineField.setVisible(false);
-        JobDurationField.setVisible(false);
+        jobDeadlineField.setVisible(false);
+        jobDurationField.setVisible(false);
 
         vehicleRenterCheckBox = new JCheckBox("Vehicle Renter", false);
         vehicleRenterCheckBox.setFont(new Font("Comic Sans MS", Font.PLAIN, 18));
@@ -147,14 +152,14 @@ public class AccountCreation implements ActionListener{
                 	vehicleOwnerCheckBox.setSelected(false); 
                     vehicleRenterStatus = true;
                     //System.out.println("Vehicle Renter Check Box Clicked!");
-                    JobDurationField.setVisible(true);
-                    JobDeadlineField.setVisible(true);
+                    jobDurationField.setVisible(true);
+                    jobDeadlineField.setVisible(true);
                     createAccount.setBounds(350, 550, 280, 50); //Set location of button
                 }
                 else if (!vehicleRenterCheckBox.isSelected()){
                     vehicleRenterStatus = false;
-                    JobDurationField.setVisible(false);
-                    JobDeadlineField.setVisible(false);
+                    jobDurationField.setVisible(false);
+                    jobDeadlineField.setVisible(false);
                 }
             }
         });
@@ -225,21 +230,23 @@ public class AccountCreation implements ActionListener{
         	fWriter.write(ID + "\n");
         	
         	if(vehicleRenterCheckBox.isSelected()) {
-        		JobDuration = JobDurationField.getText().substring(25).trim();;
-        		JobDeadline = JobDeadlineField.getText().substring(14).trim();;
-        		fWriter.write(JobDuration + "\n");
-        		fWriter.write(JobDeadline + "\n");
+        		jobDuration = jobDurationField.getText().substring(25).trim();;
+        		jobDeadline = jobDeadlineField.getText().substring(14).trim();;
+        		fWriter.write(jobDuration + "\n");
+        		fWriter.write(jobDeadline + "\n");
         	}
         	
         	if(vehicleOwnerCheckBox.isSelected()) {
         		carMake = carMakeField.getText().substring(10).trim();;
         		carModel = carModelField.getText().substring(11).trim();;
         		carYear = carYearField.getText().substring(10).trim();;
-        		licensePlate = licensePlateField.getText().substring(17).trim();;
+        		licensePlate = licensePlateField.getText().substring(17);
+        		residencyTime = residencyTimeField.getText().substring(26);
         		fWriter.write(carMake + "\n");
         		fWriter.write(carModel + "\n");
         		fWriter.write(carYear + "\n");
         		fWriter.write(licensePlate + "\n");
+        		fWriter.write(residencyTime + "\n");
         	}
         	fWriter.close();
         } catch(IOException error) {
@@ -270,10 +277,11 @@ public class AccountCreation implements ActionListener{
         panel.add(carMakeField);
         panel.add(carModelField);
         panel.add(carYearField);
+        panel.add(residencyTimeField);
 
         //Vehicle Owner fields
-        panel.add(JobDeadlineField);
-        panel.add(JobDurationField);
+        panel.add(jobDeadlineField);
+        panel.add(jobDurationField);
 
 
         // adds to current object
