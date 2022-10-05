@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.File;
 
+
 import javax.swing.*;
 
 public class AccountCreation implements ActionListener{
@@ -43,6 +44,7 @@ public class AccountCreation implements ActionListener{
     //Labels and variables to hold user information; to be stored to file
     private boolean vehicleOwnerStatus;
     private boolean vehicleRenterStatus;
+
     private String email;
     private String carMake;
     private String carModel;
@@ -160,6 +162,7 @@ public class AccountCreation implements ActionListener{
         createAccount = new JButton("Create Account");
         createAccount.setBounds(200,510,150,25);
         createAccount.setBackground(lav);
+
         createAccount.addActionListener(this);
 
     }
@@ -210,10 +213,7 @@ public class AccountCreation implements ActionListener{
         }
     
         } 
-        
-      
-
-
+ 
     private void createPanel() {
         panel = new JPanel();
 
