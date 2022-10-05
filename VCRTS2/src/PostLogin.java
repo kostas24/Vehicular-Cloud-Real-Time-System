@@ -3,34 +3,35 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
-//test
+//loginLabel
 public class PostLogin implements ActionListener{
 
     JFrame frame = new JFrame();
    
-	private static final int FRAME_WIDTH = 500;
-	private static final int FRAME_HEIGHT = 500;
+	private static final int FRAME_WIDTH = 1000;
+	private static final int FRAME_HEIGHT = 1000;
 
 
-	private JLabel test;
+	private JLabel loginLabel;
 	private JPanel panel;
 	private JTextField nameField;
 	private JButton enterName;
+	private JButton createBack;
 	private JLabel welcomeLabel;
 	private Color lav = new Color(221,160,221);
-	//test
+	//loginLabel
 	
 	public PostLogin() {
-		test = new JLabel("Login Here. "); 
-		test.setBounds(200,10,350,50);
+		loginLabel = new JLabel("Login Below"); 
+		loginLabel.setBounds(350, 10, 270, 70); //Set location of label
 		
-		test.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
-		
+		loginLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 50));
 		nameField = new JTextField("Name: ");
-		nameField.setBounds(175, 100, 150, 25);
-		
+		nameField.setBounds(320, 300, 350, 40);
+		nameField.setFont(new Font("Comic Sans MS", Font.PLAIN, 24));
 		createButtonName();
 		createWelcomeLabel();
+		createBackButton();
 		createPanel();
 		
 		
@@ -48,9 +49,16 @@ public class PostLogin implements ActionListener{
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		String name = nameField.getText();
+		String name = nameField.getText().substring(5).trim();
 		welcomeLabel.setText("Welcome " + name);
+		welcomeLabel.setBounds(370, 240, 250, 60);
+		welcomeLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 32));
 		
+		if(e.getSource() == createBack)
+		{
+			frame.dispose();
+			LaunchPage launch = new LaunchPage();
+		}
 	}
 	
 	public void checkName() {
@@ -59,26 +67,34 @@ public class PostLogin implements ActionListener{
 	
 	public void createButtonName() {
 		enterName = new JButton("Enter");
-		enterName.setBounds(175, 125, 150, 25);
+		enterName.setFont(new Font("Comic Sans MS", Font.PLAIN, 32));
+		enterName.setBounds(350, 360, 280, 50); //Set location of button	
 		enterName.setBackground(lav);
 		enterName.addActionListener(this);
 	}
 	
+    private void createBackButton() {
+        createBack = new JButton("Back");
+        createBack.setFont(new Font("Comic Sans MS", Font.PLAIN, 32));
+        createBack.setBounds(700, 900, 240, 50); //Set location of button
+        createBack.setBackground(lav);
+        createBack.addActionListener(this);
+
+    }
+	
 	public void createWelcomeLabel() {
 		welcomeLabel = new JLabel(" ");
-		welcomeLabel.setBounds(190, 200, 350, 50);
-		welcomeLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
 	}
 	
 	private void createPanel() {
 		panel = new JPanel();
 		panel.setLayout(null);
 		panel.setBackground(Color.CYAN);
-		panel.add(test);
+		panel.add(loginLabel);
 		panel.add(nameField);
 		panel.add(enterName);
 		panel.add(welcomeLabel);
-		
+		panel.add(createBack);
 
 		// adds to current object
 		frame.add(panel);

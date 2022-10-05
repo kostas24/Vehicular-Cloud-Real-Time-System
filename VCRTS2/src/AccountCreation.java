@@ -5,7 +5,6 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.io.File;
 
 
@@ -15,11 +14,11 @@ public class AccountCreation implements ActionListener{
 
     JFrame frame = new JFrame();
 
-    private static final int FRAME_WIDTH = 600;
-    private static final int FRAME_HEIGHT = 600;
+    private static final int FRAME_WIDTH = 1000;
+    private static final int FRAME_HEIGHT = 1000;
 
     //Labels and variables for the Frame and Panel
-    private JLabel test;
+    private JLabel accounttextLabel;
     private JLabel confirmLabel;
     private JLabel informationLabel;
     private JPanel panel;
@@ -34,7 +33,7 @@ public class AccountCreation implements ActionListener{
     private JTextField JobDurationField;
     private JTextField JobDeadlineField;
     private JButton createAccount;
-
+    private JButton createBack;
     private JCheckBox vehicleOwnerCheckBox;
     private JCheckBox vehicleRenterCheckBox;
     //private ItemListener vehicleOwnerListener;
@@ -57,31 +56,40 @@ public class AccountCreation implements ActionListener{
     private String licensePlate;
 
     public AccountCreation() {
-        test = new JLabel("Create Account Here");
-        test.setBounds(200,10,400,50);
+        accounttextLabel = new JLabel("Create Account Here");
+        accounttextLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 50));
+        accounttextLabel.setBounds(250, 10, 500, 80);
 
         informationLabel = new JLabel("Please enter your personal information below: ");
-        informationLabel.setBounds(140, 30, 400, 50);
+        informationLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 32));
+        informationLabel.setBounds(150, 130, 700, 50);
 
-        test.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
-        nameField = new JTextField("First Name: ");
-        nameField.setBounds(188, 100, 175, 25);
+        nameField = new JTextField("Name: ");
+		nameField.setBounds(320, 200, 350, 40);
+		nameField.setFont(new Font("Comic Sans MS", Font.PLAIN, 24));
         emailField = new JTextField("Email: ");
-        emailField.setBounds(188, 140, 175, 25);
+		emailField.setBounds(320, 245, 350, 40);
+		emailField.setFont(new Font("Comic Sans MS", Font.PLAIN, 24));
         phoneNumField = new JTextField("Phone Number: ");
-        phoneNumField.setBounds(188, 180, 175, 25);
+		phoneNumField.setBounds(320, 290, 350, 40);
+		phoneNumField.setFont(new Font("Comic Sans MS", Font.PLAIN, 24));
         idNumberField = new JTextField("ID Number: ");
-        idNumberField.setBounds(188, 220, 175, 25);
+		idNumberField.setBounds(320, 335, 350, 40);
+		idNumberField.setFont(new Font("Comic Sans MS", Font.PLAIN, 24));
 
         //Setting up fields for if user wants to register as Vehicle Owner
         licensePlateField = new JTextField("License Plate #: ");
-        licensePlateField.setBounds(188, 340, 175, 25);
+        licensePlateField.setBounds(320, 450, 350, 40);
+        licensePlateField.setFont(new Font("Comic Sans MS", Font.PLAIN, 24));
         carMakeField = new JTextField("Car Make: ");
-        carMakeField.setBounds(200, 380, 150, 25);
+        carMakeField.setBounds(320, 495, 350, 40);
+        carMakeField.setFont(new Font("Comic Sans MS", Font.PLAIN, 24));
         carModelField = new JTextField("Car Model: ");
-        carModelField.setBounds(200, 420, 150, 25);
+        carModelField.setBounds(320, 540, 350, 40);
+        carModelField.setFont(new Font("Comic Sans MS", Font.PLAIN, 24));
         carYearField = new JTextField("Car Year: ");
-        carYearField.setBounds(225, 460, 100, 25);
+        carYearField.setBounds(320, 585, 350, 40);
+        carYearField.setFont(new Font("Comic Sans MS", Font.PLAIN, 24));
 
         //Setting fields to not be visible unless checkbox is clicked
         carMakeField.setVisible(false);
@@ -91,17 +99,20 @@ public class AccountCreation implements ActionListener{
 
         //Check boxes with their default values set to false
         vehicleOwnerCheckBox = new JCheckBox("Vehicle Owner", false);
-        vehicleOwnerCheckBox.setBounds(200, 260, 150, 25);
+        vehicleOwnerCheckBox.setFont(new Font("Comic Sans MS", Font.PLAIN, 18));
+        vehicleOwnerCheckBox.setBounds(410, 385, 150, 25);
         vehicleOwnerCheckBox.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent e) {
                 if(vehicleOwnerCheckBox.isSelected())
                 {
+                	vehicleRenterCheckBox.setSelected(false); 
                     vehicleOwnerStatus = true;
                     //System.out.println("Vehicle Owner Check Box Clicked!");
                     carMakeField.setVisible(true);
                     carModelField.setVisible(true);
                     carYearField.setVisible(true);
                     licensePlateField.setVisible(true);
+                    createAccount.setBounds(350, 655, 280, 50); //Set location of button
                 }
                 else if(!vehicleOwnerCheckBox.isSelected())
                 {
@@ -111,28 +122,34 @@ public class AccountCreation implements ActionListener{
                     carModelField.setVisible(false);
                     carYearField.setVisible(false);
                     licensePlateField.setVisible(false);
+                    
                 }
             }
         });
         //Setting up fields for if user wants to register as Vehicle Renter
         JobDurationField = new JTextField("Job Duration (In Hours): ");
-        JobDurationField.setBounds(188, 340, 215, 40);
+        JobDurationField.setBounds(320, 450, 350, 40);
+        JobDurationField.setFont(new Font("Comic Sans MS", Font.PLAIN, 24));
         JobDeadlineField = new JTextField("Job Deadline: ");
-        JobDeadlineField.setBounds(188, 390, 175, 40);
+        JobDeadlineField.setBounds(320, 495, 350, 40);
+        JobDeadlineField.setFont(new Font("Comic Sans MS", Font.PLAIN, 24));
 
         //Setting fields to not be visible unless checkbox is clicked
         JobDeadlineField.setVisible(false);
         JobDurationField.setVisible(false);
 
         vehicleRenterCheckBox = new JCheckBox("Vehicle Renter", false);
-        vehicleRenterCheckBox.setBounds(200, 300, 150, 25);
+        vehicleRenterCheckBox.setFont(new Font("Comic Sans MS", Font.PLAIN, 18));
+        vehicleRenterCheckBox.setBounds(410, 415, 150, 25);
         vehicleRenterCheckBox.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent e) {
                 if(vehicleRenterCheckBox.isSelected()) {
+                	vehicleOwnerCheckBox.setSelected(false); 
                     vehicleRenterStatus = true;
                     //System.out.println("Vehicle Renter Check Box Clicked!");
                     JobDurationField.setVisible(true);
                     JobDeadlineField.setVisible(true);
+                    createAccount.setBounds(350, 550, 280, 50); //Set location of button
                 }
                 else if (!vehicleRenterCheckBox.isSelected()){
                     vehicleRenterStatus = false;
@@ -144,6 +161,7 @@ public class AccountCreation implements ActionListener{
 
 
         createButtonCreateAccount();
+        createBackButton();
         createPanel();
 
 
@@ -160,58 +178,74 @@ public class AccountCreation implements ActionListener{
     }
     private void createButtonCreateAccount() {
         createAccount = new JButton("Create Account");
-        createAccount.setBounds(200,510,150,25);
+    	createAccount.setFont(new Font("Comic Sans MS", Font.PLAIN, 32));
+		createAccount.setBounds(350, 655, 280, 50); //Set location of button
         createAccount.setBackground(lav);
-
         createAccount.addActionListener(this);
 
     }
+    
+    private void createBackButton() {
+        createBack = new JButton("Back");
+        createBack.setFont(new Font("Comic Sans MS", Font.PLAIN, 32));
+        createBack.setBounds(700, 900, 240, 50); //Set location of button
+        createBack.setBackground(lav);
+        createBack.addActionListener(this);
+
+    }
+    
     public void actionPerformed(ActionEvent e) {
-        name = nameField.getText();
+        name = nameField.getText().substring(6).trim();;
        // confirmLabel.setText(name);
-        email = emailField.getText();
+        email = emailField.getText().substring(7).trim();;
      //   confirmLabel.setText(email);
-        phoneNum = phoneNumField.getText();
+        phoneNum = phoneNumField.getText().substring(14).trim();;
       //  confirmLabel.setText(phoneNum);
-        ID = idNumberField.getText();
+        ID = idNumberField.getText().substring(11).trim();;
         
-        
-        
-        
+        if(e.getSource() == createBack)
+		{
+			frame.dispose();
+			LaunchPage launch = new LaunchPage();
+		}
+        else if(e.getSource() == createAccount)
+        {
+        	
+        }
+
         File registry = new File("VCRTSregistry.txt");
         
         if(registry.isFile() == true) {
         try {
         	FileWriter fWriter = new FileWriter(registry, true);
+        	fWriter.write(""+"\n");
         	fWriter.write(name + "\n");
         	fWriter.write(email + "\n");
         	fWriter.write(phoneNum + "\n");
         	fWriter.write(ID + "\n");
         	
         	if(vehicleRenterCheckBox.isSelected()) {
-        		JobDuration = JobDurationField.getText();
-        		JobDeadline = JobDeadlineField.getText();
+        		JobDuration = JobDurationField.getText().substring(25).trim();;
+        		JobDeadline = JobDeadlineField.getText().substring(14).trim();;
         		fWriter.write(JobDuration + "\n");
         		fWriter.write(JobDeadline + "\n");
         	}
         	
         	if(vehicleOwnerCheckBox.isSelected()) {
-        		carMake = carMakeField.getText();
-        		carModel = carModelField.getText();
-        		carYear = carYearField.getText();
-        		licensePlate = licensePlateField.getText();
+        		carMake = carMakeField.getText().substring(10).trim();;
+        		carModel = carModelField.getText().substring(11).trim();;
+        		carYear = carYearField.getText().substring(10).trim();;
+        		licensePlate = licensePlateField.getText().substring(17).trim();;
         		fWriter.write(carMake + "\n");
         		fWriter.write(carModel + "\n");
         		fWriter.write(carYear + "\n");
         		fWriter.write(licensePlate + "\n");
         	}
         	fWriter.close();
-        	System.out.println("here");
         } catch(IOException error) {
         	System.out.println("An error has occured");
         }
-        }
-    
+        }   
         } 
  
     private void createPanel() {
@@ -220,11 +254,12 @@ public class AccountCreation implements ActionListener{
         //Default fields
         panel.setLayout(null);
         panel.setBackground(Color.CYAN);
-        panel.add(test);
+        panel.add(accounttextLabel);
         panel.add(nameField);
         panel.add(emailField);
         panel.add(phoneNumField);
         panel.add(createAccount);
+        panel.add(createBack);
         panel.add(vehicleOwnerCheckBox);
         panel.add(vehicleRenterCheckBox);
         panel.add(idNumberField);
