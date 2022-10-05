@@ -8,17 +8,13 @@ public class LaunchPage implements ActionListener{
 	
 	//Variables for size of Entire GUI
 	private static final int FRAME_WIDTH = 1000;
-	private static final int FRAME_HEIGHT = 600;
+	private static final int FRAME_HEIGHT = 1000;
 
 	JFrame frame = new JFrame();
-	//private JTextField nameField;
-	//private JTextField passwordField;
 	private JButton ButtonAccount;
 	private JButton ButtonLogin;
 	private JLabel welcomeLabel;
 	private JLabel optionLabel;
-	//private JLabel loginLabel;
-	//private JLabel createAccountLabel;
 	private JPanel panel;
 	private Color lav = new Color(221,160,221);
 
@@ -28,20 +24,14 @@ public class LaunchPage implements ActionListener{
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setFocusable(true);
 		welcomeLabel = new JLabel("Welcome to VCRTS"); 
-		welcomeLabel.setBounds(300, 10, 300, 30); //Set location of label
-		welcomeLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 30));
+		welcomeLabel.setBounds(250, 10, 500, 50); //Set location of label
+		welcomeLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 50));
 		optionLabel = new JLabel("Please login or create an account below");
-		optionLabel.setBounds(305, 100, 300, 30); //Set location of label
-		optionLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
-		/*loginLabel = new JLabel("Please provide your login info");
-		  loginLabel.setBounds(200, 200, 300, 30); 
-		  loginLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 16));
-		  */
+		optionLabel.setBounds(210, 300, 600, 50); //Set location of label
+		optionLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 32));
 
 		ImageIcon CloudComputingIcon = new ImageIcon("Cloud Computing.jpg");
 		frame.setIconImage(CloudComputingIcon.getImage()); //Changing Frame Icon to cloud computing icon
-	 
-		
 		createButtonAccount(); 
 		createButtonLogin();
 		createPanel();	
@@ -50,10 +40,7 @@ public class LaunchPage implements ActionListener{
 	}
 
 		public void actionPerformed(ActionEvent event) {
-			// Cant figure out why the label won't show???
-			/*
 
-			*/
 			if(event.getSource() == ButtonLogin)
 			{
 				frame.dispose();
@@ -96,8 +83,8 @@ public class LaunchPage implements ActionListener{
 	// Creating Button to Create Account
 	private void createButtonAccount() {
 		ButtonAccount = new JButton("Create Account");
-		// Dimension size = ButtonAccount.getPreferredSize();
-		ButtonAccount.setBounds(380, 220, 140, 25); //Set location of button\	
+		ButtonAccount.setFont(new Font("Comic Sans MS", Font.PLAIN, 32));
+		ButtonAccount.setBounds(350, 420, 280, 50); //Set location of button	
 		ButtonAccount.setBackground(lav);
 		ButtonAccount.addActionListener(this);
 
@@ -106,8 +93,8 @@ public class LaunchPage implements ActionListener{
 	//Create Login Button
 	private void createButtonLogin() {
 		ButtonLogin = new JButton("Login");
-		// Dimension size = ButtonLogin.getPreferredSize();
-		ButtonLogin.setBounds(380, 180, 140, 25); //Set location of button
+		ButtonLogin.setFont(new Font("Comic Sans MS", Font.PLAIN, 32));
+		ButtonLogin.setBounds(350, 360, 280, 50); //Set location of button
 		ButtonLogin.setBackground(lav);
 		ButtonLogin.addActionListener(this);
 	}
