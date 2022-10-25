@@ -53,17 +53,17 @@ public class AccountCreation implements ActionListener {
 	private boolean vehicleOwnerStatus; // Not being used at this time
 	private boolean vehicleRenterStatus; // Not being used at this time
 
-	private String email;
-	private String carMake;
-	private String carModel;
-	private String carYear;
-	private String jobDuration;
-	private String jobDeadline;
-	private String name;
-	private String phoneNum;
-	private String ID;
-	private String licensePlate;
-	private String residencyTime;
+	protected String email;
+	protected String carMake;
+	protected String carModel;
+	protected String carYear;
+	protected String jobDuration;
+	protected String jobDeadline;
+	protected String name;
+	protected String phoneNum;
+	protected String ID;
+	protected String licensePlate;
+	protected String residencyTime;
 
 	public AccountCreation() {
 		accounttextLabel = new JLabel("Create Account Here");

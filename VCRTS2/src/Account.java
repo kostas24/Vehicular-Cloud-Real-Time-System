@@ -1,5 +1,7 @@
 public class Account {
 
+	//CLASS MIGHT NOT BE Needed? Cant we just Use AccountCreation as the Superclass?
+	
 	private String name;
 	private String email;
 	private int phoneNum;
@@ -11,7 +13,7 @@ public class Account {
 		this.email = email;
 		this.phoneNum = phoneNum;
 		this.id = id;
-		this.adminStatus = adminStatus;
+		this.setAdminStatus(adminStatus);
 	}
 
 	public String getName() {
@@ -44,6 +46,14 @@ public class Account {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public boolean isAdminStatus() {
+		return adminStatus;
+	}
+
+	public void setAdminStatus(boolean adminStatus) {
+		this.adminStatus = adminStatus;
 	}
 	
 }
