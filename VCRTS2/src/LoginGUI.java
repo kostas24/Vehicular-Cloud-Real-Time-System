@@ -1,10 +1,11 @@
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
-public class PostLogin implements ActionListener{
+public class LoginGUI implements ActionListener{
 
     JFrame frame = new JFrame();
     JFrame popup;
@@ -22,7 +23,7 @@ public class PostLogin implements ActionListener{
 	private JLabel welcomeLabel;
 	private Color BLUE = Color.BLUE;
 	
-	public PostLogin() {
+	public LoginGUI() {
 		loginLabel = new JLabel("Login Below"); 
 		loginLabel.setForeground(Color.white);
 		loginLabel.setBounds(290, 10, 270, 60); //Set location of label	
@@ -77,7 +78,7 @@ public class PostLogin implements ActionListener{
 		else if(!(e.getSource() == createBack)){
 			 popup = new JFrame();
 			 welcomeLabel.setText("");
-			 JOptionPane.showMessageDialog(popup, "Please fill out all the fields to continue", "Error", JOptionPane.WARNING_MESSAGE);
+			 JOptionPane.showMessageDialog(popup, "Please fill out all the fields to continue", "Error", JOptionPane.ERROR_MESSAGE);
 			 
 		}
 		
