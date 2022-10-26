@@ -2,9 +2,17 @@
 public class VehicleOwner extends AccountCreation{
 
 
-	public VehicleOwner()
+	public VehicleOwner(String name, String email, String phoneNum, String ID, String licensePlate, String carMake, String carModel, String carYear, String residencyTime)
 	{
-		
+		this.name = name;
+		this.email = email;
+		this.phoneNum = phoneNum;
+		this.ID = ID;
+		this.licensePlate = licensePlate;
+		this.carMake = carMake;
+		this.carModel = carModel;
+		this.carYear = carYear;
+		this.residencyTime = residencyTime;
 	}	
 	
 	private void addVehicle() // private? public?
@@ -12,7 +20,7 @@ public class VehicleOwner extends AccountCreation{
 		
 	}
 	
-	private void deleteVehicle() // private? public?
+	private void deleteVehicle(String licensePlate) // private? public?
 	{
 		
 	}

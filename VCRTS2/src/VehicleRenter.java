@@ -1,12 +1,17 @@
 
 public class VehicleRenter extends AccountCreation{
 
-	public VehicleRenter()
+	public VehicleRenter(String name, String email, String phoneNum, String ID, String jobDuration, String jobDeadline)
 	{
-		
+		this.name = name;
+		this.email = email;
+		this.phoneNum = phoneNum;
+		this.ID = ID;
+		this.jobDuration = jobDuration;
+		this.jobDeadline = jobDeadline;
 	}
 	
-	private void requestJob() {
+	private void requestJob(String jobId, Double jobDuration, String jobDeadline) {
 		
 		
 	}
