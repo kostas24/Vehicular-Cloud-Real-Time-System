@@ -1,4 +1,3 @@
-
 public class VehicleRenter extends AccountCreation{
 
 	public VehicleRenter(String name, String email, String phoneNum, String ID, String jobDuration, String jobDeadline)

@@ -1,3 +1,4 @@
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -48,7 +49,7 @@ public class LaunchPage implements ActionListener{
 			if(event.getSource() == ButtonLogin)
 			{
 				frame.dispose();
-				PostLogin login = new PostLogin();
+				LoginGUI login = new LoginGUI();
 			}
 			else if(event.getSource() == ButtonAccount)
 			{

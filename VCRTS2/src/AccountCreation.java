@@ -1,3 +1,4 @@
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,6 +14,8 @@ import javax.swing.*;
 public class AccountCreation implements ActionListener {
 
 	JFrame frame = new JFrame();
+	JFrame ownerFrame;
+	JFrame renterFrame;
 	JFrame popup;
 	private static final int FRAME_WIDTH = 800;
 	private static final int FRAME_HEIGHT = 800;
@@ -352,13 +355,22 @@ public class AccountCreation implements ActionListener {
 					fWriter.write(residencyTime + "\n");
 					fWriter.close();
 					
-					owners.add(new VehicleOwner(name, email, phoneNum, ID, licensePlate, carMake, carModel, carYear, residencyTime));
+					//owners.add(new VehicleOwner(name, email, phoneNum, ID, licensePlate, carMake, carModel, carYear, residencyTime));
+					//^creates new jframe for some reason. no good
 					
 					clearTextFields();
+				
 					
 					popup = new JFrame();
-					JOptionPane.showMessageDialog(popup, "You have succesfully registered as a Vehicle Owner", "Account Creation Confirmed",
+					JOptionPane.showMessageDialog(popup, "You have successfully registered as a Vehicle Owner", "Account Creation Confirmed",
 							JOptionPane.INFORMATION_MESSAGE);
+					
+					
+					
+					//TEMPORARY, SHOULD BE IN LOGINGUI. SHOULD DIRECT YOU HERE AFTER LOGIN, FOR NOW WE WILL DO THIS.
+					frame.dispose();
+					OwnerDashboard ownerDash = new OwnerDashboard();
+					
 				} 
 				
 				catch (IOException error) {
@@ -386,13 +398,18 @@ public class AccountCreation implements ActionListener {
 					fWriter.write(jobDeadline + "\n");
 					fWriter.close();
 					
-					renters.add(new VehicleRenter(name, email, phoneNum, ID, jobDuration, jobDeadline));
+				//	renters.add(new VehicleRenter(name, email, phoneNum, ID, jobDuration, jobDeadline));
+					//^creates new jframe for some reason. no good
 					
 					clearTextFields();
 					
 					popup = new JFrame();
-					JOptionPane.showMessageDialog(popup, "You have succesfully registered as a Vehicle Renter", "Account Creation Confirmed",
+					JOptionPane.showMessageDialog(popup, "You have successfully registered as a Vehicle Renter", "Account Creation Confirmed",
 							JOptionPane.INFORMATION_MESSAGE);
+					
+					//TEMPORARY, SHOULD BE IN LOGINGUI. SHOULD DIRECT YOU HERE AFTER LOGIN, FOR NOW WE WILL DO THIS.
+					frame.dispose();
+					RenterDashboard renterDash = new RenterDashboard();
 				}
 		
 				catch (IOException error) {
@@ -468,4 +485,5 @@ public class AccountCreation implements ActionListener {
 		// adds to current object
 		frame.add(panel);
 	}
+	
 }
