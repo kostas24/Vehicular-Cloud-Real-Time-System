@@ -333,7 +333,7 @@ public class AccountCreation implements ActionListener {
 					&& !carMake.isEmpty() && !carModel.isEmpty() && !carYear.isEmpty() && !residencyTime.isEmpty()
 					&& vehicleOwnerCheckBox.isSelected()) {
 				FileWriter fWriter;
-				try {
+				try {               //adds vehicle owner to registry and arraylist
 					fWriter = new FileWriter(registry, true);
 					java.util.Date time = new java.util.Date();
 					
@@ -370,7 +370,7 @@ public class AccountCreation implements ActionListener {
 			else if (!name.isEmpty() && !email.isEmpty() && !phoneNum.isEmpty() && !ID.isEmpty()
 					&& !jobDuration.isEmpty() && !jobDeadline.isEmpty() && vehicleRenterCheckBox.isSelected()) {
 				FileWriter fWriter;
-				try {
+				try {               //adds vehicle renter to registry and arraylist
 					fWriter = new FileWriter(registry, true);
 					java.util.Date time = new java.util.Date();
 

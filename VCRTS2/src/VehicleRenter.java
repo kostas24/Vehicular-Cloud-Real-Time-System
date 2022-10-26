@@ -11,7 +11,7 @@ public class VehicleRenter extends AccountCreation{
 		this.jobDeadline = jobDeadline;
 	}
 	
-	private void requestJob() {
+	private void requestJob(String jobId, Double jobDuration, String jobDeadline) {
 		
 		
 	}

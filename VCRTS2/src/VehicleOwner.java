@@ -20,7 +20,7 @@ public class VehicleOwner extends AccountCreation{
 		
 	}
 	
-	private void deleteVehicle() // private? public?
+	private void deleteVehicle(String licensePlate) // private? public?
 	{
 		
 	}
