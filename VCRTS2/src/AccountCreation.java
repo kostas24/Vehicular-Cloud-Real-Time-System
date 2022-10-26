@@ -6,6 +6,7 @@ import java.awt.event.ItemListener;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.io.File;
 import javax.swing.*;
 
@@ -52,6 +53,9 @@ public class AccountCreation implements ActionListener {
 	// Labels and variables to hold user information; to be stored to file
 	private boolean vehicleOwnerStatus; // Not being used at this time
 	private boolean vehicleRenterStatus; // Not being used at this time
+	
+	private ArrayList<VehicleOwner> owners = new ArrayList<>();
+	private ArrayList<VehicleRenter> renters = new ArrayList<>();
 
 	protected String email;
 	protected String carMake;
@@ -334,6 +338,7 @@ public class AccountCreation implements ActionListener {
 					java.util.Date time = new java.util.Date();
 					
 					fWriter.write("" + "\n");
+					fWriter.write("1");
 					fWriter.write(time.toString() + "\n");
 					fWriter.write(name + "\n");
 					fWriter.write(email + "\n");
@@ -346,6 +351,8 @@ public class AccountCreation implements ActionListener {
 					fWriter.write(carYear + "\n");
 					fWriter.write(residencyTime + "\n");
 					fWriter.close();
+					
+					owners.add(new VehicleOwner(name, email, phoneNum, ID, licensePlate, carMake, carModel, carYear, residencyTime));
 					
 					clearTextFields();
 					
@@ -368,6 +375,7 @@ public class AccountCreation implements ActionListener {
 					java.util.Date time = new java.util.Date();
 
 					fWriter.write("" + "\n");
+					fWriter.write("0");
 					fWriter.write(time.toString() + "\n");
 					fWriter.write(name + "\n");
 					fWriter.write(email + "\n");
@@ -377,6 +385,8 @@ public class AccountCreation implements ActionListener {
 					fWriter.write(jobDuration + "\n");
 					fWriter.write(jobDeadline + "\n");
 					fWriter.close();
+					
+					renters.add(new VehicleRenter(name, email, phoneNum, ID, jobDuration, jobDeadline));
 					
 					clearTextFields();
 					
