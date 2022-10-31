@@ -10,6 +10,7 @@ public class Job {
 	private int jobPriorityLevel;
 	private int jobID;
 	private boolean jobInProgress;
+	private int completionTime;
 
 	public Job(int jobDuration, int jobID) {
 		this.jobDuration = jobDuration;
@@ -67,6 +68,14 @@ public class Job {
 
 	public void generateCheckpointImage() { // Incomplete
 
+	}
+	
+	public void setCompletionTime(int completionTime) {
+		this.completionTime = completionTime;
+	}
+	
+	public int getCompletionTime() {
+		return completionTime;
 	}
 
 }

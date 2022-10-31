@@ -12,8 +12,15 @@ public class Controller {
 		jobIDList = new ArrayList <Integer> ();
 	}
 	
-	public int calculateCompletionTime() { //incomplete
-		return 0;
+	public void calculateCompletionTime() { //incomplete
+		int completionTime = 0;
+		for(VehicleRenter renter: vehicleRenters) {
+			ArrayList<Job> jobList = new ArrayList<>(renter.getJobList());
+			for(int i=0; i<jobList.size(); i++ ) {
+				completionTime += jobList.get(i).getJobDuration();
+				jobList.get(i).setCompletionTime(completionTime);
+			}
+		}
 	}
 	
 	public void approveJob() {
