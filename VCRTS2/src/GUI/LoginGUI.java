@@ -1,3 +1,4 @@
+package GUI;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -98,6 +99,8 @@ public class LoginGUI implements ActionListener{
 		enterName.setForeground(Color.white);
 		enterName.setBounds(270, 390, 250, 40);
 		enterName.setBackground(BLUE);
+		enterName.setOpaque(true);
+		enterName.setBorderPainted(false);
 		enterName.addActionListener(this);
 	}
 	
@@ -107,6 +110,8 @@ public class LoginGUI implements ActionListener{
         createBack.setForeground(Color.white);
         createBack.setBounds(10, 10, 100, 40); //Set location of button
         createBack.setBackground(BLUE);
+        createBack.setOpaque(true);
+		createBack.setBorderPainted(false);
         createBack.addActionListener(this);
     }
 	
