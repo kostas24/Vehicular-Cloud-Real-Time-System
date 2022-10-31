@@ -1,3 +1,4 @@
+package GUI;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -10,6 +11,9 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.io.File;
 import javax.swing.*;
+
+import ObjectClasses.VehicleOwner;
+import ObjectClasses.VehicleRenter;
 
 public class AccountCreation implements ActionListener {
 
@@ -287,6 +291,8 @@ public class AccountCreation implements ActionListener {
 		createAccount.setForeground(Color.white);
 		createAccount.setBounds(240, 675, 250, 40); // Set location of button
 		createAccount.setBackground(BLUE);
+		createAccount.setOpaque(true);
+		createAccount.setBorderPainted(false);
 		createAccount.addActionListener(this);
 	}
 
@@ -296,6 +302,8 @@ public class AccountCreation implements ActionListener {
 		createBack.setForeground(Color.white);
 		createBack.setBounds(10, 10, 100, 40); // Set location of button
 		createBack.setBackground(BLUE);
+		createBack.setOpaque(true);
+		createBack.setBorderPainted(false);
 		createBack.addActionListener(this);
 	}
 	
@@ -305,6 +313,8 @@ public class AccountCreation implements ActionListener {
 		createClear.setForeground(Color.white); 
 		createClear.setBounds(500, 680, 90, 30); //Set location of button
 		createClear.setBackground(Color.red);
+		createClear.setOpaque(true);
+		createClear.setBorderPainted(false);
 		createClear.addActionListener(this);
 	}
 

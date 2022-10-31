@@ -1,3 +1,4 @@
+package GUI;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -65,6 +66,8 @@ public class LaunchPage implements ActionListener{
 		ButtonAccount.setForeground(Color.white);
 		ButtonAccount.setBounds(270, 410, 250, 40); //Set location of button	
 		ButtonAccount.setBackground(BLUE);
+		ButtonAccount.setOpaque(true);
+		ButtonAccount.setBorderPainted(false);
 		ButtonAccount.addActionListener(this);
 
 	}
@@ -76,6 +79,8 @@ public class LaunchPage implements ActionListener{
 		ButtonLogin.setForeground(Color.white);
 		ButtonLogin.setBounds(270, 360, 250, 40); //Set location of button
 		ButtonLogin.setBackground(BLUE);
+		ButtonLogin.setOpaque(true);
+		ButtonLogin.setBorderPainted(false);
 		ButtonLogin.addActionListener(this);
 	}
 
