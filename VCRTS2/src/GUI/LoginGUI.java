@@ -75,6 +75,12 @@ public class LoginGUI implements ActionListener{
 		welcomeLabel.setForeground(Color.white);
 		welcomeLabel.setBounds(330 - (name.length()*5), 240, 450, 60);
 		welcomeLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 24));
+		
+			if(name.equals("admin") && password.equals("admin"))
+			{			
+				frame.dispose();
+				ControllerDashboard controller = new ControllerDashboard();
+			}
 		}
 		else if(!(e.getSource() == createBack)){
 			 popup = new JFrame();
@@ -82,6 +88,8 @@ public class LoginGUI implements ActionListener{
 			 JOptionPane.showMessageDialog(popup, "Please fill out all the fields to continue", "Error", JOptionPane.ERROR_MESSAGE);
 			 
 		}
+		
+
 		
 	}
 	
