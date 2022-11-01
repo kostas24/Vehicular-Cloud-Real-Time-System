@@ -1,5 +1,8 @@
 package ObjectClasses;
-
+import java.util.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
 
@@ -36,6 +39,16 @@ public class VehicleRenter extends Account {
 	 */
 	private void requestJob(int jobDuration, int jobID) {
 		jobs.add(new Job(jobDuration, jobID));
+		File jobRegistry = new File("VCRTSjobs.txt");
+		FileWriter fWriter;
+		try {
+			fWriter = new FileWriter(jobRegistry);
+			fWriter.write("Job ID: " + jobID + " _ Job Duration: " + jobDuration);
+			fWriter.close();
+		}
+		catch (IOException error) {
+			System.out.println("An error has occured");
+		}
 	}
 	
 	/*
@@ -58,6 +71,10 @@ public class VehicleRenter extends Account {
 			}
 		}
 		return jobFound;
+	}
+	
+	public ArrayList getJobList() {
+		return jobs;
 	}
 
 }
