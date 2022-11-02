@@ -5,10 +5,10 @@ import java.util.*;
 
 public class Controller {
 
-	private static ArrayList<VehicleRenter> vehicleRenters;
+	private static ArrayList<VehicleRenter> vehicleRenters = new ArrayList<VehicleRenter>();
 	private static ArrayList<VehicleOwner> vehicleOwners;
 	private static ArrayList<Integer> jobIDList;
-	private static ArrayList<Integer> completionTimes;
+	private static ArrayList<Integer> completionTimes = new ArrayList<Integer>();
 
 	public Controller() {
 		jobIDList = new ArrayList<Integer>();
@@ -68,6 +68,9 @@ public class Controller {
 		vehicleRenters.add(new VehicleRenter(name, email, phoneNum, id, jobDuration, jobID));
 
 	}
+	
+	
+	
 
 	/*
 	 * Removes a VehicleRenter from the list of renters known to the Controller using their email to find and 
