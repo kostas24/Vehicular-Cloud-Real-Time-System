@@ -48,7 +48,10 @@ public class ControllerDashboard implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource() == buttonCompletionTime)
 			{		
-				
+
+				ArrayList<Integer> times = new ArrayList<Integer>(Controller.calculateCompletionTime());
+				System.out.println(times.toString());
+        
 				completionTimeLabel.setText(Controller.calculateCompletionTime().toString());
 				//Maybe add an if statement to detect if there are no Jobs/completionTime arraylist is empty?
 				/*
