@@ -25,6 +25,7 @@ public class Controller {
 				completionTime += jobList.get(i).getJobDuration();
 				jobList.get(i).setCompletionTime(completionTime);
 				completionTimes.add(completionTime);
+				jobList.remove(i);
 			}
 		}
 	return completionTimes;
@@ -117,5 +118,14 @@ public class Controller {
 		}
 		return jobID;
 	}
+	
+	public static VehicleRenter returnRenter (String ID) {
+		for (VehicleRenter renter: vehicleRenters) {
+			if(renter.getIDNumber().equals(ID)) {
+				return renter;
+			}
+		}
+		return null;
+		}
+	}
 
-}

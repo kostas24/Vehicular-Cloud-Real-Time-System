@@ -9,7 +9,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Random;
 import java.io.File;
 import javax.swing.*;
 
@@ -77,6 +76,7 @@ public class AccountCreation implements ActionListener {
 	protected String ID;
 	protected String licensePlate;
 	protected String residencyTime;
+	protected String currentID;
 
 	public AccountCreation() {
 		accounttextLabel = new JLabel("Create Account Here");
@@ -401,9 +401,9 @@ public class AccountCreation implements ActionListener {
 					fWriter.write("" + "\n");
 					fWriter.write("0");
 					fWriter.write(time.toString() + "\n");
-					fWriter.write(name + "\n");
-					fWriter.write(email + "\n");
-					fWriter.write(phoneNum + "\n");
+					fWriter.write("Name: " + name + "\n");
+					fWriter.write("Email: " + email + "\n");
+					fWriter.write("Phone Number: " + phoneNum + "\n");
 					fWriter.write(ID + "\n");
 
 					fWriter.write(jobDuration + "\n");
@@ -412,13 +412,10 @@ public class AccountCreation implements ActionListener {
 				
 					int phoneNumber = Integer.parseInt(phoneNum);
 					int jobDuration_Number = Integer.parseInt(jobDuration);
-					Random randI = new Random();
-			        int jobID = randI.nextInt(100);
-			        jobID = jobID+1;
-
+					int jobID = 12;
 					
 					Controller.addRenter(name, email, phoneNumber, ID, jobDuration_Number, jobID);
-					
+					currentID = ID;
 				//	renters.add(new VehicleRenter(name, email, phoneNum, ID, jobDuration, jobDeadline));
 					//^creates new jframe for some reason. no good
 					

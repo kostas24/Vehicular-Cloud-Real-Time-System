@@ -76,5 +76,9 @@ public class VehicleRenter extends Account {
 	public ArrayList getJobList() {
 		return jobs;
 	}
+	
+	public String getIDNumber () {
+		return super.getId();
+	}
 
 }
