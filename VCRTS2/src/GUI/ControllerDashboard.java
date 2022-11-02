@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.*;
-//import ObjectClasses.Controller;
+import ObjectClasses.Controller;
 
 public class ControllerDashboard implements ActionListener{
 
@@ -25,7 +25,7 @@ public class ControllerDashboard implements ActionListener{
 		public ControllerDashboard() {
 			//completionTimes = controller.calculateCompletionTime()
 			completionTimeLabel = new JLabel("----------"); 
-			completionTimeLabel.setBounds(300, 300, 350, 40); 
+			completionTimeLabel.setBounds(350, 300, 350, 40); 
 			completionTimeLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 24));
 			completionTimeLabel.setForeground(Color.white);
 			
@@ -48,10 +48,8 @@ public class ControllerDashboard implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource() == buttonCompletionTime)
 			{		
-				Controller controller = new Controller();
-				controller.calculateCompletionTime();
 				
-				
+				completionTimeLabel.setText(Controller.calculateCompletionTime().toString());
 				//Maybe add an if statement to detect if there are no Jobs/completionTime arraylist is empty?
 				/*
 				StringBuilder sb = new StringBuilder();

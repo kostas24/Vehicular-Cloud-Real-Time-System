@@ -5,9 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
-import ObjectClasses.Job;
-import ObjectClasses.VehicleRenter;
-
 public class RenterDashboard implements ActionListener{
 
 	JFrame renterFrame = new JFrame();
@@ -23,8 +20,8 @@ public class RenterDashboard implements ActionListener{
 	private JTextField jobIDField;
 	
 	//*********************************
-	private Job jobs = new Job(0, null, 0, 0); //how can i get values that we inputted in GUI?
-	private VehicleRenter vr = new VehicleRenter(null, null, 0, null, 0, null, 0, 0); //how can i get values that we inputted in GUI?
+	//private Job jobs = new Job(0, null, 0, 0); //how can i get values that we inputted in GUI?
+	//private VehicleRenter vr = new VehicleRenter(null, null, 0, null, 0, null, 0, 0); //how can i get values that we inputted in GUI?
 	
 	public RenterDashboard() {
 		

@@ -5,10 +5,10 @@ import java.util.*;
 
 public class Controller {
 
-	private static ArrayList<VehicleRenter> vehicleRenters;
+	private static ArrayList<VehicleRenter> vehicleRenters = new ArrayList<VehicleRenter>();
 	private static ArrayList<VehicleOwner> vehicleOwners;
 	private static ArrayList<Integer> jobIDList;
-	private static ArrayList<Integer> completionTimes;
+	private static ArrayList<Integer> completionTimes = new ArrayList<Integer>();
 
 	public Controller() {
 		jobIDList = new ArrayList<Integer>();
@@ -17,7 +17,7 @@ public class Controller {
 		vehicleOwners = new ArrayList<VehicleOwner>();
 	}
 
-	public static void calculateCompletionTime()  { // shouldn't this return something?
+	public static ArrayList<Integer> calculateCompletionTime()  { // shouldn't this return something?
 		int completionTime = 0;
 		for (VehicleRenter renter : vehicleRenters) {
 			ArrayList<Job> jobList = new ArrayList<>(renter.getJobList());
@@ -27,7 +27,8 @@ public class Controller {
 				completionTimes.add(completionTime);
 			}
 		}
-		return completionTimes;
+	return completionTimes;
+		
 	}
 
 	//Incomplete
@@ -67,6 +68,9 @@ public class Controller {
 		vehicleRenters.add(new VehicleRenter(name, email, phoneNum, id, jobDuration, jobID));
 
 	}
+	
+	
+	
 
 	/*
 	 * Removes a VehicleRenter from the list of renters known to the Controller using their email to find and 

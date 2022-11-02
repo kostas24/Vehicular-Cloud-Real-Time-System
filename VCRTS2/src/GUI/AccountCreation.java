@@ -9,9 +9,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Random;
 import java.io.File;
 import javax.swing.*;
 
+import ObjectClasses.Controller;
 import ObjectClasses.VehicleOwner;
 import ObjectClasses.VehicleRenter;
 
@@ -407,6 +409,15 @@ public class AccountCreation implements ActionListener {
 					fWriter.write(jobDuration + "\n");
 					fWriter.write(jobDeadline + "\n");
 					fWriter.close();
+				
+					int phoneNumber = Integer.parseInt(phoneNum);
+					int jobDuration_Number = Integer.parseInt(jobDuration);
+					Random randI = new Random();
+			        int jobID = randI.nextInt(100);
+			        jobID = jobID+1;
+
+					
+					Controller.addRenter(name, email, phoneNumber, ID, jobDuration_Number, jobID);
 					
 				//	renters.add(new VehicleRenter(name, email, phoneNum, ID, jobDuration, jobDeadline));
 					//^creates new jframe for some reason. no good
