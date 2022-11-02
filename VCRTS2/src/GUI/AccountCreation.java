@@ -9,6 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Random;
 import java.io.File;
 import javax.swing.*;
 
@@ -411,7 +412,10 @@ public class AccountCreation implements ActionListener {
 				
 					int phoneNumber = Integer.parseInt(phoneNum);
 					int jobDuration_Number = Integer.parseInt(jobDuration);
-					int jobID = 12;
+					Random randI = new Random();
+			        int jobID = randI.nextInt(100);
+			        jobID = jobID+1;
+
 					
 					Controller.addRenter(name, email, phoneNumber, ID, jobDuration_Number, jobID);
 					
