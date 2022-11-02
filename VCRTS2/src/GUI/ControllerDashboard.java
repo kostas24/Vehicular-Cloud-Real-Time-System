@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.*;
-import ObjectClasses.Controller;
+//import ObjectClasses.Controller;
 
 public class ControllerDashboard implements ActionListener{
 
@@ -23,13 +23,13 @@ public class ControllerDashboard implements ActionListener{
 		
 		
 		public ControllerDashboard() {
-			//completionTimes = controller.calculateCompletionTime();
-			completionTimeLabel = new JLabel("(insert compTime Here)"); 
+			//completionTimes = controller.calculateCompletionTime()
+			completionTimeLabel = new JLabel("----------"); 
 			completionTimeLabel.setBounds(300, 300, 350, 40); 
 			completionTimeLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 24));
 			completionTimeLabel.setForeground(Color.white);
 			
-			createButtonCompletitionTime();
+			createButtonCompletionTime();
 			createBackButton();
 			createPanel();			
 			ControllerFrame.setTitle("VCRTS - Vehicle Controller Dashboard"); 
@@ -49,6 +49,8 @@ public class ControllerDashboard implements ActionListener{
 			if(e.getSource() == buttonCompletionTime)
 			{		
 				
+				
+				
 				//Maybe add an if statement to detect if there are no Jobs/completionTime arraylist is empty?
 				/*
 				StringBuilder sb = new StringBuilder();
@@ -66,8 +68,8 @@ public class ControllerDashboard implements ActionListener{
 			}
 		}
 		
-		private void createButtonCompletitionTime() {
-			buttonCompletionTime = new JButton("Find Completition Time");
+		private void createButtonCompletionTime() {
+			buttonCompletionTime = new JButton("Find Completion Time");
 			buttonCompletionTime.setFont(new Font("Comic Sans MS", Font.PLAIN, 28));
 			buttonCompletionTime.setForeground(Color.white);
 			buttonCompletionTime.setBounds(220, 360, 360, 40); 
