@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class VehicleRenter extends Account {
 
 	private ArrayList<Job> jobs;
+	
 
 	/*
 	 * Basic constructor for current Milestone that only adds job to this vehicle
@@ -49,6 +50,7 @@ public class VehicleRenter extends Account {
 		catch (IOException error) {
 			System.out.println("An error has occured");
 		}
+		System.out.println(jobs.get(0).getJobDuration());
 	}
 	
 	/*
@@ -73,7 +75,7 @@ public class VehicleRenter extends Account {
 		return jobFound;
 	}
 	
-	public ArrayList getJobList() {
+	public ArrayList<Job> getJobList() {
 		return jobs;
 	}
 

@@ -4,10 +4,10 @@ import java.util.*;
 
 public class Controller {
 
-	ArrayList<VehicleRenter> vehicleRenters;
-	ArrayList<VehicleOwner> vehicleOwners;
-	ArrayList<Integer> jobIDList;
-	ArrayList<Integer> completionTimes;
+	private static ArrayList<VehicleRenter> vehicleRenters;
+	private static ArrayList<VehicleOwner> vehicleOwners;
+	private static ArrayList<Integer> jobIDList;
+	private static ArrayList<Integer> completionTimes;
 
 	public Controller() {
 		jobIDList = new ArrayList<Integer>();
@@ -16,17 +16,22 @@ public class Controller {
 		vehicleOwners = new ArrayList<VehicleOwner>();
 	}
 
-	public ArrayList<Integer> calculateCompletionTime() { // shouldn't this return something?
+	public void calculateCompletionTime() { // shouldn't this return something?
 		int completionTime = 0;
-		for (VehicleRenter renter : vehicleRenters) {
-			ArrayList<Job> jobList = new ArrayList<>(renter.getJobList());
-			for (int i = 0; i < jobList.size(); i++) {
+		ArrayList<Job> jobList = new ArrayList<Job>();
+		System.out.println("here");
+		System.out.println(vehicleRenters.size());
+		for (int i=0; i<vehicleRenters.size(); i++) {
+			jobList = vehicleRenters.get(i).getJobList();
+			System.out.println("here");
+			System.out.println(jobList.get(0).getCompletionTime());
+			for (int j = 0; j < jobList.size(); j++) {
 				completionTime += jobList.get(i).getJobDuration();
 				jobList.get(i).setCompletionTime(completionTime);
 				completionTimes.add(completionTime);
 			}
 		}
-		return completionTimes;
+		//return jobList.size();
 	}
 
 	public void approveJob() {
@@ -88,6 +93,12 @@ public class Controller {
 			jobID = rand.nextInt(10000);
 		}
 		return jobID;
+	}
+	
+	public void addNewRenter (VehicleRenter renter) {
+		vehicleRenters.add(renter);
+		System.out.println(vehicleRenters.get(0).getName());
+		System.out.println(vehicleRenters.size());
 	}
 
 }
