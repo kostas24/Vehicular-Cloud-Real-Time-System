@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.io.File;
 import javax.swing.*;
 
+import ObjectClasses.Controller;
 import ObjectClasses.VehicleOwner;
 import ObjectClasses.VehicleRenter;
 
@@ -407,6 +408,12 @@ public class AccountCreation implements ActionListener {
 					fWriter.write(jobDuration + "\n");
 					fWriter.write(jobDeadline + "\n");
 					fWriter.close();
+				
+					int phoneNumber = Integer.parseInt(phoneNum);
+					int jobDuration_Number = Integer.parseInt(jobDuration);
+					int jobID = 12;
+					
+					Controller.addRenter(name, email, phoneNumber, ID, jobDuration_Number, jobID);
 					
 				//	renters.add(new VehicleRenter(name, email, phoneNum, ID, jobDuration, jobDeadline));
 					//^creates new jframe for some reason. no good

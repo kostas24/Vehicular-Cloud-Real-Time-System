@@ -17,7 +17,7 @@ public class Controller {
 		vehicleOwners = new ArrayList<VehicleOwner>();
 	}
 
-	public static void calculateCompletionTime()  { // shouldn't this return something?
+	public static ArrayList<Integer> calculateCompletionTime()  { // shouldn't this return something?
 		int completionTime = 0;
 		for (VehicleRenter renter : vehicleRenters) {
 			ArrayList<Job> jobList = new ArrayList<>(renter.getJobList());
@@ -27,7 +27,8 @@ public class Controller {
 				completionTimes.add(completionTime);
 			}
 		}
-		return completionTimes;
+	return completionTimes;
+		
 	}
 
 	//Incomplete
