@@ -39,7 +39,7 @@ public class VehicleRenter extends Account {
 	 */
 	public void requestJob(int jobDuration, int jobID) {
 		jobs.add(new Job(jobDuration, jobID));
-		File jobRegistry = new File("VCRTSjobs.txt");
+	/**	File jobRegistry = new File("VCRTSjobs.txt");
 		FileWriter fWriter;
 		try {
 			fWriter = new FileWriter(jobRegistry);
@@ -48,7 +48,7 @@ public class VehicleRenter extends Account {
 		}
 		catch (IOException error) {
 			System.out.println("An error has occured");
-		}
+		}**/
 	}
 	
 	/*
