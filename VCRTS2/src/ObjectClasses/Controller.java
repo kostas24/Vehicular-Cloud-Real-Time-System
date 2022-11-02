@@ -1,13 +1,14 @@
 package ObjectClasses;
 
+import java.sql.Date;
 import java.util.*;
 
 public class Controller {
 
-	ArrayList<VehicleRenter> vehicleRenters;
-	ArrayList<VehicleOwner> vehicleOwners;
-	ArrayList<Integer> jobIDList;
-	ArrayList<Integer> completionTimes;
+	private static ArrayList<VehicleRenter> vehicleRenters;
+	private static ArrayList<VehicleOwner> vehicleOwners;
+	private static ArrayList<Integer> jobIDList;
+	private static ArrayList<Integer> completionTimes;
 
 	public Controller() {
 		jobIDList = new ArrayList<Integer>();
@@ -16,7 +17,7 @@ public class Controller {
 		vehicleOwners = new ArrayList<VehicleOwner>();
 	}
 
-	public ArrayList<Integer> calculateCompletionTime() { // shouldn't this return something?
+	public static ArrayList<Integer> calculateCompletionTime() { // shouldn't this return something?
 		int completionTime = 0;
 		for (VehicleRenter renter : vehicleRenters) {
 			ArrayList<Job> jobList = new ArrayList<>(renter.getJobList());
@@ -29,6 +30,7 @@ public class Controller {
 		return completionTimes;
 	}
 
+	//Incomplete
 	public void approveJob() {
 
 	}
@@ -36,7 +38,7 @@ public class Controller {
 	/*
 	 * Adds a VehicleOwner to the list of renters known to the Controller.
 	 */
-	public void addOwner(String name, String email, int phoneNumber, String id, String licensePlate, String carMake,
+	public static void addOwner(String name, String email, int phoneNumber, String id, String licensePlate, String carMake,
 			String carModel, int carYear, int residencyTime) {
 		vehicleOwners.add(new VehicleOwner(name, email, phoneNumber, id, licensePlate, carMake, carModel, carYear,
 				residencyTime));
@@ -47,10 +49,10 @@ public class Controller {
 	 * Removes a VehicleOwner from the list of renters known to the Controller using their email to find and 
 	 * remove them.
 	 */
-	public boolean removeOwner(String email) {
+	public static boolean removeOwner(String email) {
 		boolean removed = false;
 		for (int i = 0; i < vehicleOwners.size(); i++) {
-			if (vehicleOwners.get(i).getEmail().equals(email)) {
+			if (vehicleOwners.get(i).getEmail().equalsIgnoreCase(email)) {
 				vehicleOwners.remove(i);
 				removed = true;
 			}
@@ -61,7 +63,7 @@ public class Controller {
 	/*
 	 * Adds a VehicleRenter to the list of renters known to the Controller.
 	 */
-	public void addRenter(String name, String email, int phoneNum, String id, int jobDuration, int jobID) {
+	public static void addRenter(String name, String email, int phoneNum, String id, int jobDuration, int jobID) {
 		vehicleRenters.add(new VehicleRenter(name, email, phoneNum, id, jobDuration, jobID));
 
 	}
@@ -70,18 +72,40 @@ public class Controller {
 	 * Removes a VehicleRenter from the list of renters known to the Controller using their email to find and 
 	 * remove them.
 	 */
-	public boolean removeRenter(String email) {
+	public static boolean removeRenter(String email) {
 		boolean removed = false;
 		for (int i = 0; i < vehicleOwners.size(); i++) {
-			if (vehicleRenters.get(i).getEmail().equals(email)) {
+			if (vehicleRenters.get(i).getEmail().equalsIgnoreCase(email)) {
 				vehicleRenters.remove(i);
 				removed = true;
 			}
 		}
 		return removed;
 	}
+	
+	public static boolean addJob(String email, int jobDuration, Date jobDeadline, int jobPriorityLevel, int jobID) {
+		boolean jobAdded = false;
+		for (int i = 0; i < vehicleRenters.size(); i++) {
+			if (vehicleRenters.get(i).getEmail().equalsIgnoreCase(email)) {
+				vehicleRenters.get(i).requestJob(jobDuration, jobDeadline, jobPriorityLevel, jobID);
+				jobAdded = true;
+			}
+		}
+		return jobAdded;
+	}
+	
+	public static boolean addVehicle(String email, String licensePlate, String carMake, String carModel, int carYear, int residencyTime) {
+		boolean vehicleAdded = false;
+		for(int i = 1 ; i < vehicleOwners.size(); i++) {
+			if(vehicleOwners.get(i).getEmail().equalsIgnoreCase(email)) {
+				vehicleOwners.get(i).addVehicle(licensePlate, carMake, carModel, carYear, residencyTime);
+				vehicleAdded = true;
+			}
+		}
+		return vehicleAdded;
+	}
 
-	public int generateJobID() {
+	public static int generateJobID() {
 		Random rand = new Random();
 		int jobID = rand.nextInt(10000);
 		while (jobIDList.contains(jobID)) {

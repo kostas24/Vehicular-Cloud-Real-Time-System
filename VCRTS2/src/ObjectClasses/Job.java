@@ -69,11 +69,11 @@ public class Job {
 	public void generateCheckpointImage() { // Incomplete
 
 	}
-	
+
 	public void setCompletionTime(int completionTime) {
 		this.completionTime = completionTime;
 	}
-	
+
 	public int getCompletionTime() {
 		return completionTime;
 	}
