@@ -12,15 +12,11 @@ public class OwnerDashboard implements ActionListener{
 	private static final int FRAME_WIDTH = 800;
 	private static final int FRAME_HEIGHT = 800;
 	
-	private JLabel nameLabel;
 	private JButton buttonAddJob;
 	private JPanel panel;
 	
 	public OwnerDashboard() {
-		nameLabel = new JLabel("Sample Owner"); //Should be users name top right corner of frame im thinking
-		nameLabel.setBounds(0, 0, 200, 35);
-		nameLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-		nameLabel.setForeground(Color.white);
+	
 		createButtonAddJob();
 		createPanel();			
 		ownerFrame.setTitle("VCRTS - Vehicle Owner Dashboard"); //setting Title on top left corner of GUI
@@ -42,6 +38,8 @@ public class OwnerDashboard implements ActionListener{
 			
 		}
 		
+		
+		
 	}
 	
 	private void createButtonAddJob() {
@@ -58,7 +56,6 @@ public class OwnerDashboard implements ActionListener{
 		panel = new JPanel();
 		panel.setLayout(null);
 		panel.setBackground(new Color (32, 42, 68));
-		panel.add(nameLabel);
 		panel.add(buttonAddJob);
 		ownerFrame.add(panel);
 	

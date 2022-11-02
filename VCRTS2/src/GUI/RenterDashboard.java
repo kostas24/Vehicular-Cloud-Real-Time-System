@@ -14,9 +14,9 @@ public class RenterDashboard implements ActionListener{
 	private static final int FRAME_WIDTH = 800;
 	private static final int FRAME_HEIGHT = 800;
 	
-	private JLabel nameLabel;
 	private JPanel panel;
 	private JButton buttonAddJob;
+	private JButton createBack;
 	
 	
 	//*********************************
@@ -24,11 +24,8 @@ public class RenterDashboard implements ActionListener{
 	private VehicleRenter vr = new VehicleRenter(null, null, 0, null, 0, null, 0, 0); //how can i get values that we inputted in GUI?
 	
 	public RenterDashboard() {
-		nameLabel = new JLabel("Sample Renter"); //Should be users name top right corner of frame im thinking
-		nameLabel.setBounds(0, 0, 200, 35);
-		nameLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-		nameLabel.setForeground(Color.white);
 		createButtonAddJob();
+		createBackButton();
 		createPanel();			
 		renterFrame.setTitle("VCRTS - Vehicle Renter Dashboard"); //setting Title on top left corner of GUI
 		
@@ -58,14 +55,31 @@ public class RenterDashboard implements ActionListener{
 		{
 			
 		}
+		
+		if(e.getSource() == createBack)
+		{
+			renterFrame.dispose();
+			LaunchPage launch = new LaunchPage();
+		}
 	}
+	
+	 private void createBackButton() {
+	        createBack = new JButton("Back");
+	        createBack.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+	        createBack.setForeground(Color.white);
+	        createBack.setBounds(10, 10, 100, 40); //Set location of button
+	        createBack.setBackground(Color.BLUE);
+	        createBack.setOpaque(true);
+			createBack.setBorderPainted(false);
+	        createBack.addActionListener(this);
+	    }
 	
 	private void createPanel() {
 		panel = new JPanel();
 		panel.setLayout(null);
 		panel.setBackground(new Color (32, 42, 68));
-		panel.add(nameLabel);
 		panel.add(buttonAddJob);
+		panel.add(createBack);
 		renterFrame.add(panel);
 	
 	}
