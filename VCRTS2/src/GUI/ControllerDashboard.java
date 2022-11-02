@@ -16,25 +16,21 @@ public class ControllerDashboard implements ActionListener{
 		
 		private JButton buttonCompletionTime;
 		private JLabel completionTimeLabel;
-		private JLabel nameLabel;
 		private JPanel panel;
+		private JButton createBack;
 		//private Controller controller = new Controller();
 		private ArrayList<Integer> completionTimes;
 		
 		
 		public ControllerDashboard() {
 			//completionTimes = controller.calculateCompletionTime();
-			nameLabel = new JLabel("Controller"); 
-			nameLabel.setBounds(0, 0, 200, 35);
-			nameLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-			nameLabel.setForeground(Color.white);
-
 			completionTimeLabel = new JLabel("(insert compTime Here)"); 
 			completionTimeLabel.setBounds(300, 300, 350, 40); 
 			completionTimeLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 24));
 			completionTimeLabel.setForeground(Color.white);
 			
 			createButtonCompletitionTime();
+			createBackButton();
 			createPanel();			
 			ControllerFrame.setTitle("VCRTS - Vehicle Controller Dashboard"); 
 			
@@ -62,6 +58,12 @@ public class ControllerDashboard implements ActionListener{
 				completionTimeLabel.setText(sb.toString());
 			*/		
 			}
+			
+			if(e.getSource() == createBack)
+			{
+				ControllerFrame.dispose();
+				LaunchPage launch = new LaunchPage();
+			}
 		}
 		
 		private void createButtonCompletitionTime() {
@@ -74,20 +76,27 @@ public class ControllerDashboard implements ActionListener{
 			buttonCompletionTime.addActionListener(this);
 		}
 		
-		
-		
+		 private void createBackButton() {
+		        createBack = new JButton("Back");
+		        createBack.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		        createBack.setForeground(Color.white);
+		        createBack.setBounds(10, 10, 100, 40); //Set location of button
+		        createBack.setBackground(Color.BLUE);
+		        createBack.setOpaque(true);
+				createBack.setBorderPainted(false);
+		        createBack.addActionListener(this);
+		    }
+
 		private void createPanel() {
 			panel = new JPanel();
 			panel.setLayout(null);
 			panel.setBackground(new Color (32, 42, 68));
-			panel.add(nameLabel);
 			panel.add(buttonCompletionTime);
 			panel.add(completionTimeLabel);
-			
+			panel.add(createBack);
 			ControllerFrame.add(panel);
 		
 		}
 		
 	
 }
-
