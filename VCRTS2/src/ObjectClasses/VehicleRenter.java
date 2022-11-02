@@ -37,7 +37,7 @@ public class VehicleRenter extends Account {
 	/*
 	 * Basic method in order to add a job using just jobDuration and jobID for current implementation.
 	 */
-	private void requestJob(int jobDuration, int jobID) {
+	public void requestJob(int jobDuration, int jobID) {
 		jobs.add(new Job(jobDuration, jobID));
 		File jobRegistry = new File("VCRTSjobs.txt");
 		FileWriter fWriter;
@@ -54,7 +54,7 @@ public class VehicleRenter extends Account {
 	/*
 	 * Overloaded method with all parameters to add a job for future implementation.
 	 */
-	private void requestJob(int jobDuration, Date jobDeadline, int jobPriorityLevel, int jobID) {
+	void requestJob(int jobDuration, Date jobDeadline, int jobPriorityLevel, int jobID) {
 		jobs.add(new Job(jobDuration, jobDeadline, jobPriorityLevel, jobID));
 	}
 	
@@ -62,7 +62,7 @@ public class VehicleRenter extends Account {
 	 * Method to delete a job using its JobID and returns a boolean to confirm the job was found and 
 	 * deleted to be used in GUI to throw error if the job is not found. 
 	 */
-	private boolean deleteJob(int jobID) {
+	public boolean deleteJob(int jobID) {
 		boolean jobFound = false;
 		for (int i = 0; i < jobs.size(); i++) {
 			if (jobs.get(i).getJobID() == jobID) {

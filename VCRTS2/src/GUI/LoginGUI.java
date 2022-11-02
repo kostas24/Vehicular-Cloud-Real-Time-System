@@ -50,7 +50,7 @@ public class LoginGUI implements ActionListener{
 		frame.setTitle("VCRTS - Login"); //setting Title on top left corner of GUI
 		
 		ImageIcon CloudComputingIcon = new ImageIcon("Images/Cloud Computing.jpg");
-		frame.setIconImage(CloudComputingIcon.getImage()); //Changing Frame Icon to cloud computing icon
+		frame.setIconImage(CloudComputingIcon.getImage());  //Changing Frame Icon to cloud computing icon
 		
 		//INPUTTING SIZE OF GUI from VARIABLES
 		frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
