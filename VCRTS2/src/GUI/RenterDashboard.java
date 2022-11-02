@@ -17,13 +17,37 @@ public class RenterDashboard implements ActionListener{
 	private JPanel panel;
 	private JButton buttonAddJob;
 	private JButton createBack;
-	
+	private JLabel jobDurationLabel;
+	private JTextField jobDurationField;
+	private JLabel jobIDLabel;
+	private JTextField jobIDField;
 	
 	//*********************************
 	private Job jobs = new Job(0, null, 0, 0); //how can i get values that we inputted in GUI?
 	private VehicleRenter vr = new VehicleRenter(null, null, 0, null, 0, null, 0, 0); //how can i get values that we inputted in GUI?
 	
 	public RenterDashboard() {
+		
+		jobDurationLabel = new JLabel("Job Duration(Hours): ");
+		jobDurationLabel.setBounds(40, 300, 350, 35);
+		jobDurationLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		jobDurationLabel.setForeground(Color.white);
+		
+		jobDurationField = new JTextField("Job Duration(Hours): ");
+		jobDurationField.setBounds(240, 300, 350, 35);
+		jobDurationField.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		jobDurationField.setForeground(Color.white);
+		
+		jobIDLabel = new JLabel("Job ID: ");
+		jobIDLabel.setBounds(165, 260, 350, 35);
+		jobIDLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		jobIDLabel.setForeground(Color.white);
+		
+		jobIDField = new JTextField("Job ID: ");
+		jobIDField.setBounds(240, 260, 350, 35);
+		jobIDField.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		jobIDField.setForeground(Color.white);
+		
 		createButtonAddJob();
 		createBackButton();
 		createPanel();			
@@ -43,7 +67,7 @@ public class RenterDashboard implements ActionListener{
 		buttonAddJob = new JButton("Add Job");
 		buttonAddJob.setFont(new Font("Comic Sans MS", Font.PLAIN, 26));
 		buttonAddJob.setForeground(Color.white);
-		buttonAddJob.setBounds(270, 360, 200, 40); 
+		buttonAddJob.setBounds(300, 350, 200, 40); 
 		buttonAddJob.setBackground(Color.BLUE);
 		buttonAddJob.setBorderPainted(false);
 		buttonAddJob.addActionListener(this);
@@ -80,6 +104,10 @@ public class RenterDashboard implements ActionListener{
 		panel.setBackground(new Color (32, 42, 68));
 		panel.add(buttonAddJob);
 		panel.add(createBack);
+		panel.add(jobDurationField);
+		panel.add(jobDurationLabel);
+		panel.add(jobIDField);
+		panel.add(jobIDLabel);
 		renterFrame.add(panel);
 	
 	}
