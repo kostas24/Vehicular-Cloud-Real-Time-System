@@ -43,6 +43,7 @@ public class OwnerDashboard implements ActionListener{
 		buttonAddJob.setForeground(Color.white);
 		buttonAddJob.setBounds(300, 350, 200, 40); 
 		buttonAddJob.setBackground(Color.BLUE);
+		buttonAddJob.setOpaque(true);
 		buttonAddJob.setBorderPainted(false);
 		buttonAddJob.addActionListener(this);
 	}
