@@ -9,14 +9,21 @@ public class Controller {
 	private static ArrayList<VehicleOwner> vehicleOwners;
 	private static ArrayList<Integer> jobIDList;
 	private static ArrayList<Integer> completionTimes = new ArrayList<Integer>();
+	private static int nextJobID;
 
 	public Controller() {
 		jobIDList = new ArrayList<Integer>();
 		completionTimes = new ArrayList<Integer>();
 		vehicleRenters = new ArrayList<VehicleRenter>();
 		vehicleOwners = new ArrayList<VehicleOwner>();
+		nextJobID = 0;
 	}
 
+	/*
+	 * In the future, this method should calculate job completion times in order of their ID number. ID Numbers
+	 * are now set to generate in order from 0 upwards. So it can just use the jobIDList to calculate job 
+	 * completion times for ease of use.
+	 */
 	public static ArrayList<Integer> calculateCompletionTime()  { // shouldn't this return something?
 		int completionTime = 0;
 		for (VehicleRenter renter : vehicleRenters) {
@@ -110,12 +117,14 @@ public class Controller {
 	}
 
 	public static int generateJobID() {
-		Random rand = new Random();
-		int jobID = rand.nextInt(10000);
-		while (jobIDList.contains(jobID)) {
-			jobID = rand.nextInt(10000);
-		}
-		return jobID;
+		//Controller controller = new Controller ();
+		jobIDList.add(nextJobID+1);
+		nextJobID += 1;
+		return nextJobID;
+	}
+	
+	public static ArrayList<Integer> getJobIDList(){
+		return jobIDList;
 	}
 
 }

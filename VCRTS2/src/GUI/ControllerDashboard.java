@@ -15,7 +15,10 @@ public class ControllerDashboard implements ActionListener{
 		private static final int FRAME_HEIGHT = 800;
 		
 		private JButton buttonCompletionTime;
+		private JLabel jobTimeTextLabel;
+		private JLabel idTextLabel;
 		private JLabel completionTimeLabel;
+		private JLabel completionIDLabel;
 		private JPanel panel;
 		private JButton createBack;
 		//private Controller controller = new Controller();
@@ -24,8 +27,25 @@ public class ControllerDashboard implements ActionListener{
 		
 		public ControllerDashboard() {
 			//completionTimes = controller.calculateCompletionTime()
+			//Controller controller = new Controller();
+			
+			idTextLabel = new JLabel("Job ID's: ");
+			idTextLabel.setBounds(230, 200, 2000, 40); 
+			idTextLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 24));
+			idTextLabel.setForeground(Color.white);
+			
+			jobTimeTextLabel = new JLabel("Duration: ");
+			jobTimeTextLabel.setBounds(230, 300, 200, 40); 
+			jobTimeTextLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 24));
+			jobTimeTextLabel.setForeground(Color.white);
+			
+			completionIDLabel = new JLabel("-----------"); 
+			completionIDLabel.setBounds(450, 200, 350, 40); 
+			completionIDLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 24));
+			completionIDLabel.setForeground(Color.white);
+			
 			completionTimeLabel = new JLabel("----------"); 
-			completionTimeLabel.setBounds(350, 300, 350, 40); 
+			completionTimeLabel.setBounds(450, 300, 350, 40); 
 			completionTimeLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 24));
 			completionTimeLabel.setForeground(Color.white);
 			
@@ -50,16 +70,9 @@ public class ControllerDashboard implements ActionListener{
 			{		
 
 				ArrayList<Integer> times = new ArrayList<Integer>(Controller.calculateCompletionTime());
-				System.out.println(times.toString());       
+				//System.out.println(times.toString());       
 				completionTimeLabel.setText(times.toString());
-				//Maybe add an if statement to detect if there are no Jobs/completionTime arraylist is empty?
-				/*
-				StringBuilder sb = new StringBuilder();
-				for (Integer i : completionTimes) {
-				    sb.append(i == null ? "" : i.toString());
-				}
-				completionTimeLabel.setText(sb.toString());
-			*/		
+				completionIDLabel.setText(Controller.getJobIDList().toString());	
 			}
 			
 			if(e.getSource() == createBack)
@@ -75,6 +88,7 @@ public class ControllerDashboard implements ActionListener{
 			buttonCompletionTime.setForeground(Color.white);
 			buttonCompletionTime.setBounds(220, 360, 360, 40); 
 			buttonCompletionTime.setBackground(Color.BLUE);
+			buttonCompletionTime.setOpaque(true);
 			buttonCompletionTime.setBorderPainted(false);
 			buttonCompletionTime.addActionListener(this);
 		}
@@ -97,6 +111,9 @@ public class ControllerDashboard implements ActionListener{
 			panel.add(buttonCompletionTime);
 			panel.add(completionTimeLabel);
 			panel.add(createBack);
+			panel.add(completionIDLabel);
+			panel.add(idTextLabel);
+			panel.add(jobTimeTextLabel);
 			ControllerFrame.add(panel);
 		
 		}

@@ -412,12 +412,17 @@ public class AccountCreation implements ActionListener {
 				
 					int phoneNumber = Integer.parseInt(phoneNum);
 					int jobDuration_Number = Integer.parseInt(jobDuration);
+					int jobID = Controller.generateJobID();
+					System.out.println(jobID);
+					/*
 					Random randI = new Random();
 			        int jobID = randI.nextInt(100);
 			        jobID = jobID+1;
-
+			        */
 					
 					Controller.addRenter(name, email, phoneNumber, ID, jobDuration_Number, jobID);
+					//System.out.println("Added!");
+					//System.out.println(Controller.getJobIDList().toString());
 					
 				//	renters.add(new VehicleRenter(name, email, phoneNum, ID, jobDuration, jobDeadline));
 					//^creates new jframe for some reason. no good
