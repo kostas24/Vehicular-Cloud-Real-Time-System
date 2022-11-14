@@ -61,7 +61,7 @@ public class AccountCreation implements ActionListener {
 	// Labels and variables to hold user information; to be stored to file
 	private boolean vehicleOwnerStatus; // Not being used at this time
 	private boolean vehicleRenterStatus; // Not being used at this time
-	
+
 	private ArrayList<VehicleOwner> owners = new ArrayList<>();
 	private ArrayList<VehicleRenter> renters = new ArrayList<>();
 
@@ -257,7 +257,7 @@ public class AccountCreation implements ActionListener {
 					jobDurationLabel.setVisible(true);
 					jobDeadlineLabel.setVisible(true);
 
-					createAccount.setBounds(240, 550, 250, 40); 
+					createAccount.setBounds(240, 550, 250, 40);
 					createClear.setBounds(500, 555, 90, 30); // Set location of buttons
 				} else if (!vehicleRenterCheckBox.isSelected()) {
 					vehicleRenterStatus = false;
@@ -308,12 +308,12 @@ public class AccountCreation implements ActionListener {
 		createBack.setBorderPainted(false);
 		createBack.addActionListener(this);
 	}
-	
+
 	private void createClearButton() {
 		createClear = new JButton("Clear");
 		createClear.setFont(new Font("Comic Sans MS", Font.PLAIN, 17));
-		createClear.setForeground(Color.white); 
-		createClear.setBounds(500, 680, 90, 30); //Set location of button
+		createClear.setForeground(Color.white);
+		createClear.setBounds(500, 680, 90, 30); // Set location of button
 		createClear.setBackground(Color.red);
 		createClear.setOpaque(true);
 		createClear.setBorderPainted(false);
@@ -337,21 +337,21 @@ public class AccountCreation implements ActionListener {
 			frame.dispose();
 			LaunchPage launch = new LaunchPage();
 		}
-		
-		if(e.getSource() == createClear) {
+
+		if (e.getSource() == createClear) {
 			clearTextFields();
 		}
-		
+
 		File registry = new File("VCRTSregistry.txt");
 		if (registry.isFile() == true && e.getSource() == createAccount) {
 			if (!name.isEmpty() && !email.isEmpty() && !phoneNum.isEmpty() && !ID.isEmpty() && !licensePlate.isEmpty()
 					&& !carMake.isEmpty() && !carModel.isEmpty() && !carYear.isEmpty() && !residencyTime.isEmpty()
 					&& vehicleOwnerCheckBox.isSelected()) {
 				FileWriter fWriter;
-				try {               //adds vehicle owner to registry and arraylist
+				try { // adds vehicle owner to registry and arraylist
 					fWriter = new FileWriter(registry, true);
 					java.util.Date time = new java.util.Date();
-					
+
 					fWriter.write("" + "\n");
 					fWriter.write("1");
 					fWriter.write(time.toString() + "\n");
@@ -366,25 +366,24 @@ public class AccountCreation implements ActionListener {
 					fWriter.write(carYear + "\n");
 					fWriter.write(residencyTime + "\n");
 					fWriter.close();
-					
-					//owners.add(new VehicleOwner(name, email, phoneNum, ID, licensePlate, carMake, carModel, carYear, residencyTime));
-					//^creates new jframe for some reason. no good
-					
+
+					// owners.add(new VehicleOwner(name, email, phoneNum, ID, licensePlate, carMake,
+					// carModel, carYear, residencyTime));
+					// ^creates new jframe for some reason. no good
+
 					clearTextFields();
-				
-					
+
 					popup = new JFrame();
-					JOptionPane.showMessageDialog(popup, "You have successfully registered as a Vehicle Owner", "Account Creation Confirmed",
-							JOptionPane.INFORMATION_MESSAGE);
-					
-					
-					
-					//TEMPORARY, SHOULD BE IN LOGINGUI. SHOULD DIRECT YOU HERE AFTER LOGIN, FOR NOW WE WILL DO THIS.
+					JOptionPane.showMessageDialog(popup, "You have successfully registered as a Vehicle Owner",
+							"Account Creation Confirmed", JOptionPane.INFORMATION_MESSAGE);
+
+					// TEMPORARY, SHOULD BE IN LOGINGUI. SHOULD DIRECT YOU HERE AFTER LOGIN, FOR NOW
+					// WE WILL DO THIS.
 					frame.dispose();
 					OwnerDashboard ownerDash = new OwnerDashboard();
-					
-				} 
-				
+
+				}
+
 				catch (IOException error) {
 					System.out.println("An error has occured");
 				}
@@ -394,7 +393,7 @@ public class AccountCreation implements ActionListener {
 			else if (!name.isEmpty() && !email.isEmpty() && !phoneNum.isEmpty() && !ID.isEmpty()
 					&& !jobDuration.isEmpty() && !jobDeadline.isEmpty() && vehicleRenterCheckBox.isSelected()) {
 				FileWriter fWriter;
-				try {               //adds vehicle renter to registry and arraylist
+				try { // adds vehicle renter to registry and arraylist
 					fWriter = new FileWriter(registry, true);
 					java.util.Date time = new java.util.Date();
 
@@ -409,32 +408,34 @@ public class AccountCreation implements ActionListener {
 					fWriter.write(jobDuration + "\n");
 					fWriter.write(jobDeadline + "\n");
 					fWriter.close();
-				
+
 					int phoneNumber = Integer.parseInt(phoneNum);
 					int jobDuration_Number = Integer.parseInt(jobDuration);
 					int jobID = 12;
-					
+
 					Controller.addRenter(name, email, phoneNumber, ID, jobDuration_Number, jobID);
+					// Controller.addJobID(jobID);
 					currentID = ID;
-				//	renters.add(new VehicleRenter(name, email, phoneNum, ID, jobDuration, jobDeadline));
-					//^creates new jframe for some reason. no good
-					
+					// renters.add(new VehicleRenter(name, email, phoneNum, ID, jobDuration,
+					// jobDeadline));
+					// ^creates new jframe for some reason. no good
+
 					clearTextFields();
-					
+
 					popup = new JFrame();
-					JOptionPane.showMessageDialog(popup, "You have successfully registered as a Vehicle Renter", "Account Creation Confirmed",
-							JOptionPane.INFORMATION_MESSAGE);
-					
-					//TEMPORARY, SHOULD BE IN LOGINGUI. SHOULD DIRECT YOU HERE AFTER LOGIN, FOR NOW WE WILL DO THIS.
+					JOptionPane.showMessageDialog(popup, "You have successfully registered as a Vehicle Renter",
+							"Account Creation Confirmed", JOptionPane.INFORMATION_MESSAGE);
+
+					// TEMPORARY, SHOULD BE IN LOGINGUI. SHOULD DIRECT YOU HERE AFTER LOGIN, FOR NOW
+					// WE WILL DO THIS.
 					frame.dispose();
 					RenterDashboard renterDash = new RenterDashboard();
 				}
-		
+
 				catch (IOException error) {
 					System.out.println("An error has occured");
 				}
 			}
-			
 
 			else if (!(e.getSource() == createBack)) {
 				popup = new JFrame();
@@ -458,8 +459,7 @@ public class AccountCreation implements ActionListener {
 		jobDeadlineField.setText("");
 		residencyTimeField.setText("");
 	}
-	
-	
+
 	private void createPanel() {
 		panel = new JPanel();
 
@@ -503,5 +503,5 @@ public class AccountCreation implements ActionListener {
 		// adds to current object
 		frame.add(panel);
 	}
-	
+
 }

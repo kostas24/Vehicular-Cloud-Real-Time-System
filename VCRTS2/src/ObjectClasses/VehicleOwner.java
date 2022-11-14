@@ -1,5 +1,12 @@
 package ObjectClasses;
-
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.Scanner;
+import java.io.*;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -7,6 +14,50 @@ import java.util.Queue;
 public class VehicleOwner extends Account {
 
 	private ArrayList<Vehicle> vehicles;
+	static ServerSocket serverSocket;
+	static Socket socket;
+	static DataInputStream inputStream;
+	static DataOutputStream outputStream;
+	
+public static void main(String[] args) {
+		
+		String messageIn = "";
+		String messageOut = "";
+		Scanner keyInput;
+		
+		try {
+
+			System.out.println("----------*** This is Owner client side ***--------");
+			System.out.println("client started!");
+			//connect the client socket to server
+			Socket socket = new Socket("localhost", 2);
+			
+			
+			//client reads a message from Server
+			inputStream = new DataInputStream(socket.getInputStream());
+			outputStream = new DataOutputStream(socket.getOutputStream());
+			
+			while(!messageIn.equals("exit")) {
+				messageIn = inputStream.readUTF();
+				// client prints the message received from server to console
+				System.out.println("message received from server: " + "\"" + messageIn + "\"");
+				
+				
+				// ********************************************************
+				// client reads a message from keyboard
+				System.out.println("Enter a message you want to send to server side: ");
+				keyInput = new Scanner(System.in);
+				messageOut = keyInput.nextLine();
+				// server sends the message to client
+				outputStream.writeUTF(messageOut);
+				
+			}
+	} catch (Exception e) {
+		
+		e.printStackTrace();
+
+	}
+}
 
 	/*
 	 * Constructor to create a VehicleOwner object and calls method to associate a

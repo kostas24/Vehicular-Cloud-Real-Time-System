@@ -18,12 +18,17 @@ public class ControllerDashboard implements ActionListener{
 		private JLabel completionTimeLabel;
 		private JPanel panel;
 		private JButton createBack;
-		//private Controller controller = new Controller();
 		private ArrayList<Integer> completionTimes;
+		private ArrayList<Integer> times;
+		private JLabel IDlabel;
 		
 		
 		public ControllerDashboard() {
-			//completionTimes = controller.calculateCompletionTime()
+			IDlabel = new JLabel("----------"); 
+			IDlabel.setBounds(350, 200, 350, 40); 
+			IDlabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 24));
+			IDlabel.setForeground(Color.white);
+		
 			completionTimeLabel = new JLabel("----------"); 
 			completionTimeLabel.setBounds(350, 300, 350, 40); 
 			completionTimeLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 24));
@@ -49,10 +54,13 @@ public class ControllerDashboard implements ActionListener{
 			if(e.getSource() == buttonCompletionTime)
 			{		
 
-				ArrayList<Integer> times = new ArrayList<Integer>(Controller.calculateCompletionTime());
+				times = new ArrayList<Integer>(Controller.calculateCompletionTime());
 				System.out.println(times.toString());
         
 				completionTimeLabel.setText(times.toString());
+			//	Controller controller = new Controller();
+		//		IDlabel.setText(Controller.getJobIDList().toString());
+				
 				//Maybe add an if statement to detect if there are no Jobs/completionTime arraylist is empty?
 				/*
 				StringBuilder sb = new StringBuilder();
@@ -65,10 +73,12 @@ public class ControllerDashboard implements ActionListener{
 			
 			if(e.getSource() == createBack)
 			{
+				//times.clear();
 				ControllerFrame.dispose();
 				LaunchPage launch = new LaunchPage();
 			}
 		}
+		
 		
 		private void createButtonCompletionTime() {
 			buttonCompletionTime = new JButton("Find Completion Time");
@@ -98,6 +108,7 @@ public class ControllerDashboard implements ActionListener{
 			panel.add(buttonCompletionTime);
 			panel.add(completionTimeLabel);
 			panel.add(createBack);
+		//	panel.add(IDlabel);
 			ControllerFrame.add(panel);
 		
 		}

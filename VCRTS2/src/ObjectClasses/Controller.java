@@ -1,14 +1,74 @@
 package ObjectClasses;
+import java.io.*;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.Scanner;
 
 import java.sql.Date;
 import java.util.*;
 
 public class Controller {
+	
+	static ServerSocket serverSocketRent;
+	static ServerSocket serverSocketOwn;
+	static Socket socketRent;
+	static Socket socketOwn;
+	static DataInputStream inputStreamRent;
+	static DataOutputStream outputStreamRent;
+	static DataInputStream inputStreamOwn;
+	static DataOutputStream outputStreamOwn;
 
 	private static ArrayList<VehicleRenter> vehicleRenters = new ArrayList<VehicleRenter>();
 	private static ArrayList<VehicleOwner> vehicleOwners;
 	private static ArrayList<Integer> jobIDList;
 	private static ArrayList<Integer> completionTimes = new ArrayList<Integer>();
+	public static VehicleRenter latestRenter;
+	
+	public static void main(String[] args) {
+		
+		String messageIn = "";
+		String messageOut = "";
+		Scanner keyInput;
+		
+		try {
+		System.out.println("----------$$$ This is server side $$$--------");
+		System.out.println("wating for client to connect...");
+		serverSocketRent = new ServerSocket(1);
+		//serverSocketOwn = new ServerSocket(2);
+		// sever accepts connection request from client
+		socketRent = serverSocketRent.accept();
+	//	socketOwn = serverSocketOwn.accept();
+		
+		System.out.println("client is connected!");
+		
+		inputStreamRent = new DataInputStream(socketRent.getInputStream());
+		outputStreamRent = new DataOutputStream(socketRent.getOutputStream());
+		
+	//	inputStreamOwn = new DataInputStream(socketOwn.getInputStream());
+	//	outputStreamOwn = new DataOutputStream(socketOwn.getOutputStream());
+		
+		
+		
+		while (!messageIn.equals("exit")) {
+
+			// extract the message from client
+			messageIn = inputStreamRent.readUTF();
+			// server prints the message received from client to console
+			System.out.println("message received from client: " + "\"" + messageIn + "\"");
+
+			// ********************************************************
+			// server reads a message from keyboard
+			System.out.println("Enter a message you want to send to client side: ");
+			keyInput = new Scanner(System.in);
+			messageOut = keyInput.nextLine();
+			// server sends the message to client
+			outputStreamRent.writeUTF(messageOut);
+		}
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+	}
 
 	public Controller() {
 		jobIDList = new ArrayList<Integer>();
@@ -18,6 +78,7 @@ public class Controller {
 	}
 
 	public static ArrayList<Integer> calculateCompletionTime()  { // shouldn't this return something?
+		completionTimes.clear();
 		int completionTime = 0;
 		for (VehicleRenter renter : vehicleRenters) {
 			ArrayList<Job> jobList = new ArrayList<>(renter.getJobList());
@@ -65,9 +126,10 @@ public class Controller {
 	/*
 	 * Adds a VehicleRenter to the list of renters known to the Controller.
 	 */
-	public static void addRenter(String name, String email, int phoneNum, String id, int jobDuration, int jobID) {
-		vehicleRenters.add(new VehicleRenter(name, email, phoneNum, id, jobDuration, jobID));
-
+	public static void addRenter(String name, String email, int phoneNum, String id, int jobDuration, int jobID) throws IOException {
+		VehicleRenter newRenter = new VehicleRenter(name, email, phoneNum, id, jobDuration, jobID);
+		vehicleRenters.add(newRenter);
+		latestRenter = newRenter;
 	}
 	
 	
@@ -119,6 +181,10 @@ public class Controller {
 		return jobID;
 	}
 	
+	public static void addJobID(int jobID) {
+		jobIDList.add(jobID);
+	}
+	
 	public static VehicleRenter returnRenter (String ID) {
 		for (VehicleRenter renter: vehicleRenters) {
 			if(renter.getIDNumber().equals(ID)) {
@@ -127,5 +193,9 @@ public class Controller {
 		}
 		return null;
 		}
+	
+	public static ArrayList<Integer> getJobIDList(){
+		return jobIDList;
+	}
 	}
 
