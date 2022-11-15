@@ -22,6 +22,8 @@ public class Controller {
 	private static ArrayList<VehicleOwner> vehicleOwners;
 	private static ArrayList<Integer> jobIDList;
 	private static ArrayList<Integer> completionTimes = new ArrayList<Integer>();
+	
+	public static VehicleOwner latestOwner;
 	public static VehicleRenter latestRenter;
 	
 	public static void main(String[] args) {
@@ -102,9 +104,10 @@ public class Controller {
 	 * Adds a VehicleOwner to the list of renters known to the Controller.
 	 */
 	public static void addOwner(String name, String email, int phoneNumber, String id, String licensePlate, String carMake,
-			String carModel, int carYear, int residencyTime) {
-		vehicleOwners.add(new VehicleOwner(name, email, phoneNumber, id, licensePlate, carMake, carModel, carYear,
-				residencyTime));
+			String carModel, int carYear, int residencyTime) throws IOException{
+		VehicleOwner newOwner = new VehicleOwner(name, email, phoneNumber, id, licensePlate, carMake, carModel, carYear, residencyTime);
+		vehicleOwners.add(newOwner);
+		latestOwner = newOwner;
 
 	}
 	

@@ -106,13 +106,13 @@ public class RenterDashboard extends AccountCreation implements ActionListener {
 			
 			t.start(); 
 			
-			
+		}
 
 		if (e.getSource() == createBack) {
 			renterFrame.dispose();
 			LaunchPage launch = new LaunchPage();
 		}
-	}
+	
 	}
 
 	private void createBackButton() {

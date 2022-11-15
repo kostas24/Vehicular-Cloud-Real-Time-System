@@ -11,15 +11,16 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class VehicleOwner extends Account {
+public class VehicleOwner extends Account implements Runnable {
 
 	private ArrayList<Vehicle> vehicles;
 	static ServerSocket serverSocket;
 	static Socket socket;
 	static DataInputStream inputStream;
 	static DataOutputStream outputStream;
+	public String requestedVehicle;
 	
-public static void main(String[] args) {
+		public void run() {
 		
 		String messageIn = "";
 		String messageOut = "";
@@ -29,29 +30,19 @@ public static void main(String[] args) {
 
 			System.out.println("----------*** This is Owner client side ***--------");
 			System.out.println("client started!");
-			//connect the client socket to server
-			Socket socket = new Socket("localhost", 2);
-			
-			
-			//client reads a message from Server
+			// connect the client socket to server
+			Socket socket = new Socket("localhost", 1);
+
+			// client reads a message from Server
 			inputStream = new DataInputStream(socket.getInputStream());
 			outputStream = new DataOutputStream(socket.getOutputStream());
+
+			System.out.println("Client connected to server");
 			
-			while(!messageIn.equals("exit")) {
-				messageIn = inputStream.readUTF();
-				// client prints the message received from server to console
-				System.out.println("message received from server: " + "\"" + messageIn + "\"");
-				
-				
-				// ********************************************************
-				// client reads a message from keyboard
-				System.out.println("Enter a message you want to send to server side: ");
-				keyInput = new Scanner(System.in);
-				messageOut = keyInput.nextLine();
-				// server sends the message to client
-				outputStream.writeUTF(messageOut);
-				
-			}
+			outputStream.writeUTF(requestedVehicle);
+			
+			System.out.println("Client job request sent");
+			
 	} catch (Exception e) {
 		
 		e.printStackTrace();
@@ -80,6 +71,12 @@ public static void main(String[] args) {
 
 	{
 		vehicles.add(new Vehicle(carMake, carModel, carYear, licensePlate, residencyTime));
+	}
+	
+	public void requestVehicle(String licensePlate, String carMake, String carModel, String carYear, String residencyTime) {
+		String requestedVehicle = "License Plate: " +  licensePlate + ", Car Make: " + carMake + ", Car Model: " + carModel + ", Car Year: " + carYear + "Residency Time (Hours): " + residencyTime;
+		System.out.println(requestedVehicle);
+		this.requestedVehicle = requestedVehicle;
 	}
 
 	/*
