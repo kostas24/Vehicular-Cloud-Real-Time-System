@@ -66,5 +66,9 @@ public class VehicleOwner extends Account {
 			}
 		}
 	}
+	
+	public ArrayList<Vehicle> getVehicleList() {
+		return vehicles;
+	}
 
 }
