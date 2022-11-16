@@ -119,7 +119,9 @@ public class ControllerDashboard implements ActionListener {
 		}
 		if(e.getSource() == acceptButton)
 		{
-			
+			popup = new JFrame();
+			JOptionPane.showMessageDialog(popup, "Job has been accepted successfully", "Job Accepted",
+					JOptionPane.INFORMATION_MESSAGE);
 		}
 		
 		if(e.getSource() == rejectButton)
