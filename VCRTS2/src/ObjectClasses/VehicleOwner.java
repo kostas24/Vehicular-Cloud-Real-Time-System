@@ -3,11 +3,43 @@ package ObjectClasses;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Scanner;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 
-public class VehicleOwner extends Account {
+public class VehicleOwner extends Account implements Runnable{
 
 	private ArrayList<Vehicle> vehicles;
 
+	static ServerSocket serverSocket;
+	static Socket socket;
+	static DataInputStream inputStream;
+	static DataOutputStream outputStream;
+	public String requestedJob;
+	
+	public void run() {
+		String messageIn = "";
+		String messageIyt = "";
+		Scanner keyInput;
+		
+		try {
+			
+			System.out.println("----------*** This is Owner client side ***--------");
+			System.out.println("client started!");
+			
+			Socket socket = new Socket("localhost2", 1);
+			
+			inputStream = new DataInputStream(socket.getInputStream());
+			outputStream = new DataOutputStream(socket.getOutputStream());
+
+			System.out.println("Client connected to server");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	/*
 	 * Constructor to create a VehicleOwner object and calls method to associate a
 	 * vehicle with the VehicleOwner.
@@ -65,6 +97,10 @@ public class VehicleOwner extends Account {
 				}
 			}
 		}
+	}
+	
+	public ArrayList<Vehicle> getVehicleList() {
+		return vehicles;
 	}
 
 }

@@ -1,7 +1,12 @@
 package ObjectClasses;
 
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.net.*;
 import java.sql.Date;
 import java.util.*;
+
+import javax.swing.JTable;
 
 public class Controller {
 
@@ -10,6 +15,69 @@ public class Controller {
 	private static ArrayList<Integer> jobIDList;
 	private static ArrayList<Integer> completionTimes = new ArrayList<Integer>();
 	private static int nextJobID;
+	/**	private static ServerSocket serverSocket;
+	private static Socket socket;
+	private static DataInputStream inputStream;
+	private static DataOutputStream outputStream;
+	public static VehicleOwner latestOwner; **/
+	
+	static ServerSocket serverSocketRent;
+	static ServerSocket serverSocketOwn;
+	static Socket socketRent;
+	static Socket socketOwn;
+	static DataInputStream inputStreamRent;
+	static DataOutputStream outputStreamRent;
+	static DataInputStream inputStreamOwn;
+	static DataOutputStream outputStreamOwn;
+	
+	public static VehicleOwner latestOwner;
+	public static VehicleRenter latestRenter;
+	
+public static void main(String[] args) {
+		
+		String messageIn = "";
+		String messageOut = "";
+		Scanner keyInput;
+		
+		try {
+		System.out.println("----------$$$ This is server side $$$--------");
+		System.out.println("wating for client to connect...");
+		serverSocketRent = new ServerSocket(1);
+		//serverSocketOwn = new ServerSocket(2);
+		// sever accepts connection request from client
+		socketRent = serverSocketRent.accept();
+	//	socketOwn = serverSocketOwn.accept();
+		
+		System.out.println("client is connected!");
+		
+		inputStreamRent = new DataInputStream(socketRent.getInputStream());
+		outputStreamRent = new DataOutputStream(socketRent.getOutputStream());
+		
+	//	inputStreamOwn = new DataInputStream(socketOwn.getInputStream());
+	//	outputStreamOwn = new DataOutputStream(socketOwn.getOutputStream());
+		
+		
+		
+		while (!messageIn.equals("exit")) {
+
+			// extract the message from client
+			messageIn = inputStreamRent.readUTF();
+			// server prints the message received from client to console
+			System.out.println("message received from client: " + "\"" + messageIn + "\"");
+
+			// ********************************************************
+			// server reads a message from keyboard
+			System.out.println("Enter a message you want to send to client side: ");
+			keyInput = new Scanner(System.in);
+			messageOut = keyInput.nextLine();
+			// server sends the message to client
+			outputStreamRent.writeUTF(messageOut);
+		}
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+	}
 
 	public Controller() {
 		jobIDList = new ArrayList<Integer>();
@@ -20,11 +88,12 @@ public class Controller {
 	}
 
 	/*
-	 * In the future, this method should calculate job completion times in order of their ID number. ID Numbers
-	 * are now set to generate in order from 0 upwards. So it can just use the jobIDList to calculate job 
-	 * completion times for ease of use.
+	 * In the future, this method should calculate job completion times in order of
+	 * their ID number. ID Numbers are now set to generate in order from 0 upwards.
+	 * So it can just use the jobIDList to calculate job completion times for ease
+	 * of use.
 	 */
-	public static ArrayList<Integer> calculateCompletionTime()  { // shouldn't this return something?
+	public static ArrayList<Integer> calculateCompletionTime() { // shouldn't this return something?
 		int completionTime = 0;
 		for (VehicleRenter renter : vehicleRenters) {
 			ArrayList<Job> jobList = new ArrayList<>(renter.getJobList());
@@ -34,11 +103,11 @@ public class Controller {
 				completionTimes.add(completionTime);
 			}
 		}
-	return completionTimes;
-		
+		return completionTimes;
+
 	}
 
-	//Incomplete
+	// Incomplete
 	public void approveJob() {
 
 	}
@@ -46,16 +115,16 @@ public class Controller {
 	/*
 	 * Adds a VehicleOwner to the list of renters known to the Controller.
 	 */
-	public static void addOwner(String name, String email, int phoneNumber, String id, String licensePlate, String carMake,
-			String carModel, int carYear, int residencyTime) {
+	public static void addOwner(String name, String email, int phoneNumber, String id, String licensePlate,
+			String carMake, String carModel, int carYear, int residencyTime) {
 		vehicleOwners.add(new VehicleOwner(name, email, phoneNumber, id, licensePlate, carMake, carModel, carYear,
 				residencyTime));
 
 	}
-	
+
 	/*
-	 * Removes a VehicleOwner from the list of renters known to the Controller using their email to find and 
-	 * remove them.
+	 * Removes a VehicleOwner from the list of renters known to the Controller using
+	 * their email to find and remove them.
 	 */
 	public static boolean removeOwner(String email) {
 		boolean removed = false;
@@ -72,16 +141,14 @@ public class Controller {
 	 * Adds a VehicleRenter to the list of renters known to the Controller.
 	 */
 	public static void addRenter(String name, String email, int phoneNum, String id, int jobDuration, int jobID) {
-		vehicleRenters.add(new VehicleRenter(name, email, phoneNum, id, jobDuration, jobID));
-
+		VehicleRenter newRenter = new VehicleRenter(name, email, phoneNum, id, jobDuration, jobID);
+		vehicleRenters.add(newRenter);
+		latestRenter = newRenter;
 	}
-	
-	
-	
 
 	/*
-	 * Removes a VehicleRenter from the list of renters known to the Controller using their email to find and 
-	 * remove them.
+	 * Removes a VehicleRenter from the list of renters known to the Controller
+	 * using their email to find and remove them.
 	 */
 	public static boolean removeRenter(String email) {
 		boolean removed = false;
@@ -93,7 +160,7 @@ public class Controller {
 		}
 		return removed;
 	}
-	
+
 	public static boolean addJob(String email, int jobDuration, Date jobDeadline, int jobPriorityLevel, int jobID) {
 		boolean jobAdded = false;
 		for (int i = 0; i < vehicleRenters.size(); i++) {
@@ -104,11 +171,12 @@ public class Controller {
 		}
 		return jobAdded;
 	}
-	
-	public static boolean addVehicle(String email, String licensePlate, String carMake, String carModel, int carYear, int residencyTime) {
+
+	public static boolean addVehicle(String email, String licensePlate, String carMake, String carModel, int carYear,
+			int residencyTime) {
 		boolean vehicleAdded = false;
-		for(int i = 1 ; i < vehicleOwners.size(); i++) {
-			if(vehicleOwners.get(i).getEmail().equalsIgnoreCase(email)) {
+		for (int i = 1; i < vehicleOwners.size(); i++) {
+			if (vehicleOwners.get(i).getEmail().equalsIgnoreCase(email)) {
 				vehicleOwners.get(i).addVehicle(licensePlate, carMake, carModel, carYear, residencyTime);
 				vehicleAdded = true;
 			}
@@ -117,14 +185,84 @@ public class Controller {
 	}
 
 	public static int generateJobID() {
-		//Controller controller = new Controller ();
-		jobIDList.add(nextJobID+1);
+		// Controller controller = new Controller ();
+		jobIDList.add(nextJobID + 1);
 		nextJobID += 1;
 		return nextJobID;
 	}
-	
-	public static ArrayList<Integer> getJobIDList(){
+
+	public static ArrayList<Integer> getJobIDList() {
 		return jobIDList;
 	}
 
+	public static JTable getJobInfoTable() {
+
+		String[] columnNames = { "Name", "Email", "ID Number", "Phone Number", "Job Duration", "Job ID" };
+		String[][] jobInfoArray = new String[jobIDList.size()][6];
+
+		if (jobInfoArray.length > 0) {
+			for (int i = 0; i < jobInfoArray.length; i++) {
+				for (int j = 0; j < jobInfoArray[i].length; j++) {
+					
+					if (j == 0) {
+						jobInfoArray[i][j] = vehicleRenters.get(i).getName();
+					} else if (j == 1) {
+						jobInfoArray[i][j] = vehicleRenters.get(i).getEmail();
+					} else if (j == 2) {
+						jobInfoArray[i][j] = vehicleRenters.get(i).getId();
+					} else if (j == 3) {
+						jobInfoArray[i][j] = Integer.toString(vehicleRenters.get(i).getPhoneNum());
+					} else if (j == 4) {
+						jobInfoArray[i][j] = Integer
+								.toString(((Job) vehicleRenters.get(i).getJobList().get(0)).getJobDuration());
+					} else if (j == 5) {
+						jobInfoArray[i][j] = Integer
+								.toString(((Job) vehicleRenters.get(i).getJobList().get(0)).getJobID());
+					}
+				}
+			}
+		}
+
+		JTable jobInfoTable = new JTable(jobInfoArray, columnNames);
+		return jobInfoTable;
+	}
+
+	public static JTable getVehicleInfoTable() {
+		String[] columnNames = { "Name", "Email", "ID Number", "Phone Number", "License Plate", "Residency Time",
+				"Car Make", "Car Model", "Car Year" };
+		String[][] vehicleInfoArray = new String[vehicleOwners.size()][9];
+
+		if (vehicleInfoArray.length > 0) {
+			for (int i = 0; i < vehicleInfoArray.length; i++) {
+				for (int j = 0; j < vehicleInfoArray[i].length; j++) {
+
+					if (j == 0) {
+						vehicleInfoArray[i][j] = vehicleOwners.get(i).getName();
+					} else if (j == 1) {
+						vehicleInfoArray[i][j] = vehicleOwners.get(i).getEmail();
+					} else if (j == 2) {
+						vehicleInfoArray[i][j] = vehicleOwners.get(i).getId();
+					} else if (j == 3) {
+						vehicleInfoArray[i][j] = Integer.toString(vehicleOwners.get(i).getPhoneNum());
+					} else if (j == 4) {
+						vehicleInfoArray[i][j] = vehicleOwners.get(i).getVehicleList().get(0).getLicensePlate();
+					} else if (j == 5) {
+						vehicleInfoArray[i][j] = Integer
+								.toString(vehicleOwners.get(i).getVehicleList().get(0).getResidencyTime());
+					} else if (j == 6) {
+						vehicleInfoArray[i][j] = vehicleOwners.get(i).getVehicleList().get(0).getCarMake();
+					} else if (j == 7) {
+						vehicleInfoArray[i][j] = vehicleOwners.get(i).getVehicleList().get(0).getCarModel();
+					} else if (j == 8) {
+						vehicleInfoArray[i][j] = Integer
+								.toString(vehicleOwners.get(i).getVehicleList().get(0).getCarYear());
+					}
+
+				}
+			}
+		}
+
+		JTable vehicleInfoTable = new JTable(vehicleInfoArray, columnNames);
+		return vehicleInfoTable;
+	}
 }

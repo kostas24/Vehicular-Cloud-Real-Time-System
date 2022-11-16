@@ -1,14 +1,56 @@
 package ObjectClasses;
 import java.util.*;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.net.ServerSocket;
+import java.net.Socket;
 
-public class VehicleRenter extends Account {
+public class VehicleRenter extends Account implements Runnable{
 
 	private ArrayList<Job> jobs;
+	
+	static ServerSocket serverSocket;
+	static Socket socket;
+	static DataInputStream inputStream;
+	static DataOutputStream outputStream;
+	public String requestedJob;
+	
+	public void run() {
+		// TODO Auto-generated method stub
+
+		String messageIn = "";
+		String messageOut = "";
+		Scanner keyInput;
+
+		try {
+
+			System.out.println("----------*** This is Renter client side ***--------");
+			System.out.println("client started!");
+			// connect the client socket to server
+			Socket socket = new Socket("localhost", 1);
+
+			// client reads a message from Server
+			inputStream = new DataInputStream(socket.getInputStream());
+			outputStream = new DataOutputStream(socket.getOutputStream());
+
+			System.out.println("Client connected to server");
+			
+			outputStream.writeUTF(requestedJob);
+			
+			System.out.println("Client job request sent");
+			
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
+	}
 
 	/*
 	 * Basic constructor for current Milestone that only adds job to this vehicle
@@ -39,16 +81,13 @@ public class VehicleRenter extends Account {
 	 */
 	public void requestJob(int jobDuration, int jobID) {
 		jobs.add(new Job(jobDuration, jobID));
-	/**	File jobRegistry = new File("VCRTSjobs.txt");
-		FileWriter fWriter;
-		try {
-			fWriter = new FileWriter(jobRegistry);
-			fWriter.write("Job ID: " + jobID + " _ Job Duration: " + jobDuration);
-			fWriter.close();
-		}
-		catch (IOException error) {
-			System.out.println("An error has occured");
-		}**/
+		String jobDurationString = Integer.toString(jobDuration);
+		String jobIDString = Integer.toString(jobID);
+
+		String requestedJob = "Job Duration: " + jobDurationString + ", " + "Job ID: " + jobIDString;
+		System.out.println(requestedJob);
+		this.requestedJob = requestedJob;
+
 	}
 	
 	/*
