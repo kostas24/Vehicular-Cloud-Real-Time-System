@@ -367,7 +367,10 @@ public class AccountCreation implements ActionListener {
 					fWriter.write(residencyTime + "\n");
 					fWriter.close();
 					
-					Controller.addOwner(name, email, Integer.parseInt(phoneNum), ID, licensePlate, carMake, carModel, Integer.parseInt(carYear), Integer.parseInt(residencyTime));
+					int phoneNumInt = Integer.parseInt(phoneNum);
+					
+					Controller.addOwner(name, email, phoneNumInt, ID, licensePlate, carMake, carModel, Integer.parseInt(carYear), Integer.parseInt(residencyTime));
+
 					
 					
 					clearTextFields();

@@ -13,11 +13,11 @@ public class VehicleOwner extends Account implements Runnable{
 
 	private ArrayList<Vehicle> vehicles;
 
-	static ServerSocket serverSocket;
-	static Socket socket;
-	static DataInputStream inputStream;
-	static DataOutputStream outputStream;
-	public String requestedJob;
+	static ServerSocket serverSocket2;
+	static Socket socket2;
+	static DataInputStream inputStream2;
+	static DataOutputStream outputStream2;
+	public String requestedVehicle;
 	
 	public void run() {
 		String messageIn = "";
@@ -29,12 +29,17 @@ public class VehicleOwner extends Account implements Runnable{
 			System.out.println("----------*** This is Owner client side ***--------");
 			System.out.println("client started!");
 			
-			Socket socket = new Socket("localhost2", 1);
+			Socket socket2 = new Socket("localhost", 2);
 			
-			inputStream = new DataInputStream(socket.getInputStream());
-			outputStream = new DataOutputStream(socket.getOutputStream());
-
+			inputStream2 = new DataInputStream(socket2.getInputStream());
+			outputStream2 = new DataOutputStream(socket2.getOutputStream());
+			
 			System.out.println("Client connected to server");
+			
+			outputStream2.writeUTF(requestedVehicle);
+			
+			System.out.println("Client vehicle request sent");
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -49,6 +54,12 @@ public class VehicleOwner extends Account implements Runnable{
 		super(name, email, phoneNumber, id);
 		vehicles = new ArrayList<Vehicle>();
 		addVehicle(licensePlate, carMake, carModel, carYear, residencyTime);
+	}
+	
+	public void requestVehicle(String licensePlate, String carMake, String carModel, String carYear, String residencyTime) {
+		String requestedVehicle = "License Plate: " + licensePlate + ", Car Make: " + carMake + ", Car Model: " +  carModel + ", Car Year: " + carYear + ", Residency Time (Hours): " + residencyTime;
+		System.out.println(requestedVehicle);
+		this.requestedVehicle = requestedVehicle;
 	}
 
 	/*
