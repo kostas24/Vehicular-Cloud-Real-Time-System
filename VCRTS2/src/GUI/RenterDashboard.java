@@ -4,8 +4,12 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import ObjectClasses.Controller;
+import ObjectClasses.VehicleRenter;
+
 import javax.swing.*;
-public class RenterDashboard implements ActionListener{
+
+public class RenterDashboard extends AccountCreation implements ActionListener{
 
 	JFrame renterFrame = new JFrame();
 	private static final int FRAME_WIDTH = 800;
@@ -18,6 +22,7 @@ public class RenterDashboard implements ActionListener{
 	private JTextField jobDurationField;
 	private JLabel jobIDLabel;
 	private JTextField jobIDField;
+	private VehicleRenter currentRenter = Controller.latestRenter;
 	
 	//*********************************
 	//private Job jobs = new Job(0, null, 0, 0); //how can i get values that we inputted in GUI?
@@ -30,20 +35,18 @@ public class RenterDashboard implements ActionListener{
 		jobDurationLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
 		jobDurationLabel.setForeground(Color.white);
 		
-		jobDurationField = new JTextField("Job Duration(Hours): ");
+		jobDurationField = new JTextField();
 		jobDurationField.setBounds(240, 300, 350, 35);
 		jobDurationField.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-		jobDurationField.setForeground(Color.white);
 		
 		jobIDLabel = new JLabel("Job ID: ");
 		jobIDLabel.setBounds(165, 260, 350, 35);
 		jobIDLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
 		jobIDLabel.setForeground(Color.white);
 		
-		jobIDField = new JTextField("Job ID: ");
+		jobIDField = new JTextField();
 		jobIDField.setBounds(240, 260, 350, 35);
-		jobIDField.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-		jobIDField.setForeground(Color.white);
+		jobIDField.setFont(new Font("Comic Sans MS", Font.PLAIN, 20)); 
 		
 		createButtonAddJob();
 		createBackButton();
@@ -72,9 +75,25 @@ public class RenterDashboard implements ActionListener{
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		
+		Thread t = new Thread(currentRenter);
 		if(e.getSource() == buttonAddJob)
 		{
+			String jobID = jobIDField.getText();
+			int jobID_Number = Integer.parseInt(jobID);
+
+			String jobDuration = jobDurationField.getText();
+			int jobDuration_Number = Integer.parseInt(jobDuration);
+
+			//Thread t = new Thread(currentRenter);
+			
+			try {
+			currentRenter.requestJob(jobDuration_Number, jobID_Number);
+			} catch (Exception error) {
+
+				error.printStackTrace();
+		}
+			
+			t.start(); 
 			
 		}
 		

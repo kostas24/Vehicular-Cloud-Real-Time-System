@@ -367,8 +367,11 @@ public class AccountCreation implements ActionListener {
 					fWriter.write(residencyTime + "\n");
 					fWriter.close();
 					
-					//owners.add(new VehicleOwner(name, email, phoneNum, ID, licensePlate, carMake, carModel, carYear, residencyTime));
-					//^creates new jframe for some reason. no good
+					int phoneNumInt = Integer.parseInt(phoneNum);
+					
+					Controller.addOwner(name, email, phoneNumInt, ID, licensePlate, carMake, carModel, Integer.parseInt(carYear), Integer.parseInt(residencyTime));
+
+					
 					
 					clearTextFields();
 				
@@ -410,17 +413,15 @@ public class AccountCreation implements ActionListener {
 					fWriter.write(jobDeadline + "\n");
 					fWriter.close();
 				
-					int phoneNumber = Integer.parseInt(phoneNum);
-					int jobDuration_Number = Integer.parseInt(jobDuration);
-					int jobID = Controller.generateJobID();
-					System.out.println(jobID);
+
+					//System.out.println(jobID);
 					/*
 					Random randI = new Random();
 			        int jobID = randI.nextInt(100);
 			        jobID = jobID+1;
 			        */
 					
-					Controller.addRenter(name, email, phoneNumber, ID, jobDuration_Number, jobID);
+					Controller.addRenter(name, email, Integer.parseInt(phoneNum), ID, Integer.parseInt(jobDuration), Controller.generateJobID());
 					//System.out.println("Added!");
 					//System.out.println(Controller.getJobIDList().toString());
 					

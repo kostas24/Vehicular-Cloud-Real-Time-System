@@ -3,11 +3,48 @@ package ObjectClasses;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Scanner;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 
-public class VehicleOwner extends Account {
+public class VehicleOwner extends Account implements Runnable{
 
 	private ArrayList<Vehicle> vehicles;
 
+	static ServerSocket serverSocket2;
+	static Socket socket2;
+	static DataInputStream inputStream2;
+	static DataOutputStream outputStream2;
+	public String requestedVehicle;
+	
+	public void run() {
+		String messageIn = "";
+		String messageIyt = "";
+		Scanner keyInput;
+		
+		try {
+			
+			System.out.println("----------*** This is Owner client side ***--------");
+			System.out.println("client started!");
+			
+			Socket socket2 = new Socket("localhost", 2);
+			
+			inputStream2 = new DataInputStream(socket2.getInputStream());
+			outputStream2 = new DataOutputStream(socket2.getOutputStream());
+			
+			System.out.println("Client connected to server");
+			
+			outputStream2.writeUTF(requestedVehicle);
+			
+			System.out.println("Client vehicle request sent");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	/*
 	 * Constructor to create a VehicleOwner object and calls method to associate a
 	 * vehicle with the VehicleOwner.
@@ -17,6 +54,12 @@ public class VehicleOwner extends Account {
 		super(name, email, phoneNumber, id);
 		vehicles = new ArrayList<Vehicle>();
 		addVehicle(licensePlate, carMake, carModel, carYear, residencyTime);
+	}
+	
+	public void requestVehicle(String licensePlate, String carMake, String carModel, String carYear, String residencyTime) {
+		String requestedVehicle = "License Plate: " + licensePlate + ", Car Make: " + carMake + ", Car Model: " +  carModel + ", Car Year: " + carYear + ", Residency Time (Hours): " + residencyTime;
+		System.out.println(requestedVehicle);
+		this.requestedVehicle = requestedVehicle;
 	}
 
 	/*
@@ -65,6 +108,10 @@ public class VehicleOwner extends Account {
 				}
 			}
 		}
+	}
+	
+	public ArrayList<Vehicle> getVehicleList() {
+		return vehicles;
 	}
 
 }
