@@ -80,7 +80,7 @@ public class VehicleRenter extends Account implements Runnable{
 	 * Basic method in order to add a job using just jobDuration and jobID for current implementation.
 	 */
 	public void requestJob(int jobDuration, int jobID) {
-		//jobs.add(new Job(jobDuration, jobID));
+		jobs.add(new Job(jobDuration, jobID));
 		String jobDurationString = Integer.toString(jobDuration);
 		String jobIDString = Integer.toString(jobID);
 
