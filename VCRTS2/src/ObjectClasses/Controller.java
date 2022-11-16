@@ -188,7 +188,11 @@ public static void main(String[] args) {
 			}
 		}
 		
-		jobIDList.remove(jobID-1);
+		for (int i = 0; i < jobIDList.size(); i++) {
+			if(jobID == jobIDList.get(i)) {
+				jobIDList.remove(i);
+			}
+		}
 		return removed;
 	}
 
