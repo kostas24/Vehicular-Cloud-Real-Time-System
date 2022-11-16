@@ -11,6 +11,7 @@ import ObjectClasses.Controller;
 public class ControllerDashboard implements ActionListener {
 
 	JFrame ControllerFrame = new JFrame();
+	JFrame popup;
 	private static final int FRAME_WIDTH = 800;
 	private static final int FRAME_HEIGHT = 800;
 
@@ -123,7 +124,9 @@ public class ControllerDashboard implements ActionListener {
 		
 		if(e.getSource() == rejectButton)
 		{
-			
+			popup = new JFrame();
+			JOptionPane.showMessageDialog(popup, "Your job has been rejected", "Please try again",
+					JOptionPane.INFORMATION_MESSAGE);
 		}
 		
 	}
