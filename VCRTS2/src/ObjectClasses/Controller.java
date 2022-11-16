@@ -252,7 +252,6 @@ public static void main(String[] args) {
 		JTable jobInfoTable = new JTable(jobInfoArray, columnNames);
 		return jobInfoTable;
 	}
-	
 
 
 	public static JTable getVehicleInfoTable() {

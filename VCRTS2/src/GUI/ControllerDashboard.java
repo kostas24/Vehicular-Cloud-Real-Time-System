@@ -31,7 +31,7 @@ public class ControllerDashboard implements ActionListener {
 	private JButton refreshTablesButton;
 	private JButton acceptButton;
 	private JButton rejectButton;
-	
+
 	// private Controller controller = new Controller();
 	private ArrayList<Integer> completionTimes;
 
@@ -80,7 +80,6 @@ public class ControllerDashboard implements ActionListener {
 		createRejectButton();
 		createPanel();
 		ControllerFrame.setTitle("VCRTS - Vehicle Controller Dashboard");
-
 		ImageIcon CloudComputingIcon = new ImageIcon("Images/Cloud Computing.jpg");
 		ControllerFrame.setIconImage(CloudComputingIcon.getImage());
 
@@ -137,6 +136,7 @@ public class ControllerDashboard implements ActionListener {
 			catch (IOException error) {
 				System.out.println("An error has occured writing to VCRTSjobs.txt file");
 			}
+
 			
 		}
 		
@@ -223,3 +223,4 @@ public class ControllerDashboard implements ActionListener {
 	}
 
 }
+
