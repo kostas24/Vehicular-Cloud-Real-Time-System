@@ -147,6 +147,7 @@ public class ControllerDashboard implements ActionListener {
 		acceptButton.setOpaque(true);
 		acceptButton.setBorderPainted(false);
 		acceptButton.addActionListener(this);
+
 	}
 
 	private void createButtonCompletionTime() {
@@ -202,3 +203,4 @@ public class ControllerDashboard implements ActionListener {
 	}
 
 }
+
