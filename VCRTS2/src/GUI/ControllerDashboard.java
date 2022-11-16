@@ -3,6 +3,9 @@ package GUI;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -77,7 +80,6 @@ public class ControllerDashboard implements ActionListener {
 		createRejectButton();
 		createPanel();
 		ControllerFrame.setTitle("VCRTS - Vehicle Controller Dashboard");
-
 		ImageIcon CloudComputingIcon = new ImageIcon("Images/Cloud Computing.jpg");
 		ControllerFrame.setIconImage(CloudComputingIcon.getImage());
 
@@ -116,13 +118,31 @@ public class ControllerDashboard implements ActionListener {
 			
 			panel.revalidate();
 		}
+		File acceptedJobs = new File("VCRTSjobs.txt");
 		if(e.getSource() == acceptButton)
 		{
+			//write accepted jobs to file
+			FileWriter fWriter;
+			try {              
+				fWriter = new FileWriter(acceptedJobs, true);
+				java.util.Date time = new java.util.Date();
+				
+				fWriter.write("" + "\n");
+				fWriter.write(time.toString() + "\n");
+				fWriter.write(""+ "\n"); // PRINT ACCEPTED JOB INFORMATION in ""
+				fWriter.close();
+				
+			} 
+			catch (IOException error) {
+				System.out.println("An error has occured writing to VCRTSjobs.txt file");
+			}
+
 			
 		}
 		
 		if(e.getSource() == rejectButton)
 		{
+			//remove job?
 			
 		}
 		

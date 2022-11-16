@@ -14,6 +14,8 @@ public class Controller {
 	private static ArrayList<VehicleOwner> vehicleOwners;
 	private static ArrayList<Integer> jobIDList;
 	private static ArrayList<Integer> completionTimes = new ArrayList<Integer>();
+	
+	
 	private static int nextJobID;
 	/**	private static ServerSocket serverSocket;
 	private static Socket socket;
@@ -210,6 +212,14 @@ public static void main(String[] args) {
 	public static ArrayList<Integer> getJobIDList() {
 		return jobIDList;
 	}
+	
+	public static ArrayList<VehicleRenter> getVehicleRenter() {
+		return vehicleRenters;
+	}
+	
+	public static ArrayList<VehicleOwner> getVehicleOwner() {
+		return vehicleOwners;
+	}
 
 	public static JTable getJobInfoTable() {
 
@@ -242,6 +252,7 @@ public static void main(String[] args) {
 		JTable jobInfoTable = new JTable(jobInfoArray, columnNames);
 		return jobInfoTable;
 	}
+
 
 	public static JTable getVehicleInfoTable() {
 		String[] columnNames = { "Name", "Email", "ID Number", "Phone Number", "License Plate", "Residency Time",
