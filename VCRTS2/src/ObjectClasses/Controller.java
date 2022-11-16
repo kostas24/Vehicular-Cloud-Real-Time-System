@@ -219,7 +219,7 @@ public static void main(String[] args) {
 		if (jobInfoArray.length > 0) {
 			for (int i = 0; i < jobInfoArray.length; i++) {
 				for (int j = 0; j < jobInfoArray[i].length; j++) {
-
+					
 					if (j == 0) {
 						jobInfoArray[i][j] = vehicleRenters.get(i).getName();
 					} else if (j == 1) {
