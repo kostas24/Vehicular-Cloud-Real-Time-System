@@ -367,6 +367,8 @@ public class AccountCreation implements ActionListener {
 					fWriter.write(residencyTime + "\n");
 					fWriter.close();
 					
+					Controller.addOwner(name, email, FRAME_HEIGHT, ID, licensePlate, carMake, carModel, Integer.parseInt(carYear), Integer.parseInt(residencyTime));
+					
 					//owners.add(new VehicleOwner(name, email, phoneNum, ID, licensePlate, carMake, carModel, carYear, residencyTime));
 					//^creates new jframe for some reason. no good
 					
@@ -413,7 +415,7 @@ public class AccountCreation implements ActionListener {
 					int phoneNumber = Integer.parseInt(phoneNum);
 					int jobDuration_Number = Integer.parseInt(jobDuration);
 					int jobID = Controller.generateJobID();
-					System.out.println(jobID);
+					//System.out.println(jobID);
 					/*
 					Random randI = new Random();
 			        int jobID = randI.nextInt(100);
