@@ -367,7 +367,9 @@ public class AccountCreation implements ActionListener {
 					fWriter.write(residencyTime + "\n");
 					fWriter.close();
 					
-					Controller.addOwner(name, email, FRAME_HEIGHT, ID, licensePlate, carMake, carModel, Integer.parseInt(carYear), Integer.parseInt(residencyTime));
+					int phoneNumInt = Integer.parseInt(phoneNum);
+					
+					Controller.addOwner(name, email, phoneNumInt, ID, licensePlate, carMake, carModel, Integer.parseInt(carYear), Integer.parseInt(residencyTime));
 					
 					//owners.add(new VehicleOwner(name, email, phoneNum, ID, licensePlate, carMake, carModel, carYear, residencyTime));
 					//^creates new jframe for some reason. no good

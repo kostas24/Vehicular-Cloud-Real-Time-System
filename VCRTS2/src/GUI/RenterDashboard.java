@@ -46,7 +46,7 @@ public class RenterDashboard extends AccountCreation implements ActionListener{
 		
 		jobIDField = new JTextField();
 		jobIDField.setBounds(240, 260, 350, 35);
-		jobIDField.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		jobIDField.setFont(new Font("Comic Sans MS", Font.PLAIN, 20)); 
 		
 		createButtonAddJob();
 		createBackButton();
@@ -75,7 +75,7 @@ public class RenterDashboard extends AccountCreation implements ActionListener{
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		
+		Thread t = new Thread(currentRenter);
 		if(e.getSource() == buttonAddJob)
 		{
 			String jobID = jobIDField.getText();
@@ -84,7 +84,7 @@ public class RenterDashboard extends AccountCreation implements ActionListener{
 			String jobDuration = jobDurationField.getText();
 			int jobDuration_Number = Integer.parseInt(jobDuration);
 
-			Thread t = new Thread(currentRenter);
+			//Thread t = new Thread(currentRenter);
 			
 			try {
 			currentRenter.requestJob(jobDuration_Number, jobID_Number);

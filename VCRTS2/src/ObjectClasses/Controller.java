@@ -35,33 +35,47 @@ public class Controller {
 	
 public static void main(String[] args) {
 		
-		String messageIn = "";
-		String messageOut = "";
+		String messageInRenter = "";
+		String messageOutRenter = "";
+		String messageInOwner = "";
+		String messageOutOwner = "";
 		Scanner keyInput;
 		
 		try {
 		System.out.println("----------$$$ This is server side $$$--------");
 		System.out.println("wating for client to connect...");
 		serverSocketRent = new ServerSocket(1);
-		//serverSocketOwn = new ServerSocket(2);
+		serverSocketOwn = new ServerSocket(2);
+		
 		// sever accepts connection request from client
 		socketRent = serverSocketRent.accept();
-	//	socketOwn = serverSocketOwn.accept();
 		
-		System.out.println("client is connected!");
+		System.out.println("Renter is connected!");
 		
 		inputStreamRent = new DataInputStream(socketRent.getInputStream());
 		outputStreamRent = new DataOutputStream(socketRent.getOutputStream());
+		messageInRenter = inputStreamRent.readUTF();
+		
+		socketOwn = serverSocketOwn.accept();
+		
+		System.out.println("Owner is connected!");
+		
+		inputStreamOwn = new DataInputStream(socketOwn.getInputStream());
+		outputStreamOwn = new DataOutputStream(socketOwn.getOutputStream());
+		messageInOwner = inputStreamOwn.readUTF();
+		
+		System.out.println("Renter - " + messageInRenter);
+		System.out.println("Owner - " + messageInOwner);
 		
 	//	inputStreamOwn = new DataInputStream(socketOwn.getInputStream());
 	//	outputStreamOwn = new DataOutputStream(socketOwn.getOutputStream());
 		
 		
 		
-		while (!messageIn.equals("exit")) {
+/**		while (!messageInRenter.equals("exit")) {
 
 			// extract the message from client
-			messageIn = inputStreamRent.readUTF();
+			messageInRenter = inputStreamRent.readUTF();
 			// server prints the message received from client to console
 			System.out.println("message received from client: " + "\"" + messageIn + "\"");
 
@@ -72,7 +86,7 @@ public static void main(String[] args) {
 			messageOut = keyInput.nextLine();
 			// server sends the message to client
 			outputStreamRent.writeUTF(messageOut);
-		}
+		} **/
 		} catch (Exception e) {
 
 			e.printStackTrace();
@@ -117,8 +131,10 @@ public static void main(String[] args) {
 	 */
 	public static void addOwner(String name, String email, int phoneNumber, String id, String licensePlate,
 			String carMake, String carModel, int carYear, int residencyTime) {
-		vehicleOwners.add(new VehicleOwner(name, email, phoneNumber, id, licensePlate, carMake, carModel, carYear,
-				residencyTime));
+		VehicleOwner newOwner = new VehicleOwner(name, email, phoneNumber, id, licensePlate, carMake, carModel, carYear,
+				residencyTime);
+		vehicleOwners.add(newOwner);
+		latestOwner = newOwner;
 
 	}
 

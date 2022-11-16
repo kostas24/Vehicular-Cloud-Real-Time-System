@@ -127,14 +127,15 @@ public class OwnerDashboard extends AccountCreation implements ActionListener{
 			
 			Thread thread = new Thread(currentOwner);
 			
-		/**	try {
+			try {
 				currentOwner.requestVehicle(licensePlate, carMake, carModel, carYear, residencyTime);
 			} catch (Exception error ) {
 				
 				error.printStackTrace();
-			} **/
+			} 
 			
 			thread.start();
+			
 			
 		}
 		
