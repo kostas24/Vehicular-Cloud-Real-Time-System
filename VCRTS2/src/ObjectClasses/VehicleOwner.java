@@ -53,6 +53,7 @@ public class VehicleOwner extends Account implements Runnable{
 			String carModel, int carYear, int residencyTime) {
 		super(name, email, phoneNumber, id);
 		vehicles = new ArrayList<Vehicle>();
+		this.requestedVehicle = "License Plate: " + licensePlate + ", Car Make: " + carMake + ", Car Model: " +  carModel + ", Car Year: " + carYear + ", Residency Time (Hours): " + residencyTime;
 		addVehicle(licensePlate, carMake, carModel, carYear, residencyTime);
 	}
 	

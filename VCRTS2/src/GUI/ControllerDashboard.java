@@ -122,14 +122,9 @@ public class ControllerDashboard implements ActionListener {
 		}
 
 		if (e.getSource() == refreshTablesButton) {
-			jobInfoTable = Controller.getJobInfoTable();
-			vehicleInfoTable = Controller.getVehicleInfoTable();
-
-			jobScrollPane = new JScrollPane(jobInfoTable);
-			vehicleScrollPane = new JScrollPane(vehicleInfoTable);
+			ControllerFrame.dispose();
 			
-			panel.revalidate();
-			ControllerFrame.revalidate();
+			ControllerDashboard controllerDashboard = new ControllerDashboard();
 		}
 		File acceptedJobs = new File("VCRTSjobs.txt");
 		if(e.getSource() == acceptButton)

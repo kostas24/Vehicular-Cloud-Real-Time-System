@@ -377,7 +377,7 @@ public class AccountCreation implements ActionListener {
 					try {
 						VehicleOwner currentOwner = Controller.latestOwner;
 						thread = new Thread(currentOwner);
-						currentOwner.requestVehicle(licensePlate, carMake, carModel, carYear, residencyTime);
+						//currentOwner.requestVehicle(licensePlate, carMake, carModel, carYear, residencyTime);
 					} catch (Exception error ) {
 						
 						error.printStackTrace();
@@ -446,7 +446,7 @@ public class AccountCreation implements ActionListener {
 					try {
 						VehicleRenter currentRenter = Controller.latestRenter;
 						t = new Thread(currentRenter);
-						currentRenter.requestJob(Integer.parseInt(jobDuration), Integer.parseInt(ID));
+						//currentRenter.requestJob(Integer.parseInt(jobDuration), Integer.parseInt(ID));
 						} catch (Exception error) {
 
 							error.printStackTrace();

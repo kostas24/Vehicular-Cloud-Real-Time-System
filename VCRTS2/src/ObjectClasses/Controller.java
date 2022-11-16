@@ -117,7 +117,8 @@ public static void main(String[] args) {
 	 * So it can just use the jobIDList to calculate job completion times for ease
 	 * of use.
 	 */
-	public static ArrayList<Integer> calculateCompletionTime() { // shouldn't this return something?
+	public static ArrayList<Integer> calculateCompletionTime() { 
+		completionTimes.clear();
 		int completionTime = 0;
 		for (VehicleRenter renter : vehicleRenters) {
 			ArrayList<Job> jobList = new ArrayList<>(renter.getJobList());
@@ -178,12 +179,16 @@ public static void main(String[] args) {
 	 */
 	public static boolean removeRenter(String email) {
 		boolean removed = false;
+		int jobID = 0;
 		for (int i = 0; i < vehicleRenters.size(); i++) {
 			if (vehicleRenters.get(i).getEmail().equalsIgnoreCase(email)) {
+				jobID = ((Job) vehicleRenters.get(i).getJobList().get(0)).getJobID();
 				vehicleRenters.remove(i);
 				removed = true;
 			}
 		}
+		
+		jobIDList.remove(jobID-1);
 		return removed;
 	}
 
