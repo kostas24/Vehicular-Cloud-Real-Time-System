@@ -26,6 +26,9 @@ public class ControllerDashboard implements ActionListener {
 	private JScrollPane vehicleScrollPane;
 	private JTable vehicleInfoTable;
 	private JButton refreshTablesButton;
+	private JButton acceptButton;
+	private JButton rejectButton;
+	
 	// private Controller controller = new Controller();
 	private ArrayList<Integer> completionTimes;
 
@@ -70,6 +73,8 @@ public class ControllerDashboard implements ActionListener {
 		createButtonCompletionTime();
 		createBackButton();
 		createRefreshButton();
+		createAcceptButton();
+		createRejectButton();
 		createPanel();
 		ControllerFrame.setTitle("VCRTS - Vehicle Controller Dashboard");
 
@@ -111,6 +116,39 @@ public class ControllerDashboard implements ActionListener {
 			
 			panel.revalidate();
 		}
+		if(e.getSource() == acceptButton)
+		{
+			
+		}
+		
+		if(e.getSource() == rejectButton)
+		{
+			
+		}
+		
+	}
+	
+	private void createRejectButton() {
+		rejectButton = new JButton("Reject Job");
+		rejectButton.setFont(new Font("Comic Sans MS", Font.PLAIN, 28));
+		rejectButton.setForeground(Color.white);
+		rejectButton.setBounds(220, 650, 360, 40);
+		rejectButton.setBackground(Color.RED);
+		rejectButton.setOpaque(true);
+		rejectButton.setBorderPainted(false);
+		rejectButton.addActionListener(this);
+	}
+	
+	private void createAcceptButton() {
+		acceptButton = new JButton("Accept Job");
+		acceptButton.setFont(new Font("Comic Sans MS", Font.PLAIN, 28));
+		acceptButton.setForeground(Color.white);
+		acceptButton.setBounds(220, 600, 360, 40);
+		acceptButton.setBackground(Color.GREEN);
+		acceptButton.setOpaque(true);
+		acceptButton.setBorderPainted(false);
+		acceptButton.addActionListener(this);
+
 	}
 
 	private void createButtonCompletionTime() {
@@ -159,7 +197,8 @@ public class ControllerDashboard implements ActionListener {
 		panel.add(jobTimeTextLabel);
 		panel.add(jobScrollPane);
 		panel.add(vehicleScrollPane);
-
+		panel.add(rejectButton);
+		panel.add(acceptButton);
 		ControllerFrame.add(panel);
 
 	}

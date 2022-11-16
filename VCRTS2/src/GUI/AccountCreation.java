@@ -367,9 +367,7 @@ public class AccountCreation implements ActionListener {
 					fWriter.write(residencyTime + "\n");
 					fWriter.close();
 					
-					int phoneNumInt = Integer.parseInt(phoneNum);
-					
-					Controller.addOwner(name, email, phoneNumInt, ID, licensePlate, carMake, carModel, Integer.parseInt(carYear), Integer.parseInt(residencyTime));
+					Controller.addOwner(name, email, Integer.parseInt(phoneNum), ID, licensePlate, carMake, carModel, Integer.parseInt(carYear), Integer.parseInt(residencyTime));
 					
 					//owners.add(new VehicleOwner(name, email, phoneNum, ID, licensePlate, carMake, carModel, carYear, residencyTime));
 					//^creates new jframe for some reason. no good
@@ -413,18 +411,16 @@ public class AccountCreation implements ActionListener {
 					fWriter.write(jobDuration + "\n");
 					fWriter.write(jobDeadline + "\n");
 					fWriter.close();
-				
-					int phoneNumber = Integer.parseInt(phoneNum);
-					int jobDuration_Number = Integer.parseInt(jobDuration);
-					int jobID = Controller.generateJobID();
+					
 					//System.out.println(jobID);
 					/*
 					Random randI = new Random();
 			        int jobID = randI.nextInt(100);
 			        jobID = jobID+1;
 			        */
+				
+					Controller.addRenter(name, email, Integer.parseInt(phoneNum), ID, Integer.parseInt(jobDuration), Controller.generateJobID());
 					
-					Controller.addRenter(name, email, phoneNumber, ID, jobDuration_Number, jobID);
 					//System.out.println("Added!");
 					//System.out.println(Controller.getJobIDList().toString());
 					
