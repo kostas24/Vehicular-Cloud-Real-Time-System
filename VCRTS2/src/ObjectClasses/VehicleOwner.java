@@ -27,14 +27,14 @@ public class VehicleOwner extends Account implements Runnable{
 		try {
 			
 			System.out.println("----------*** This is Owner client side ***--------");
-			System.out.println("client started!");
+			System.out.println("Owner started!");
 			
 			Socket socket2 = new Socket("localhost", 2);
 			
 			inputStream2 = new DataInputStream(socket2.getInputStream());
 			outputStream2 = new DataOutputStream(socket2.getOutputStream());
 			
-			System.out.println("Client connected to server");
+			System.out.println("Owner connected to server");
 			
 			outputStream2.writeUTF(requestedVehicle);
 			

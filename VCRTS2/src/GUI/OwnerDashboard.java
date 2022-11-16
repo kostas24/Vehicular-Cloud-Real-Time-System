@@ -3,6 +3,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.*;
 
 import javax.swing.*;
 
@@ -13,7 +14,7 @@ public class OwnerDashboard extends AccountCreation implements ActionListener{
 	JFrame ownerFrame = new JFrame();
 	private static final int FRAME_WIDTH = 800;
 	private static final int FRAME_HEIGHT = 800;
-	private VehicleOwner currentOwner = Controller.latestOwner;
+	//private VehicleOwner currentOwner = Controller.latestOwner;
 	
 	private JPanel panel;
 	private JButton buttonAddJob;
@@ -28,7 +29,6 @@ public class OwnerDashboard extends AccountCreation implements ActionListener{
 	private JTextField carModelField;
 	private JTextField carYearField;
 	private JTextField residencyField;
-
 
 	//*********************************
 	//private Job jobs = new Job(0, null, 0, 0); //how can i get values that we inputted in GUI?
@@ -125,6 +125,8 @@ public class OwnerDashboard extends AccountCreation implements ActionListener{
 			String residencyTime = residencyField.getText();
 			System.out.println(residencyTime);
 			
+			
+		/*	
 			Thread thread = new Thread(currentOwner);
 			
 			try {
@@ -135,7 +137,7 @@ public class OwnerDashboard extends AccountCreation implements ActionListener{
 			} 
 			
 			thread.start();
-			
+			*/
 			
 		}
 		

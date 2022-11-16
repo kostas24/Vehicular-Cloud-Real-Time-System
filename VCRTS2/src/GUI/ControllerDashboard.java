@@ -10,13 +10,14 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 import ObjectClasses.Controller;
+import ObjectClasses.VehicleRenter;
 
 public class ControllerDashboard implements ActionListener {
 
 	JFrame ControllerFrame = new JFrame();
 	private static final int FRAME_WIDTH = 800;
 	private static final int FRAME_HEIGHT = 800;
-
+	JFrame popup;
 	private JButton buttonCompletionTime;
 	private JLabel jobTimeTextLabel;
 	private JLabel idTextLabel;
@@ -31,16 +32,27 @@ public class ControllerDashboard implements ActionListener {
 	private JButton refreshTablesButton;
 	private JButton acceptButton;
 	private JButton rejectButton;
+	private JTextField enterEmail;
+	private JLabel enterEmailLabel;
 	
 	// private Controller controller = new Controller();
 	private ArrayList<Integer> completionTimes;
-
+//	private ArrayList<VehicleRenter> renterList; 
 	public ControllerDashboard() {
 		// completionTimes = controller.calculateCompletionTime()
 		// Controller controller = new Controller();
 
 		jobInfoTable = Controller.getJobInfoTable();
 
+		enterEmailLabel = new JLabel("Enter Email: ");
+		enterEmailLabel.setBounds(80, 550, 160, 40);
+		enterEmailLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 24));
+		enterEmailLabel.setForeground(Color.white);
+		
+		enterEmail = new JTextField("");
+		enterEmail.setBounds(220, 550, 360, 40);
+		enterEmail.setFont(new Font("Comic Sans MS", Font.PLAIN, 22));
+		
 		jobScrollPane = new JScrollPane(jobInfoTable);
 		jobScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		jobScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
@@ -68,7 +80,7 @@ public class ControllerDashboard implements ActionListener {
 		completionIDLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 24));
 		completionIDLabel.setForeground(Color.white);
 
-		completionTimeLabel = new JLabel("----------");
+		completionTimeLabel = new JLabel("-----------");
 		completionTimeLabel.setBounds(450, 450, 350, 40);
 		completionTimeLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 24));
 		completionTimeLabel.setForeground(Color.white);
@@ -118,10 +130,15 @@ public class ControllerDashboard implements ActionListener {
 			vehicleScrollPane = new JScrollPane(vehicleInfoTable);
 			
 			panel.revalidate();
+			ControllerFrame.revalidate();
 		}
 		File acceptedJobs = new File("VCRTSjobs.txt");
 		if(e.getSource() == acceptButton)
 		{
+			
+			ArrayList<String> accepted = new ArrayList<String>();
+		//	accepted.add();
+			
 			//write accepted jobs to file
 			FileWriter fWriter;
 			try {              
@@ -130,7 +147,30 @@ public class ControllerDashboard implements ActionListener {
 				
 				fWriter.write("" + "\n");
 				fWriter.write(time.toString() + "\n");
-				fWriter.write(""+ "\n"); // PRINT ACCEPTED JOB INFORMATION in ""
+				//if(Controller.getVehicleRenter().get().getEmail().equals(enterEmail.getText())|| 
+						//Controller.getVehicleOwner().get().getEmail().equals(enterEmail.getText()))
+				
+				for(int j =0; j <Controller.getVehicleRenter().size(); j++) {
+					if(Controller.getVehicleRenter().get(j).getEmail().equals(enterEmail.getText())) {
+						fWriter.write(enterEmail.getText() + "\n"); // PRINT ACCEPTED JOB INFORMATION in "" IF NEED BE WE CAN ADD OTHER INFO AS WELL
+						System.out.println("The job of "+enterEmail.getText()+ " has been accepted(vehicleRenter)");
+						popup = new JFrame();
+						JOptionPane.showMessageDialog(popup, "The job of "+enterEmail.getText()+ " has been accepted(vehicleRenter)", "Accepted Job",
+								JOptionPane.INFORMATION_MESSAGE);		
+					}
+				}
+				
+				for(int j =0; j <Controller.getVehicleOwner().size(); j++) {
+
+					if(Controller.getVehicleOwner().get(j).getEmail().equals(enterEmail.getText())) {
+						fWriter.write(enterEmail.getText() + "\n"); // PRINT ACCEPTED JOB INFORMATION in "" IF NEED BE WE CAN ADD OTHER INFO AS WELL
+						System.out.println("The vehicle of "+enterEmail.getText()+ " has been accepted(vehicleOwner)");
+						popup = new JFrame();
+						JOptionPane.showMessageDialog(popup, "The vehicle of "+enterEmail.getText()+ " has been accepted(vehicleOwner)", "Accepted Vehicle",
+								JOptionPane.INFORMATION_MESSAGE);	
+					}
+				}
+				
 				fWriter.close();
 				
 			} 
@@ -142,7 +182,46 @@ public class ControllerDashboard implements ActionListener {
 		
 		if(e.getSource() == rejectButton)
 		{
+			
+			String x = enterEmail.getText();
+						
+			//System.out.println(Controller.getVehicleRenter().toString());
+			//renterList = new ArrayList<VehicleRenter>(Controller.getVehicleRenter());
+			for(int j =0; j <Controller.getVehicleRenter().size(); j++) {
+			if(Controller.getVehicleRenter().get(j).getEmail().equals(x)) {
+				System.out.println("The job of "+x+ " has been rejected(vehicleRenter)");
+				popup = new JFrame();
+				JOptionPane.showMessageDialog(popup, "The job of "+x+ " has been rejected(vehicleRenter)", "Rejected Job",
+						JOptionPane.INFORMATION_MESSAGE);		
+				Controller.removeRenter(enterEmail.getText());
+				//for(int i =0; i < Controller.getVehicleRenter().size();i++)
+					//System.out.println(Controller.getVehicleRenter().get(i).getEmail());
+				
+				
+			}
+			}
+			for(int j =0; j <Controller.getVehicleOwner().size(); j++) {
+
+				if(Controller.getVehicleOwner().get(j).getEmail().equals(x)) {
+					System.out.println("The vehicle of "+x+ " has been rejected(vehicleOwner)");
+					popup = new JFrame();
+					JOptionPane.showMessageDialog(popup, "The vehicle of "+x+ " has been rejected(vehicleOwner)", "Rejected Vehicle",
+							JOptionPane.INFORMATION_MESSAGE);	
+					Controller.removeOwner(enterEmail.getText());
+				//for(int i =0; i < Controller.getVehicleOwner().size();i++)				
+					//System.out.println(Controller.getVehicleOwner().get(i).getEmail());			
+				}
+		}
+			
+			//Controller.rejectRenterJob(enterEmail.getText());
+		//	System.out.println(Controller.getVehicleRenter());
+			
+			
+			
 			//remove job?
+			//Controller.getJobIDList().remove(0);
+			//for(int i =0; i < Controller.getJobIDList().size();i++)
+			//System.out.println(Controller.getJobIDList());
 			
 		}
 		
@@ -218,6 +297,8 @@ public class ControllerDashboard implements ActionListener {
 		panel.add(vehicleScrollPane);
 		panel.add(rejectButton);
 		panel.add(acceptButton);
+		panel.add(enterEmail);
+		panel.add(enterEmailLabel);
 		ControllerFrame.add(panel);
 
 	}

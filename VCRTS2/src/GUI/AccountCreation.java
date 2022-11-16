@@ -370,27 +370,36 @@ public class AccountCreation implements ActionListener {
 					int phoneNumInt = Integer.parseInt(phoneNum);
 					
 					Controller.addOwner(name, email, phoneNumInt, ID, licensePlate, carMake, carModel, Integer.parseInt(carYear), Integer.parseInt(residencyTime));
+					Controller.socketOwnFound = true;
+					Controller.socketRentFound = false;
 
+					Thread thread = null;
+					try {
+						VehicleOwner currentOwner = Controller.latestOwner;
+						thread = new Thread(currentOwner);
+						currentOwner.requestVehicle(licensePlate, carMake, carModel, carYear, residencyTime);
+					} catch (Exception error ) {
+						
+						error.printStackTrace();
+					} 
 					
+					thread.start();
 					
 					clearTextFields();
-				
-					
+								
 					popup = new JFrame();
 					JOptionPane.showMessageDialog(popup, "You have successfully registered as a Vehicle Owner", "Account Creation Confirmed",
-							JOptionPane.INFORMATION_MESSAGE);
-					
-					
-					
+							JOptionPane.INFORMATION_MESSAGE);				
 					//TEMPORARY, SHOULD BE IN LOGINGUI. SHOULD DIRECT YOU HERE AFTER LOGIN, FOR NOW WE WILL DO THIS.
-					frame.dispose();
-					OwnerDashboard ownerDash = new OwnerDashboard();
+					//frame.dispose();
+					//OwnerDashboard ownerDash = new OwnerDashboard();
 					
 				} 
 				
 				catch (IOException error) {
 					System.out.println("An error has occured");
 				}
+				
 
 			}
 
@@ -422,11 +431,28 @@ public class AccountCreation implements ActionListener {
 			        */
 					
 					Controller.addRenter(name, email, Integer.parseInt(phoneNum), ID, Integer.parseInt(jobDuration), Controller.generateJobID());
+					Controller.socketRentFound = true;
+					Controller.socketOwnFound = false;
 					//System.out.println("Added!");
 					//System.out.println(Controller.getJobIDList().toString());
 					
 				//	renters.add(new VehicleRenter(name, email, phoneNum, ID, jobDuration, jobDeadline));
 					//^creates new jframe for some reason. no good
+
+					
+					
+					
+					Thread t = null;
+					try {
+						VehicleRenter currentRenter = Controller.latestRenter;
+						t = new Thread(currentRenter);
+						currentRenter.requestJob(Integer.parseInt(jobDuration), Integer.parseInt(ID));
+						} catch (Exception error) {
+
+							error.printStackTrace();
+					}
+						
+						t.start();
 					
 					clearTextFields();
 					
@@ -435,14 +461,18 @@ public class AccountCreation implements ActionListener {
 							JOptionPane.INFORMATION_MESSAGE);
 					
 					//TEMPORARY, SHOULD BE IN LOGINGUI. SHOULD DIRECT YOU HERE AFTER LOGIN, FOR NOW WE WILL DO THIS.
-					frame.dispose();
-					RenterDashboard renterDash = new RenterDashboard();
+					//frame.dispose();
+					//RenterDashboard renterDash = new RenterDashboard();
 				}
 		
 				catch (IOException error) {
 					System.out.println("An error has occured");
 				}
+				 
+					
 			}
+			
+			
 			
 
 			else if (!(e.getSource() == createBack)) {
