@@ -35,6 +35,9 @@ public class Controller {
 	public static VehicleOwner latestOwner;
 	public static VehicleRenter latestRenter;
 	
+	public static boolean socketRentFound = false;
+	public static boolean socketOwnFound = false;
+	
 public static void main(String[] args) {
 		
 		String messageInRenter = "";
@@ -50,25 +53,30 @@ public static void main(String[] args) {
 		serverSocketOwn = new ServerSocket(2);
 		
 		// sever accepts connection request from client
-		socketRent = serverSocketRent.accept();
+		while(true)
+		{
+			if(socketRentFound = true)
+			{
+				socketRent = serverSocketRent.accept();
+				System.out.println("Renter is connected!");	
+				inputStreamRent = new DataInputStream(socketRent.getInputStream());
+				outputStreamRent = new DataOutputStream(socketRent.getOutputStream());
+				messageInRenter = inputStreamRent.readUTF();
+				System.out.println("Renter - " + messageInRenter);
+				socketRent.close();
+			}
 		
-		System.out.println("Renter is connected!");
-		
-		inputStreamRent = new DataInputStream(socketRent.getInputStream());
-		outputStreamRent = new DataOutputStream(socketRent.getOutputStream());
-		messageInRenter = inputStreamRent.readUTF();
-		
-		socketOwn = serverSocketOwn.accept();
-		
-		System.out.println("Owner is connected!");
-		
-		inputStreamOwn = new DataInputStream(socketOwn.getInputStream());
-		outputStreamOwn = new DataOutputStream(socketOwn.getOutputStream());
-		messageInOwner = inputStreamOwn.readUTF();
-		
-		System.out.println("Renter - " + messageInRenter);
-		System.out.println("Owner - " + messageInOwner);
-		
+			if(socketOwnFound = true)
+			{
+				socketOwn = serverSocketOwn.accept();
+				System.out.println("Owner is connected!");
+				inputStreamOwn = new DataInputStream(socketOwn.getInputStream());
+				outputStreamOwn = new DataOutputStream(socketOwn.getOutputStream());
+				messageInOwner = inputStreamOwn.readUTF();
+				System.out.println("Owner - " + messageInOwner);
+				socketOwn.close();
+			}
+		}
 	//	inputStreamOwn = new DataInputStream(socketOwn.getInputStream());
 	//	outputStreamOwn = new DataOutputStream(socketOwn.getOutputStream());
 		
@@ -170,7 +178,7 @@ public static void main(String[] args) {
 	 */
 	public static boolean removeRenter(String email) {
 		boolean removed = false;
-		for (int i = 0; i < vehicleOwners.size(); i++) {
+		for (int i = 0; i < vehicleRenters.size(); i++) {
 			if (vehicleRenters.get(i).getEmail().equalsIgnoreCase(email)) {
 				vehicleRenters.remove(i);
 				removed = true;
@@ -220,11 +228,17 @@ public static void main(String[] args) {
 	public static ArrayList<VehicleOwner> getVehicleOwner() {
 		return vehicleOwners;
 	}
+	
+//	public static void rejectRenterJob(String email)
+	//{
+			//vehicleRenters.remove
+	//		System.out.println("Job of vehicleRenter " +vehicleRenters.get().getEmail()+ " has been rejected");		
+	//}
 
 	public static JTable getJobInfoTable() {
 
 		String[] columnNames = { "Name", "Email", "ID Number", "Phone Number", "Job Duration", "Job ID" };
-		String[][] jobInfoArray = new String[jobIDList.size()][6];
+		String[][] jobInfoArray = new String[vehicleRenters.size()][6];
 
 		if (jobInfoArray.length > 0) {
 			for (int i = 0; i < jobInfoArray.length; i++) {

@@ -75,7 +75,7 @@ public class RenterDashboard extends AccountCreation implements ActionListener{
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		Thread t = new Thread(currentRenter);
+	//	Thread t = new Thread(currentRenter);
 		if(e.getSource() == buttonAddJob)
 		{
 			String jobID = jobIDField.getText();
@@ -85,7 +85,7 @@ public class RenterDashboard extends AccountCreation implements ActionListener{
 			int jobDuration_Number = Integer.parseInt(jobDuration);
 
 			//Thread t = new Thread(currentRenter);
-			
+		/*	
 			try {
 			currentRenter.requestJob(jobDuration_Number, jobID_Number);
 			} catch (Exception error) {
@@ -94,13 +94,13 @@ public class RenterDashboard extends AccountCreation implements ActionListener{
 		}
 			
 			t.start(); 
-			
+		*/	
 		}
 		
 		if(e.getSource() == createBack)
 		{
 			renterFrame.dispose();
-			LaunchPage launch = new LaunchPage();
+			LaunchPage launch = new LaunchPage(); 
 		}
 	}
 	
