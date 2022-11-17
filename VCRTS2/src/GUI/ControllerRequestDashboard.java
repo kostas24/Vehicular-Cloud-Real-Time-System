@@ -3,9 +3,15 @@ package GUI;
 import javax.swing.*;
 
 import ObjectClasses.Controller;
+import ObjectClasses.Job;
+import ObjectClasses.VehicleOwner;
+import ObjectClasses.VehicleRenter;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class ControllerRequestDashboard implements ActionListener {
 
@@ -14,7 +20,7 @@ public class ControllerRequestDashboard implements ActionListener {
 	private static final int FRAME_HEIGHT = 800;
 	JFrame popup;
 	JPanel panel;
-	
+
 	JButton backButton;
 	JButton refreshButton;
 	JButton acceptButton;
@@ -55,7 +61,7 @@ public class ControllerRequestDashboard implements ActionListener {
 		createRejectButton();
 		createBackButton();
 		createRefreshButton();
-		
+
 		createPanel();
 
 		ControllerRequestsFrame.setTitle("VCRTS - Vehicle Controller Requests Dashboard");
@@ -88,7 +94,7 @@ public class ControllerRequestDashboard implements ActionListener {
 		acceptButton.addActionListener(this);
 
 	}
-	
+
 	private void createBackButton() {
 		backButton = new JButton("Back");
 		backButton.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
@@ -111,70 +117,72 @@ public class ControllerRequestDashboard implements ActionListener {
 		refreshButton.addActionListener(this);
 	}
 
-
 	public void actionPerformed(ActionEvent e) {
-		
+
 		if (e.getSource() == acceptButton) {
 			String searchEmail = emailField.getText();
 			boolean found = false;
-			
+
 			for (int i = 0; i < Controller.getTempVehicleOwner().size(); i++) {
-				if(searchEmail.equals(Controller.getTempVehicleOwner().get(i).getEmail())) {
+				if (searchEmail.equals(Controller.getTempVehicleOwner().get(i).getEmail())) {
 					Controller.approveOwner(Controller.getTempVehicleOwner().get(i));
 					popup = new JFrame();
-					JOptionPane.showMessageDialog(popup, "The job of " + searchEmail + " has been accepted (vehicleOwner)", "Accepted Job",
+					JOptionPane.showMessageDialog(popup,
+							"The job of '" + searchEmail + "' has been accepted (vehicleOwner)", "Accepted Job",
 							JOptionPane.INFORMATION_MESSAGE);
 					found = true;
-					
-					//Insert File Writing Method
+
+					acceptVehicleOwnerWriteToFile(Controller.getTempVehicleOwner().get(i));
 				}
 			}
-			
+
 			for (int j = 0; j < Controller.getTempVehicleRenter().size(); j++) {
-				if(searchEmail.equals(Controller.getTempVehicleRenter().get(j).getEmail())) {
+				if (searchEmail.equals(Controller.getTempVehicleRenter().get(j).getEmail())) {
 					Controller.approveRenter(Controller.getTempVehicleRenter().get(j));
 					popup = new JFrame();
-					JOptionPane.showMessageDialog(popup, "The job of " + searchEmail + " has been accepted (vehicleRenter)", "Accepted Job",
+					JOptionPane.showMessageDialog(popup,
+							"The job of '" + searchEmail + "' has been accepted (vehicleRenter)", "Accepted Job",
 							JOptionPane.INFORMATION_MESSAGE);
 					found = true;
-					
-					//Insert File Writing Method
+
+					acceptVehicleRenterWriteToFile(Controller.getTempVehicleRenter().get(j));
 				}
 			}
-			
+
 			if (!found) {
 				popup = new JFrame();
 				JOptionPane.showMessageDialog(popup, "ERROR: User '" + searchEmail + "' not found", "USER NOT FOUND",
 						JOptionPane.ERROR_MESSAGE);
 			}
-			
+
 		}
-		
-		if(e.getSource() == rejectButton)
-		{
+
+		if (e.getSource() == rejectButton) {
 			String searchEmail = emailField.getText();
 			boolean found = false;
-			
-			for(int j =0; j <Controller.getTempVehicleRenter().size(); j++) {
-				if(Controller.getTempVehicleRenter().get(j).getEmail().equals(searchEmail)) {
-					System.out.println("The job of "+searchEmail+ " has been rejected(vehicleRenter)");
+
+			for (int j = 0; j < Controller.getTempVehicleRenter().size(); j++) {
+				if (Controller.getTempVehicleRenter().get(j).getEmail().equals(searchEmail)) {
+					System.out.println("The job of " + searchEmail + " has been rejected(vehicleRenter)");
 					popup = new JFrame();
-					JOptionPane.showMessageDialog(popup, "The job of "+searchEmail+ " has been rejected (vehicleRenter)", "Rejected Job",
-						JOptionPane.INFORMATION_MESSAGE);		
-					Controller.rejectRenter(Controller.getTempVehicleRenter().get(j));	
+					JOptionPane.showMessageDialog(popup,
+							"The job of '" + searchEmail + "' has been rejected (vehicleRenter)", "Rejected Job",
+							JOptionPane.INFORMATION_MESSAGE);
+					Controller.rejectRenter(Controller.getTempVehicleRenter().get(j));
 					found = true;
-					
-					}	
+
 				}
-			
-			for(int j =0; j <Controller.getTempVehicleOwner().size(); j++) {
-				if(Controller.getTempVehicleOwner().get(j).getEmail().equals(searchEmail)) {
-					System.out.println("The vehicle of "+searchEmail+ " has been rejected (vehicleOwner)");
+			}
+
+			for (int j = 0; j < Controller.getTempVehicleOwner().size(); j++) {
+				if (Controller.getTempVehicleOwner().get(j).getEmail().equals(searchEmail)) {
+					System.out.println("The vehicle of " + searchEmail + " has been rejected (vehicleOwner)");
 					popup = new JFrame();
-					JOptionPane.showMessageDialog(popup, "The vehicle of "+searchEmail+ " has been rejected (vehicleOwner)", "Rejected Vehicle",
-							JOptionPane.INFORMATION_MESSAGE);	
+					JOptionPane.showMessageDialog(popup,
+							"The vehicle of '" + searchEmail + "' has been rejected (vehicleOwner)", "Rejected Vehicle",
+							JOptionPane.INFORMATION_MESSAGE);
 					Controller.rejectOwner(Controller.getTempVehicleOwner().get(j));
-					found = true; 
+					found = true;
 				}
 			}
 			if (!found) {
@@ -183,7 +191,7 @@ public class ControllerRequestDashboard implements ActionListener {
 						JOptionPane.ERROR_MESSAGE);
 			}
 		}
-		
+
 		if (e.getSource() == backButton) {
 			ControllerRequestsFrame.dispose();
 			ControllerDashboard controllerDashboard = new ControllerDashboard();
@@ -194,7 +202,56 @@ public class ControllerRequestDashboard implements ActionListener {
 			ControllerRequestDashboard controllerRequestDashboard = new ControllerRequestDashboard();
 		}
 	}
-	
+
+	private void acceptVehicleOwnerWriteToFile(VehicleOwner Owner) {
+		File acceptedTextFile = new File("VCRTSAcceptedFile.txt");
+		java.util.Date time = new java.util.Date();
+
+		try {
+			FileWriter fWriter = new FileWriter(acceptedTextFile, true);
+			fWriter.write("~Accepted Vehicle Owner~\n");
+
+			fWriter.write(time.toString() + "\n");
+			fWriter.write("Name: " + Owner.getName() + "\n");
+			fWriter.write("Email: " + Owner.getEmail() + "\n");
+			fWriter.write("ID Number: " + Owner.getId() + "\n");
+			fWriter.write("Phone Number: " + Owner.getPhoneNum() + "\n");
+			fWriter.write("License Plate: " + Owner.getVehicleList().get(0).getLicensePlate() + "\n");
+			fWriter.write("Residency Time: " + Owner.getVehicleList().get(0).getResidencyTime() + "\n");
+			fWriter.write("Car Make: " + Owner.getVehicleList().get(0).getCarMake() + "\n");
+			fWriter.write("Car Model: " + Owner.getVehicleList().get(0).getCarModel() + "\n");
+			fWriter.write("Car Year: " + Owner.getVehicleList().get(0).getCarYear() + "\n");
+			fWriter.write("\n");
+			
+			fWriter.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void acceptVehicleRenterWriteToFile(VehicleRenter Renter) {
+		File acceptedTextFile = new File("VCRTSAcceptedFile.txt");
+		java.util.Date time = new java.util.Date();
+
+		try {
+			FileWriter fWriter = new FileWriter(acceptedTextFile, true);
+			fWriter.write("~Accepted Vehicle Renter~\n");
+
+			fWriter.write(time.toString() + "\n");
+			fWriter.write("Name: " + Renter.getName() + "\n");
+			fWriter.write("Email: " + Renter.getEmail() + "\n");
+			fWriter.write("ID Number: " + Renter.getId() + "\n");
+			fWriter.write("Phone Number: " + Renter.getPhoneNum() + "\n");
+			fWriter.write("Job Duration: " + ((Job) Renter.getJobList().get(0)).getJobDuration() + "\n");
+			fWriter.write("Job ID: " + ((Job) Renter.getJobList().get(0)).getJobID() + "\n");
+			fWriter.write("\n");
+
+			fWriter.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 	private void createPanel() {
 		panel = new JPanel();
 		panel.setLayout(null);
@@ -209,5 +266,5 @@ public class ControllerRequestDashboard implements ActionListener {
 		panel.add(emailField);
 		ControllerRequestsFrame.add(panel);
 	}
-	
+
 }
