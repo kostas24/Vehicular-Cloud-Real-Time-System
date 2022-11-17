@@ -28,7 +28,7 @@ public class RenterDashboard extends AccountCreation implements ActionListener{
 	//private Job jobs = new Job(0, null, 0, 0); //how can i get values that we inputted in GUI?
 	//private VehicleRenter vr = new VehicleRenter(null, null, 0, null, 0, null, 0, 0); //how can i get values that we inputted in GUI?
 	
-	public RenterDashboard() {
+	public RenterDashboard(VehicleRenter Renter) {
 		
 		jobDurationLabel = new JLabel("Job Duration(Hours): ");
 		jobDurationLabel.setBounds(40, 300, 350, 35);
