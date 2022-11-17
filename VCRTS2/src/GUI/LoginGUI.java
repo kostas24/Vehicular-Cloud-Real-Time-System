@@ -84,15 +84,19 @@ public class LoginGUI implements ActionListener{
 				ControllerDashboard controller = new ControllerDashboard();
 			}
 			else {			
-				for (int i = 0; i < Controller.getVehicleOwner().size(); i++)
-					if(name.equals(Controller.getVehicleOwner().get(i).getEmail())) {
+				for (int i = 0; i < Controller.getTempVehicleOwner().size(); i++) {
+					if(name.equals(Controller.getTempVehicleOwner().get(i).getEmail())) {
 						frame.dispose();
-						OwnerDashboard OwnerDashboard = new OwnerDashboard(Controller.getVehicleOwner().get(i));
+						OwnerDashboard OwnerDashboard = new OwnerDashboard(Controller.getTempVehicleOwner().get(i));
 					}
-					else if(name.equals(Controller.getVehicleOwner().get(i).getEmail())) {
+				}
+				
+				for (int i = 0; i < Controller.getTempVehicleRenter().size(); i++) {
+					if(name.equals(Controller.getTempVehicleRenter().get(i).getEmail())) {
 						frame.dispose();
-						RenterDashboard RenterDashboard = new RenterDashboard(Controller.getVehicleRenter().get(i));
+						RenterDashboard RenterDashboard = new RenterDashboard(Controller.getTempVehicleRenter().get(i));
 					}
+				}	
 			}
 		}
 		else if(!(e.getSource() == createBack)){
