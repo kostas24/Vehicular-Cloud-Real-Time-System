@@ -1,132 +1,137 @@
 package GUI;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import ObjectClasses.Controller;
+import ObjectClasses.Job;
+import ObjectClasses.VehicleOwner;
 import ObjectClasses.VehicleRenter;
 
 import javax.swing.*;
 
-public class RenterDashboard extends AccountCreation implements ActionListener{
+public class RenterDashboard extends AccountCreation implements ActionListener {
 
 	JFrame renterFrame = new JFrame();
 	private static final int FRAME_WIDTH = 800;
 	private static final int FRAME_HEIGHT = 800;
-	
+
 	private JPanel panel;
-	private JButton buttonAddJob;
 	private JButton createBack;
-	private JLabel jobDurationLabel;
-	private JTextField jobDurationField;
-	private JLabel jobIDLabel;
-	private JTextField jobIDField;
-	private VehicleRenter currentRenter = Controller.latestRenter;
-	
-	//*********************************
-	//private Job jobs = new Job(0, null, 0, 0); //how can i get values that we inputted in GUI?
-	//private VehicleRenter vr = new VehicleRenter(null, null, 0, null, 0, null, 0, 0); //how can i get values that we inputted in GUI?
-	
-	public RenterDashboard() {
-		
-		jobDurationLabel = new JLabel("Job Duration(Hours): ");
-		jobDurationLabel.setBounds(40, 300, 350, 35);
-		jobDurationLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-		jobDurationLabel.setForeground(Color.white);
-		
-		jobDurationField = new JTextField();
-		jobDurationField.setBounds(240, 300, 350, 35);
-		jobDurationField.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-		
-		jobIDLabel = new JLabel("Job ID: ");
-		jobIDLabel.setBounds(165, 260, 350, 35);
-		jobIDLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-		jobIDLabel.setForeground(Color.white);
-		
-		jobIDField = new JTextField();
-		jobIDField.setBounds(240, 260, 350, 35);
-		jobIDField.setFont(new Font("Comic Sans MS", Font.PLAIN, 20)); 
-		
-		createButtonAddJob();
+	private JTable jobInfoTable;
+	private JScrollPane jobScrollPane;
+	private JLabel acceptedStatus;
+	private JLabel acceptedStatusText;
+	private JButton refreshButton;
+	private JLabel headerLabel;
+	private VehicleRenter vehicleRenter;
+
+	public RenterDashboard(VehicleRenter Renter) {
+		vehicleRenter = Renter;
+
+		String[] columnNames = { "Name", "Email", "ID Number", "Phone Number", "Job Duration", "Job ID" };
+		String[][] jobList = {
+				{ Renter.getName(), Renter.getEmail(), Renter.getId(), Integer.toString(Renter.getPhoneNum()),
+						Integer.toString(((Job) Renter.getJobList().get(0)).getJobDuration()),
+						Integer.toString(((Job) Renter.getJobList().get(0)).getJobID()) },
+				{ "", "", "", "", "", "" } };
+		jobInfoTable = new JTable(jobList, columnNames);
+
+		jobScrollPane = new JScrollPane(jobInfoTable);
+		jobScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		jobScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		jobScrollPane.setBounds(25, 240, 750, 150);
+
+		headerLabel = new JLabel("Vehicle Renter Information");
+		headerLabel.setBounds(220, 140, 500, 40);
+		headerLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 28));
+		headerLabel.setForeground(Color.white);
+
+		acceptedStatus = new JLabel(String.valueOf(Renter.getAcceptedStatus()).toUpperCase());
+		acceptedStatus.setBounds(450, 550, 160, 40);
+		acceptedStatus.setFont(new Font("Comic Sans MS", Font.PLAIN, 24));
+		acceptedStatus.setForeground(Color.white);
+
+		acceptedStatusText = new JLabel("Accepted Status: ");
+		acceptedStatusText.setBounds(250, 550, 360, 40);
+		acceptedStatusText.setFont(new Font("Comic Sans MS", Font.PLAIN, 22));
+		acceptedStatusText.setForeground(Color.white);
+
 		createBackButton();
-		createPanel();			
-		renterFrame.setTitle("VCRTS - Vehicle Renter Dashboard"); //setting Title on top left corner of GUI
-		
+		createRefreshButton();
+
+		createPanel();
+
+		renterFrame.setTitle("VCRTS - Vehicle owner Dashboard");
 		ImageIcon CloudComputingIcon = new ImageIcon("Images/Cloud Computing.jpg");
-		renterFrame.setIconImage(CloudComputingIcon.getImage()); //Changing Frame Icon to cloud computing icon
-		
-		//INPUTTING SIZE OF GUI from VARIABLES
+		renterFrame.setIconImage(CloudComputingIcon.getImage());
 		renterFrame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
-
 		renterFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    renterFrame.setVisible(true);
+		renterFrame.setVisible(true);
+
+		if (Renter.getStatusChanged()) {
+			popup = new JFrame();
+			if (Renter.getAcceptedStatus()) {
+				JOptionPane.showMessageDialog(popup, "The status of your request has changed!", "Request Accepted",
+						JOptionPane.INFORMATION_MESSAGE);
+				Renter.setStatusChanged(false);
+			} else if (!Renter.getAcceptedStatus()) {
+				JOptionPane.showMessageDialog(popup, "The status of your request has changed!", "Request Rejected",
+						JOptionPane.INFORMATION_MESSAGE);
+				Renter.setStatusChanged(false);
+			}
+		}
 	}
-	
-	private void createButtonAddJob() {
-		buttonAddJob = new JButton("Add Job");
-		buttonAddJob.setFont(new Font("Comic Sans MS", Font.PLAIN, 26));
-		buttonAddJob.setForeground(Color.white);
-		buttonAddJob.setBounds(300, 350, 200, 40); 
-		buttonAddJob.setBackground(Color.BLUE);
-		buttonAddJob.setOpaque(true);
-		buttonAddJob.setBorderPainted(false);
-		buttonAddJob.addActionListener(this);
-	}
-	
+
 	public void actionPerformed(ActionEvent e) {
-	//	Thread t = new Thread(currentRenter);
-		if(e.getSource() == buttonAddJob)
-		{
-			String jobID = jobIDField.getText();
-			int jobID_Number = Integer.parseInt(jobID);
 
-			String jobDuration = jobDurationField.getText();
-			int jobDuration_Number = Integer.parseInt(jobDuration);
-
-			//Thread t = new Thread(currentRenter);
-		/*	
-			try {
-			currentRenter.requestJob(jobDuration_Number, jobID_Number);
-			} catch (Exception error) {
-
-				error.printStackTrace();
-		}
-			
-			t.start(); 
-		*/	
-		}
-		
-		if(e.getSource() == createBack)
-		{
+		if (e.getSource() == createBack) {
 			renterFrame.dispose();
-			LaunchPage launch = new LaunchPage(); 
+			LaunchPage launch = new LaunchPage();
+		}
+
+		if (e.getSource() == refreshButton) {
+			renterFrame.dispose();
+			RenterDashboard renterDashboard = new RenterDashboard(vehicleRenter);
 		}
 	}
-	
-	 private void createBackButton() {
-	        createBack = new JButton("Back");
-	        createBack.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-	        createBack.setForeground(Color.white);
-	        createBack.setBounds(10, 10, 100, 40); //Set location of button
-	        createBack.setBackground(Color.BLUE);
-	        createBack.setOpaque(true);
-			createBack.setBorderPainted(false);
-	        createBack.addActionListener(this);
-	    }
-	
+
+	private void createBackButton() {
+		createBack = new JButton("Back");
+		createBack.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		createBack.setForeground(Color.white);
+		createBack.setBounds(10, 10, 100, 40); // Set location of button
+		createBack.setBackground(Color.BLUE);
+		createBack.setOpaque(true);
+		createBack.setBorderPainted(false);
+		createBack.addActionListener(this);
+	}
+
+	private void createRefreshButton() {
+		refreshButton = new JButton("Refresh");
+		refreshButton.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		refreshButton.setForeground(Color.white);
+		refreshButton.setBounds(625, 10, 150, 40);
+		refreshButton.setBackground(Color.red);
+		refreshButton.setOpaque(true);
+		refreshButton.setBorderPainted(false);
+		refreshButton.addActionListener(this);
+	}
+
 	private void createPanel() {
 		panel = new JPanel();
 		panel.setLayout(null);
-		panel.setBackground(new Color (32, 42, 68));
-		panel.add(buttonAddJob);
+		panel.setBackground(new Color(32, 42, 68));
 		panel.add(createBack);
-		panel.add(jobDurationField);
-		panel.add(jobDurationLabel);
-		panel.add(jobIDField);
-		panel.add(jobIDLabel);
+		panel.add(acceptedStatus);
+		panel.add(acceptedStatusText);
+		panel.add(headerLabel);
+		panel.add(jobScrollPane);
+		panel.add(refreshButton);
 		renterFrame.add(panel);
-	
+
 	}
-	
+
 }

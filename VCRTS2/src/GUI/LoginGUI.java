@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import ObjectClasses.Controller;
+
 public class LoginGUI implements ActionListener{
 
     JFrame frame = new JFrame();
@@ -80,6 +82,21 @@ public class LoginGUI implements ActionListener{
 			{			
 				frame.dispose();
 				ControllerDashboard controller = new ControllerDashboard();
+			}
+			else {			
+				for (int i = 0; i < Controller.getTempVehicleOwner().size(); i++) {
+					if(name.equals(Controller.getTempVehicleOwner().get(i).getEmail())) {
+						frame.dispose();
+						OwnerDashboard OwnerDashboard = new OwnerDashboard(Controller.getTempVehicleOwner().get(i));
+					}
+				}
+				
+				for (int i = 0; i < Controller.getTempVehicleRenter().size(); i++) {
+					if(name.equals(Controller.getTempVehicleRenter().get(i).getEmail())) {
+						frame.dispose();
+						RenterDashboard RenterDashboard = new RenterDashboard(Controller.getTempVehicleRenter().get(i));
+					}
+				}	
 			}
 		}
 		else if(!(e.getSource() == createBack)){
