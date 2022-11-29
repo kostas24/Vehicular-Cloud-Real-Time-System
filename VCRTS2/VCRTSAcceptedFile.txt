@@ -1,0 +1,99 @@
+~Accepted Vehicle Renter~
+Mon Nov 28 20:24:56 EST 2022
+Name: 1
+Email: 1
+ID Number: 1
+Phone Number: 1
+Job Duration: 1
+Job ID: 1
+
+~Accepted Vehicle Owner~
+Mon Nov 28 22:36:44 EST 2022
+Name: 1
+Email: 1
+ID Number: 1
+Phone Number: 1
+License Plate: 1
+Residency Time: 1
+Car Make: 1
+Car Model: 1
+Car Year: 1
+
+~Accepted Vehicle Owner~
+Mon Nov 28 22:41:35 EST 2022
+Name: 1
+Email: 1
+ID Number: 1
+Phone Number: 1
+License Plate: 1
+Residency Time: 1
+Car Make: 1
+Car Model: 1
+Car Year: 1
+
+~Accepted Vehicle Owner~
+Mon Nov 28 22:43:43 EST 2022
+Name: 1
+Email: 1
+ID Number: 1
+Phone Number: 1
+License Plate: 1
+Residency Time: 1
+Car Make: 1
+Car Model: 1
+Car Year: 1
+
+~Accepted Vehicle Owner~
+Tue Nov 29 00:48:55 EST 2022
+Name: 1
+Email: 1
+ID Number: 1
+Phone Number: 1
+License Plate: 1
+Residency Time: 1
+Car Make: 1
+Car Model: 1
+Car Year: 1
+
+~Accepted Vehicle Owner~
+Tue Nov 29 00:59:40 EST 2022
+Name: 1
+Email: 1
+ID Number: 1
+Phone Number: 1
+License Plate: 1
+Residency Time: 1
+Car Make: 1
+Car Model: 1
+Car Year: 1
+
+~Accepted Vehicle Renter~
+Tue Nov 29 11:20:26 EST 2022
+Name: 1
+Email: 1
+ID Number: 1
+Phone Number: 1
+Job Duration: 1
+Job ID: 1
+
+~Accepted Vehicle Renter~
+Tue Nov 29 11:25:31 EST 2022
+Name: 1
+Email: 1
+ID Number: 1
+Phone Number: 1
+Job Duration: 1
+Job ID: 1
+
+~Accepted Vehicle Owner~
+Tue Nov 29 11:28:34 EST 2022
+Name: 2
+Email: 2
+ID Number: 2
+Phone Number: 2
+License Plate: 2
+Residency Time: 2
+Car Make: 2
+Car Model: 2
+Car Year: 2
+
