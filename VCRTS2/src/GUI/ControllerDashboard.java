@@ -7,13 +7,15 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 import ObjectClasses.Controller;
+import ObjectClasses.VehicleRenter;
 
 public class ControllerDashboard implements ActionListener {
 
 	JFrame ControllerFrame = new JFrame();
 	private static final int FRAME_WIDTH = 800;
 	private static final int FRAME_HEIGHT = 800;
-
+	JFrame popup;
+	
 	private JButton buttonCompletionTime;
 	private JLabel jobTimeTextLabel;
 	private JLabel idTextLabel;
@@ -26,18 +28,12 @@ public class ControllerDashboard implements ActionListener {
 	private JScrollPane vehicleScrollPane;
 	private JTable vehicleInfoTable;
 	private JButton refreshTablesButton;
-	private JButton acceptButton;
-	private JButton rejectButton;
-	
-	// private Controller controller = new Controller();
-	private ArrayList<Integer> completionTimes;
+	private JButton requestsButton;
 
 	public ControllerDashboard() {
-		// completionTimes = controller.calculateCompletionTime()
-		// Controller controller = new Controller();
-
+		
 		jobInfoTable = Controller.getJobInfoTable();
-
+		
 		jobScrollPane = new JScrollPane(jobInfoTable);
 		jobScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		jobScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
@@ -65,7 +61,7 @@ public class ControllerDashboard implements ActionListener {
 		completionIDLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 24));
 		completionIDLabel.setForeground(Color.white);
 
-		completionTimeLabel = new JLabel("----------");
+		completionTimeLabel = new JLabel("-----------");
 		completionTimeLabel.setBounds(450, 450, 350, 40);
 		completionTimeLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 24));
 		completionTimeLabel.setForeground(Color.white);
@@ -73,22 +69,14 @@ public class ControllerDashboard implements ActionListener {
 		createButtonCompletionTime();
 		createBackButton();
 		createRefreshButton();
-		createAcceptButton();
-		createRejectButton();
+		createViewRequestsButton();
+		
 		createPanel();
-		ControllerFrame.setTitle("VCRTS - Vehicle Controller Dashboard");
-
+		
+		ControllerFrame.setTitle("VCRTS - Vehicle Controller Main Dashboard");
 		ImageIcon CloudComputingIcon = new ImageIcon("Images/Cloud Computing.jpg");
 		ControllerFrame.setIconImage(CloudComputingIcon.getImage());
-
-		/*
-		 * scrollPane.add(completionIDLabel); scrollPane.add(completionTimeLabel);
-		 * scrollPane.add(idTextLabel); scrollPane.add(jobTimeTextLabel);
-		 */
-
-		// INPUTTING SIZE OF GUI from VARIABLES
 		ControllerFrame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
-
 		ControllerFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		ControllerFrame.setVisible(true);
 	}
@@ -108,49 +96,28 @@ public class ControllerDashboard implements ActionListener {
 		}
 
 		if (e.getSource() == refreshTablesButton) {
-			jobInfoTable = Controller.getJobInfoTable();
-			vehicleInfoTable = Controller.getVehicleInfoTable();
-
-			jobScrollPane = new JScrollPane(jobInfoTable);
-			vehicleScrollPane = new JScrollPane(vehicleInfoTable);
+			ControllerFrame.dispose();
 			
-			panel.revalidate();
-		}
-		if(e.getSource() == acceptButton)
-		{
-			
+			ControllerDashboard controllerDashboard = new ControllerDashboard();
 		}
 		
-		if(e.getSource() == rejectButton)
-		{
-			
+		if(e.getSource() == requestsButton) {
+			ControllerFrame.dispose();
+			ControllerRequestDashboard controllerRequestDashboard = new ControllerRequestDashboard();
 		}
 		
 	}
-	
-	private void createRejectButton() {
-		rejectButton = new JButton("Reject Job");
-		rejectButton.setFont(new Font("Comic Sans MS", Font.PLAIN, 28));
-		rejectButton.setForeground(Color.white);
-		rejectButton.setBounds(220, 650, 360, 40);
-		rejectButton.setBackground(Color.RED);
-		rejectButton.setOpaque(true);
-		rejectButton.setBorderPainted(false);
-		rejectButton.addActionListener(this);
+	private void createViewRequestsButton() {
+		requestsButton = new JButton("View Requests");
+		requestsButton.setFont(new Font("Comic Sans MS", Font.PLAIN, 28));
+		requestsButton.setForeground(Color.white);
+		requestsButton.setBounds(220, 650, 360, 40);
+		requestsButton.setBackground(Color.BLUE);
+		requestsButton.setOpaque(true);
+		requestsButton.setBorderPainted(false);
+		requestsButton.addActionListener(this);
 	}
 	
-	private void createAcceptButton() {
-		acceptButton = new JButton("Accept Job");
-		acceptButton.setFont(new Font("Comic Sans MS", Font.PLAIN, 28));
-		acceptButton.setForeground(Color.white);
-		acceptButton.setBounds(220, 600, 360, 40);
-		acceptButton.setBackground(Color.GREEN);
-		acceptButton.setOpaque(true);
-		acceptButton.setBorderPainted(false);
-		acceptButton.addActionListener(this);
-
-	}
-
 	private void createButtonCompletionTime() {
 		buttonCompletionTime = new JButton("Find Completion Time");
 		buttonCompletionTime.setFont(new Font("Comic Sans MS", Font.PLAIN, 28));
@@ -197,8 +164,7 @@ public class ControllerDashboard implements ActionListener {
 		panel.add(jobTimeTextLabel);
 		panel.add(jobScrollPane);
 		panel.add(vehicleScrollPane);
-		panel.add(rejectButton);
-		panel.add(acceptButton);
+		panel.add(requestsButton);
 		ControllerFrame.add(panel);
 
 	}

@@ -12,6 +12,8 @@ import java.io.DataOutputStream;
 public class VehicleOwner extends Account implements Runnable{
 
 	private ArrayList<Vehicle> vehicles;
+	private boolean statusChanged;
+	private boolean acceptedStatus;
 
 	static ServerSocket serverSocket2;
 	static Socket socket2;
@@ -27,14 +29,14 @@ public class VehicleOwner extends Account implements Runnable{
 		try {
 			
 			System.out.println("----------*** This is Owner client side ***--------");
-			System.out.println("client started!");
+			System.out.println("Owner started!");
 			
 			Socket socket2 = new Socket("localhost", 2);
 			
 			inputStream2 = new DataInputStream(socket2.getInputStream());
 			outputStream2 = new DataOutputStream(socket2.getOutputStream());
 			
-			System.out.println("Client connected to server");
+			System.out.println("Owner connected to server");
 			
 			outputStream2.writeUTF(requestedVehicle);
 			
@@ -53,6 +55,7 @@ public class VehicleOwner extends Account implements Runnable{
 			String carModel, int carYear, int residencyTime) {
 		super(name, email, phoneNumber, id);
 		vehicles = new ArrayList<Vehicle>();
+		this.requestedVehicle = "License Plate: " + licensePlate + ", Car Make: " + carMake + ", Car Model: " +  carModel + ", Car Year: " + carYear + ", Residency Time (Hours): " + residencyTime;
 		addVehicle(licensePlate, carMake, carModel, carYear, residencyTime);
 	}
 	
@@ -112,6 +115,22 @@ public class VehicleOwner extends Account implements Runnable{
 	
 	public ArrayList<Vehicle> getVehicleList() {
 		return vehicles;
+	}
+	
+	public boolean getAcceptedStatus() {
+		return acceptedStatus;
+	}
+	
+	public boolean getStatusChanged() {
+		return statusChanged;
+	}
+	
+	public void setAcceptedStatus(boolean b) {
+		acceptedStatus = b;
+	}
+	
+	public void setStatusChanged(boolean b) {
+		statusChanged = b;
 	}
 
 }

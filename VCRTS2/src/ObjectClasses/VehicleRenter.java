@@ -13,6 +13,8 @@ import java.net.Socket;
 public class VehicleRenter extends Account implements Runnable{
 
 	private ArrayList<Job> jobs;
+	private boolean statusChanged;
+	private boolean acceptedStatus;
 	
 	static ServerSocket serverSocket;
 	static Socket socket;
@@ -30,7 +32,7 @@ public class VehicleRenter extends Account implements Runnable{
 		try {
 
 			System.out.println("----------*** This is Renter client side ***--------");
-			System.out.println("client started!");
+			System.out.println("Renter started!");
 			// connect the client socket to server
 			Socket socket = new Socket("localhost", 1);
 
@@ -38,7 +40,7 @@ public class VehicleRenter extends Account implements Runnable{
 			inputStream = new DataInputStream(socket.getInputStream());
 			outputStream = new DataOutputStream(socket.getOutputStream());
 
-			System.out.println("Client connected to server");
+			System.out.println("Renter connected to server");
 			
 			outputStream.writeUTF(requestedJob);
 			
@@ -85,7 +87,7 @@ public class VehicleRenter extends Account implements Runnable{
 		String jobIDString = Integer.toString(jobID);
 
 		String requestedJob = "Job Duration: " + jobDurationString + ", " + "Job ID: " + jobIDString;
-		System.out.println(requestedJob);
+	//	System.out.println(requestedJob);
 		this.requestedJob = requestedJob;
 
 	}
@@ -110,6 +112,22 @@ public class VehicleRenter extends Account implements Runnable{
 			}
 		}
 		return jobFound;
+	}
+	
+	public boolean getAcceptedStatus() {
+		return acceptedStatus;
+	}
+	
+	public boolean getStatusChanged() {
+		return statusChanged;
+	}
+	
+	public void setAcceptedStatus(boolean b) {
+		acceptedStatus = b;
+	}
+	
+	public void setStatusChanged(boolean b) {
+		statusChanged = b;
 	}
 	
 	public ArrayList getJobList() {

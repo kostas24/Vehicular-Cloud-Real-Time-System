@@ -1,180 +1,140 @@
 package GUI;
+
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.*;
 
 import javax.swing.*;
 
 import ObjectClasses.Controller;
 import ObjectClasses.VehicleOwner;
-public class OwnerDashboard extends AccountCreation implements ActionListener{
+
+public class OwnerDashboard extends AccountCreation implements ActionListener {
 
 	JFrame ownerFrame = new JFrame();
 	private static final int FRAME_WIDTH = 800;
 	private static final int FRAME_HEIGHT = 800;
-	private VehicleOwner currentOwner = Controller.latestOwner;
-	
+	JFrame popup;
+
 	private JPanel panel;
-	private JButton buttonAddJob;
 	private JButton createBack;
-	private JLabel licenseLabel;
-	private JLabel carMakeLabel;
-	private JLabel carModelLabel;
-	private JLabel carYearLabel;
-	private JLabel residencyLabel;
-	private JTextField licenseField;
-	private JTextField carMakeField;
-	private JTextField carModelField;
-	private JTextField carYearField;
-	private JTextField residencyField;
+	private JTable vehicleInfoTable;
+	private JScrollPane vehicleScrollPane;
+	private JLabel acceptedStatus;
+	private JLabel acceptedStatusText;
+	private JButton refreshButton;
+	private VehicleOwner vehicleOwner;
+	private JLabel headerLabel;
 
+	public OwnerDashboard(VehicleOwner Owner) {
+		
+		vehicleOwner = Owner;
+		
+		String[] columnNames = { "Name", "Email", "ID Number", "Phone Number", "License Plate", "Residency Time",
+				"Car Make", "Car Model", "Car Year" };
+		String[][] vehicleList = {{ Owner.getName(), Owner.getEmail(), Owner.getId(), Integer.toString(Owner.getPhoneNum()),
+				Owner.getVehicleList().get(0).getLicensePlate(),
+				Integer.toString(Owner.getVehicleList().get(0).getResidencyTime()),
+				Owner.getVehicleList().get(0).getCarMake(), Owner.getVehicleList().get(0).getCarModel(),
+				Integer.toString(Owner.getVehicleList().get(0).getCarYear())},
+				{"", "","","","","","","",""}};
+		vehicleInfoTable = new JTable(vehicleList, columnNames);
 
-	//*********************************
-	//private Job jobs = new Job(0, null, 0, 0); //how can i get values that we inputted in GUI?
-	//private Vehicleowner vr = new Vehicleowner(null, null, 0, null, 0, null, 0, 0); //how can i get values that we inputted in GUI?
-	
-	public OwnerDashboard() {
+		vehicleScrollPane = new JScrollPane(vehicleInfoTable);
+		vehicleScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		vehicleScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		vehicleScrollPane.setBounds(25, 240, 750, 150);
 		
-		licenseLabel = new JLabel("License Plate: ", SwingConstants.RIGHT);
-		licenseLabel.setBounds(25, 50, 300, 20);
-		licenseLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-		licenseLabel.setForeground(Color.white);
+		headerLabel = new JLabel("Vehicle Owner Information");
+		headerLabel.setBounds(220, 140, 500, 40);
+		headerLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 28));
+		headerLabel.setForeground(Color.white);
 		
-		carMakeLabel = new JLabel("Car Make: ", SwingConstants.RIGHT);
-		carMakeLabel.setBounds(25, 90, 300, 20);
-		carMakeLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-		carMakeLabel.setForeground(Color.white);
+		acceptedStatus = new JLabel(String.valueOf(Owner.getAcceptedStatus()).toUpperCase());
+		acceptedStatus.setBounds(450, 550, 160, 40);
+		acceptedStatus.setFont(new Font("Comic Sans MS", Font.PLAIN, 24));
+		acceptedStatus.setForeground(Color.white);
 		
-		carModelLabel = new JLabel("License Plate: ", SwingConstants.RIGHT);
-		carModelLabel.setBounds(25, 130, 300, 20);
-		carModelLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-		carModelLabel.setForeground(Color.white);
+		acceptedStatusText = new JLabel("Accepted Status: ");
+		acceptedStatusText.setBounds(250, 550, 360, 40);
+		acceptedStatusText.setFont(new Font("Comic Sans MS", Font.PLAIN, 22));
+		acceptedStatusText.setForeground(Color.white);
 		
-		carYearLabel = new JLabel("Car Year: ", SwingConstants.RIGHT);
-		carYearLabel.setBounds(25, 170, 300, 20);
-		carYearLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-		carYearLabel.setForeground(Color.white);
-		
-		residencyLabel = new JLabel("Residency Time (Hours): ", SwingConstants.RIGHT);
-		residencyLabel.setBounds(25, 210, 300, 20);
-		residencyLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-		residencyLabel.setForeground(Color.white);
-		
-		licenseField = new JTextField();
-		licenseField.setBounds(325, 50, 350, 35);
-		licenseField.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-		
-		carMakeField = new JTextField();
-		carMakeField.setBounds(325, 90, 350, 35);
-		carMakeField.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-		
-		carModelField = new JTextField();
-		carModelField.setBounds(325, 130, 350, 35);
-		carModelField.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-		
-		carYearField = new JTextField();
-		carYearField.setBounds(325, 170, 350, 35);
-		carYearField.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-		
-		residencyField = new JTextField();
-		residencyField.setBounds(325, 210, 350, 35);
-		residencyField.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-	
-		createButtonAddJob();
 		createBackButton();
-		createPanel();			
-		ownerFrame.setTitle("VCRTS - Vehicle owner Dashboard"); //setting Title on top left corner of GUI
+		createRefreshButton();
 		
+		createPanel();
+		
+		ownerFrame.setTitle("VCRTS - Vehicle owner Dashboard"); 
 		ImageIcon CloudComputingIcon = new ImageIcon("Images/Cloud Computing.jpg");
-		ownerFrame.setIconImage(CloudComputingIcon.getImage()); //Changing Frame Icon to cloud computing icon
-		
-		//INPUTTING SIZE OF GUI from VARIABLES
+		ownerFrame.setIconImage(CloudComputingIcon.getImage()); 
 		ownerFrame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
-
 		ownerFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    ownerFrame.setVisible(true);
-	}
-	
-	private void createButtonAddJob() {
-		buttonAddJob = new JButton("Add Job");
-		buttonAddJob.setFont(new Font("Comic Sans MS", Font.PLAIN, 26));
-		buttonAddJob.setForeground(Color.white);
-		buttonAddJob.setBounds(300, 500, 200, 40); 
-		buttonAddJob.setBackground(Color.BLUE);
-		buttonAddJob.setBorderPainted(false);
-		buttonAddJob.addActionListener(this);
-	}
-	
-	public void actionPerformed(ActionEvent e) {
+		ownerFrame.setVisible(true);
 		
-		if(e.getSource() == buttonAddJob)
-		{
-			String licensePlate = licenseField.getText();
-			System.out.println(licensePlate);
-			
-			String carMake = carMakeField.getText();
-			System.out.println(carMake);
-			
-			String carModel = carModelField.getText();
-			System.out.println(carModel);
-			
-			String carYear = carYearField.getText();
-			System.out.println(carYear);
-			
-			String residencyTime = residencyField.getText();
-			System.out.println(residencyTime);
-			
-			Thread thread = new Thread(currentOwner);
-			
-			try {
-				currentOwner.requestVehicle(licensePlate, carMake, carModel, carYear, residencyTime);
-			} catch (Exception error ) {
-				
-				error.printStackTrace();
-			} 
-			
-			thread.start();
-			
-			
+		if(Owner.getStatusChanged()) {
+			popup = new JFrame();
+			if(Owner.getAcceptedStatus()) {
+				JOptionPane.showMessageDialog(popup, "The status of your request has changed!", "Request Accepted",
+						JOptionPane.INFORMATION_MESSAGE);	
+				Owner.setStatusChanged(false);
+			}
+			else if(!Owner.getAcceptedStatus()) {
+				JOptionPane.showMessageDialog(popup, "The status of your request has changed!", "Request Rejected",
+						JOptionPane.INFORMATION_MESSAGE);
+				Owner.setStatusChanged(false);
+			}
 		}
-		
-		if(e.getSource() == createBack)
-		{
+	}
+
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == createBack) {
 			ownerFrame.dispose();
 			LaunchPage launch = new LaunchPage();
 		}
-	} 
+		
+		if (e.getSource() == refreshButton) {
+			ownerFrame.dispose();
+			OwnerDashboard ownerDashboard = new OwnerDashboard(vehicleOwner);
+		}
+	}
+
+	private void createBackButton() {
+		createBack = new JButton("Back");
+		createBack.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		createBack.setForeground(Color.white);
+		createBack.setBounds(10, 10, 100, 40); // Set location of button
+		createBack.setBackground(Color.BLUE);
+		createBack.setOpaque(true);
+		createBack.setBorderPainted(false);
+		createBack.addActionListener(this);
+	}
 	
-	 private void createBackButton() {
-	        createBack = new JButton("Back");
-	        createBack.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
-	        createBack.setForeground(Color.white);
-	        createBack.setBounds(10, 10, 100, 40); //Set location of button
-	        createBack.setBackground(Color.BLUE);
-	        createBack.setOpaque(true);
-			createBack.setBorderPainted(false);
-	        createBack.addActionListener(this);
-	    }
+	private void createRefreshButton() {
+		refreshButton = new JButton("Refresh");
+		refreshButton.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
+		refreshButton.setForeground(Color.white);
+		refreshButton.setBounds(625, 10, 150, 40);
+		refreshButton.setBackground(Color.red);
+		refreshButton.setOpaque(true);
+		refreshButton.setBorderPainted(false);
+		refreshButton.addActionListener(this);
+	}
 	
 	private void createPanel() {
 		panel = new JPanel();
 		panel.setLayout(null);
-		panel.setBackground(new Color (32, 42, 68));
-		panel.add(buttonAddJob);
+		panel.setBackground(new Color(32, 42, 68));
 		panel.add(createBack);
-		panel.add(licenseLabel);
-		panel.add(carMakeLabel);
-		panel.add(carModelLabel);
-		panel.add(carYearLabel);
-		panel.add(residencyLabel);
-		panel.add(licenseField);
-		panel.add(carMakeField);
-		panel.add(carModelField);
-		panel.add(carYearField);
-		panel.add(residencyField);
+		panel.add(vehicleScrollPane);
+		panel.add(acceptedStatus);
+		panel.add(acceptedStatusText);
+		panel.add(refreshButton);
+		panel.add(headerLabel);
 		ownerFrame.add(panel);
-	
+
 	}
-	
+
 }
