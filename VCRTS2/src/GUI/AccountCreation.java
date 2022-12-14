@@ -253,6 +253,7 @@ public class AccountCreation implements ActionListener {
 
 					createAccount.setBounds(230, 550, 250, 40);
 					createClear.setBounds(490, 550, 120, 40); 
+
 				} else if (!vehicleRenterCheckBox.isSelected()) {
 					vehicleRenterStatus = false;
 					jobDurationField.setVisible(false);
@@ -303,9 +304,11 @@ public class AccountCreation implements ActionListener {
 
 	private void createClearButton() {
 		createClear = new JButton("Clear");
+
 		createClear.setFont(new Font("Comic Sans MS", Font.PLAIN, 28));
 		createClear.setForeground(Color.white);
 		createClear.setBounds(490, 675, 120, 40); 
+
 		createClear.setBackground(Color.red);
 		createClear.setOpaque(true);
 		createClear.setBorderPainted(false);
@@ -370,6 +373,7 @@ public class AccountCreation implements ActionListener {
 					try {
 						VehicleOwner currentOwner = Controller.latestOwner;
 						thread = new Thread(currentOwner);
+
 					} catch (Exception error) {
 
 						error.printStackTrace();
@@ -382,6 +386,7 @@ public class AccountCreation implements ActionListener {
 					popup = new JFrame();
 					JOptionPane.showMessageDialog(popup, "You have successfully registered as a Vehicle Owner",
 							"Account Creation Confirmed", JOptionPane.INFORMATION_MESSAGE);
+
 
 				}
 
@@ -410,15 +415,18 @@ public class AccountCreation implements ActionListener {
 					fWriter.write(jobDeadline + "\n");
 					fWriter.close();
 
+
 					Controller.addRenter(name, email, Integer.parseInt(phoneNum), ID, Integer.parseInt(jobDuration),
 							Controller.generateJobID());
 					Controller.socketRentFound = true;
 					Controller.socketOwnFound = false;
 
+
 					Thread t = null;
 					try {
 						VehicleRenter currentRenter = Controller.latestRenter;
 						t = new Thread(currentRenter);
+
 					} catch (Exception error) {
 
 						error.printStackTrace();

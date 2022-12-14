@@ -1,0 +1,58 @@
+Accepted Vehicle Owner
+Thu Nov 17 11:09:42 EST 2022
+Name: 1
+Email: 1
+ID Number: 1
+Phone Number: 1
+Job Duration: 1
+Job ID: 1
+Accepted Vehicle Owner
+Thu Nov 17 11:09:46 EST 2022
+Name: 2
+Email: 2
+ID Number: 2
+Phone Number: 2
+Job Duration: 2
+Job ID: 2
+~Accepted Vehicle Renter~
+Thu Nov 17 11:12:05 EST 2022
+Name: 1
+Email: 1
+ID Number: 1
+Phone Number: 1
+Job Duration: 1
+Job ID: 1
+
+~Accepted Vehicle Renter~
+Thu Nov 17 11:12:15 EST 2022
+Name: 2
+Email: 2
+ID Number: 2
+Phone Number: 2
+Job Duration: 2
+Job ID: 2
+
+~Accepted Vehicle Owner~
+Thu Nov 17 11:12:24 EST 2022
+Name: 3
+Email: 3
+ID Number: 3
+Phone Number: 3
+License Plate: 3
+Residency Time: 3
+Car Make: 3
+Car Model: 3
+Car Year: 3
+
+~Accepted Vehicle Owner~
+Thu Nov 17 11:12:26 EST 2022
+Name: 4
+Email: 4
+ID Number: 4
+Phone Number: 4
+License Plate: 4
+Residency Time: 4
+Car Make: 4
+Car Model: 4
+Car Year: 4
+

@@ -66,8 +66,8 @@ public class OwnerDashboard extends AccountCreation implements ActionListener {
 		createRefreshButton();
 		
 		createPanel();
-		
 		ownerFrame.setTitle("VCRTS - Vehicle Owner Dashboard"); 
+
 		ImageIcon CloudComputingIcon = new ImageIcon("Images/Cloud Computing.jpg");
 		ownerFrame.setIconImage(CloudComputingIcon.getImage()); 
 		ownerFrame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
@@ -105,7 +105,9 @@ public class OwnerDashboard extends AccountCreation implements ActionListener {
 		createBack = new JButton("Back");
 		createBack.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
 		createBack.setForeground(Color.white);
+
 		createBack.setBounds(10, 10, 100, 40); 
+
 		createBack.setBackground(Color.BLUE);
 		createBack.setOpaque(true);
 		createBack.setBorderPainted(false);
