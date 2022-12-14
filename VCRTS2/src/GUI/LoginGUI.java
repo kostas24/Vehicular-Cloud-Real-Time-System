@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import ObjectClasses.Controller;
+
 public class LoginGUI implements ActionListener{
 
     JFrame frame = new JFrame();
@@ -22,15 +24,20 @@ public class LoginGUI implements ActionListener{
 	private JButton enterName;
 	private JButton createBack;
 	private JLabel welcomeLabel;
+	private JLabel noAccountLabel;
 	private Color BLUE = Color.BLUE;
 	
 	public LoginGUI() {
+		noAccountLabel= new JLabel(""); 
+		noAccountLabel.setForeground(Color.white);
+		noAccountLabel.setBounds(70, 430, 650, 40);
+		noAccountLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 22));
 		loginLabel = new JLabel("Login Below"); 
 		loginLabel.setForeground(Color.white);
-		loginLabel.setBounds(290, 10, 270, 60); //Set location of label	
-		loginLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 40));
+		loginLabel.setBounds(290, 10, 270, 60); 
+		loginLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 40));
 		nameField = new JTextField("");
-		nameField.setBounds(240, 300, 350, 35);
+		nameField.setBounds(240, 300, 320, 35);
 		nameField.setFont(new Font("Comic Sans MS", Font.PLAIN, 22));
 		passwordLabel = new JLabel("Password: ");
 		passwordLabel.setBounds(135, 340, 100, 35);
@@ -41,16 +48,16 @@ public class LoginGUI implements ActionListener{
 		nameLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
 		nameLabel.setForeground(Color.white);
 		passwordField = new JPasswordField("");
-		passwordField.setBounds(240, 340, 350, 35);
+		passwordField.setBounds(240, 340, 320, 35);
 		passwordField.setFont(new Font("Comic Sans MS", Font.PLAIN, 22));
 		createButtonName();
 		createWelcomeLabel();
 		createBackButton();
 		createPanel();			
-		frame.setTitle("VCRTS - Login"); //setting Title on top left corner of GUI
+		frame.setTitle("VCRTS - Login"); 
 		
 		ImageIcon CloudComputingIcon = new ImageIcon("Images/Cloud Computing.jpg");
-		frame.setIconImage(CloudComputingIcon.getImage());  //Changing Frame Icon to cloud computing icon
+		frame.setIconImage(CloudComputingIcon.getImage());  
 		
 		//INPUTTING SIZE OF GUI from VARIABLES
 		frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
@@ -75,11 +82,27 @@ public class LoginGUI implements ActionListener{
 		welcomeLabel.setForeground(Color.white);
 		welcomeLabel.setBounds(330 - (name.length()*5), 240, 450, 60);
 		welcomeLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 24));
+		noAccountLabel.setText("It seems you do not have an account, please create an account");
 		
 			if(name.equals("admin") && password.equals("admin"))
 			{			
 				frame.dispose();
 				ControllerDashboard controller = new ControllerDashboard();
+			}
+			else {			
+				for (int i = 0; i < Controller.getTempVehicleOwner().size(); i++) {
+					if(name.equals(Controller.getTempVehicleOwner().get(i).getEmail())) {
+						frame.dispose();
+						OwnerDashboard OwnerDashboard = new OwnerDashboard(Controller.getTempVehicleOwner().get(i));
+					}
+				}
+				
+				for (int i = 0; i < Controller.getTempVehicleRenter().size(); i++) {
+					if(name.equals(Controller.getTempVehicleRenter().get(i).getEmail())) {
+						frame.dispose();
+						RenterDashboard RenterDashboard = new RenterDashboard(Controller.getTempVehicleRenter().get(i));
+					}
+				}	
 			}
 		}
 		else if(!(e.getSource() == createBack)){
@@ -90,14 +113,6 @@ public class LoginGUI implements ActionListener{
 		}
 		
 
-		
-	}
-	
-	public void checkName() {
-		
-	}
-	
-	public void checkPassword() {
 		
 	}
 	
@@ -116,7 +131,7 @@ public class LoginGUI implements ActionListener{
         createBack = new JButton("Back");
         createBack.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
         createBack.setForeground(Color.white);
-        createBack.setBounds(10, 10, 100, 40); //Set location of button
+        createBack.setBounds(10, 10, 100, 40); 
         createBack.setBackground(BLUE);
         createBack.setOpaque(true);
 		createBack.setBorderPainted(false);
@@ -139,6 +154,7 @@ public class LoginGUI implements ActionListener{
 		panel.add(enterName);
 		panel.add(welcomeLabel);
 		panel.add(createBack);
+		panel.add(noAccountLabel);
 
 		// adds to current object
 		frame.add(panel);

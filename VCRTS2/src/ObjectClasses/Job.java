@@ -66,9 +66,8 @@ public class Job {
 		this.jobInProgress = jobInProgress;
 	}
 
-	public void generateCheckpointImage() { // Incomplete
-
-	}
+	//public void generateCheckpointImage() { 
+	//}
 
 	public void setCompletionTime(int completionTime) {
 		this.completionTime = completionTime;

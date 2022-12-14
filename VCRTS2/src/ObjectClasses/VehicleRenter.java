@@ -13,6 +13,8 @@ import java.net.Socket;
 public class VehicleRenter extends Account implements Runnable{
 
 	private ArrayList<Job> jobs;
+	private boolean statusChanged;
+	private boolean acceptedStatus;
 	
 	static ServerSocket serverSocket;
 	static Socket socket;
@@ -21,8 +23,6 @@ public class VehicleRenter extends Account implements Runnable{
 	public String requestedJob;
 	
 	public void run() {
-		// TODO Auto-generated method stub
-
 		String messageIn = "";
 		String messageOut = "";
 		Scanner keyInput;
@@ -110,6 +110,22 @@ public class VehicleRenter extends Account implements Runnable{
 			}
 		}
 		return jobFound;
+	}
+	
+	public boolean getAcceptedStatus() {
+		return acceptedStatus;
+	}
+	
+	public boolean getStatusChanged() {
+		return statusChanged;
+	}
+	
+	public void setAcceptedStatus(boolean b) {
+		acceptedStatus = b;
+	}
+	
+	public void setStatusChanged(boolean b) {
+		statusChanged = b;
 	}
 	
 	public ArrayList getJobList() {

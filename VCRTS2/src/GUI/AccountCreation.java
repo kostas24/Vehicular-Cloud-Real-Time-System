@@ -7,9 +7,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Random;
 import java.io.File;
 import javax.swing.*;
 
@@ -62,7 +60,7 @@ public class AccountCreation implements ActionListener {
 	// Labels and variables to hold user information; to be stored to file
 	private boolean vehicleOwnerStatus; // Not being used at this time
 	private boolean vehicleRenterStatus; // Not being used at this time
-	
+
 	private ArrayList<VehicleOwner> owners = new ArrayList<>();
 	private ArrayList<VehicleRenter> renters = new ArrayList<>();
 
@@ -196,7 +194,6 @@ public class AccountCreation implements ActionListener {
 				if (vehicleOwnerCheckBox.isSelected()) {
 					vehicleRenterCheckBox.setSelected(false);
 					vehicleOwnerStatus = true;
-					// System.out.println("Vehicle Owner Check Box Clicked!");
 					carMakeField.setVisible(true);
 					carModelField.setVisible(true);
 					carYearField.setVisible(true);
@@ -208,11 +205,10 @@ public class AccountCreation implements ActionListener {
 					carYearLabel.setVisible(true);
 					licensePlateLabel.setVisible(true);
 					carResiTimeLabel.setVisible(true);
-					createAccount.setBounds(240, 675, 250, 40);
-					createClear.setBounds(500, 680, 90, 30); // Set location of buttons
+					createAccount.setBounds(230, 675, 250, 40);
+					createClear.setBounds(490, 675, 120, 40); // Set location of buttons
 				} else if (!vehicleOwnerCheckBox.isSelected()) {
 					vehicleOwnerStatus = false;
-					// System.out.println("Vehicle Owner Check Box UnClicked!");
 					carMakeField.setVisible(false);
 					carModelField.setVisible(false);
 					carYearField.setVisible(false);
@@ -250,20 +246,17 @@ public class AccountCreation implements ActionListener {
 				if (vehicleRenterCheckBox.isSelected()) {
 					vehicleOwnerCheckBox.setSelected(false);
 					vehicleRenterStatus = true;
-					// System.out.println("Vehicle Renter Check Box Clicked!");
 					jobDurationField.setVisible(true);
 					jobDeadlineField.setVisible(true);
-
 					jobDurationLabel.setVisible(true);
 					jobDeadlineLabel.setVisible(true);
 
-					createAccount.setBounds(240, 550, 250, 40); 
-					createClear.setBounds(500, 555, 90, 30); // Set location of buttons
+					createAccount.setBounds(230, 550, 250, 40);
+					createClear.setBounds(490, 550, 120, 40); 
 				} else if (!vehicleRenterCheckBox.isSelected()) {
 					vehicleRenterStatus = false;
 					jobDurationField.setVisible(false);
 					jobDeadlineField.setVisible(false);
-
 					jobDurationLabel.setVisible(false);
 					jobDeadlineLabel.setVisible(false);
 				}
@@ -282,7 +275,6 @@ public class AccountCreation implements ActionListener {
 
 		// INPUTTING SIZE OF GUI from VARIABLES
 		frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
-
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 	}
@@ -291,7 +283,7 @@ public class AccountCreation implements ActionListener {
 		createAccount = new JButton("Create Account");
 		createAccount.setFont(new Font("Comic Sans MS", Font.PLAIN, 28));
 		createAccount.setForeground(Color.white);
-		createAccount.setBounds(240, 675, 250, 40); // Set location of button
+		createAccount.setBounds(230, 675, 250, 40); 
 		createAccount.setBackground(BLUE);
 		createAccount.setOpaque(true);
 		createAccount.setBorderPainted(false);
@@ -302,18 +294,18 @@ public class AccountCreation implements ActionListener {
 		createBack = new JButton("Back");
 		createBack.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
 		createBack.setForeground(Color.white);
-		createBack.setBounds(10, 10, 100, 40); // Set location of button
+		createBack.setBounds(10, 10, 100, 40); 
 		createBack.setBackground(BLUE);
 		createBack.setOpaque(true);
 		createBack.setBorderPainted(false);
 		createBack.addActionListener(this);
 	}
-	
+
 	private void createClearButton() {
 		createClear = new JButton("Clear");
-		createClear.setFont(new Font("Comic Sans MS", Font.PLAIN, 17));
-		createClear.setForeground(Color.white); 
-		createClear.setBounds(500, 680, 90, 30); //Set location of button
+		createClear.setFont(new Font("Comic Sans MS", Font.PLAIN, 28));
+		createClear.setForeground(Color.white);
+		createClear.setBounds(490, 675, 120, 40); 
 		createClear.setBackground(Color.red);
 		createClear.setOpaque(true);
 		createClear.setBorderPainted(false);
@@ -337,21 +329,21 @@ public class AccountCreation implements ActionListener {
 			frame.dispose();
 			LaunchPage launch = new LaunchPage();
 		}
-		
-		if(e.getSource() == createClear) {
+
+		if (e.getSource() == createClear) {
 			clearTextFields();
 		}
-		
+
 		File registry = new File("VCRTSregistry.txt");
 		if (registry.isFile() == true && e.getSource() == createAccount) {
 			if (!name.isEmpty() && !email.isEmpty() && !phoneNum.isEmpty() && !ID.isEmpty() && !licensePlate.isEmpty()
 					&& !carMake.isEmpty() && !carModel.isEmpty() && !carYear.isEmpty() && !residencyTime.isEmpty()
 					&& vehicleOwnerCheckBox.isSelected()) {
 				FileWriter fWriter;
-				try {               //adds vehicle owner to registry and arraylist
+				try { // adds vehicle owner to registry and arraylist
 					fWriter = new FileWriter(registry, true);
 					java.util.Date time = new java.util.Date();
-					
+
 					fWriter.write("" + "\n");
 					fWriter.write("1");
 					fWriter.write(time.toString() + "\n");
@@ -366,10 +358,11 @@ public class AccountCreation implements ActionListener {
 					fWriter.write(carYear + "\n");
 					fWriter.write(residencyTime + "\n");
 					fWriter.close();
-					
+
 					int phoneNumInt = Integer.parseInt(phoneNum);
-					
-					Controller.addOwner(name, email, phoneNumInt, ID, licensePlate, carMake, carModel, Integer.parseInt(carYear), Integer.parseInt(residencyTime));
+
+					Controller.addOwner(name, email, phoneNumInt, ID, licensePlate, carMake, carModel,
+							Integer.parseInt(carYear), Integer.parseInt(residencyTime));
 					Controller.socketOwnFound = true;
 					Controller.socketRentFound = false;
 
@@ -377,36 +370,31 @@ public class AccountCreation implements ActionListener {
 					try {
 						VehicleOwner currentOwner = Controller.latestOwner;
 						thread = new Thread(currentOwner);
-						currentOwner.requestVehicle(licensePlate, carMake, carModel, carYear, residencyTime);
-					} catch (Exception error ) {
-						
+					} catch (Exception error) {
+
 						error.printStackTrace();
-					} 
-					
+					}
+
 					thread.start();
-					
+
 					clearTextFields();
-								
+
 					popup = new JFrame();
-					JOptionPane.showMessageDialog(popup, "You have successfully registered as a Vehicle Owner", "Account Creation Confirmed",
-							JOptionPane.INFORMATION_MESSAGE);				
-					//TEMPORARY, SHOULD BE IN LOGINGUI. SHOULD DIRECT YOU HERE AFTER LOGIN, FOR NOW WE WILL DO THIS.
-					//frame.dispose();
-					//OwnerDashboard ownerDash = new OwnerDashboard();
-					
-				} 
-				
+					JOptionPane.showMessageDialog(popup, "You have successfully registered as a Vehicle Owner",
+							"Account Creation Confirmed", JOptionPane.INFORMATION_MESSAGE);
+
+				}
+
 				catch (IOException error) {
 					System.out.println("An error has occured");
 				}
-				
 
 			}
 
 			else if (!name.isEmpty() && !email.isEmpty() && !phoneNum.isEmpty() && !ID.isEmpty()
 					&& !jobDuration.isEmpty() && !jobDeadline.isEmpty() && vehicleRenterCheckBox.isSelected()) {
 				FileWriter fWriter;
-				try {               //adds vehicle renter to registry and arraylist
+				try { // adds vehicle renter to registry and arraylist
 					fWriter = new FileWriter(registry, true);
 					java.util.Date time = new java.util.Date();
 
@@ -421,59 +409,35 @@ public class AccountCreation implements ActionListener {
 					fWriter.write(jobDuration + "\n");
 					fWriter.write(jobDeadline + "\n");
 					fWriter.close();
-				
 
-					//System.out.println(jobID);
-					/*
-					Random randI = new Random();
-			        int jobID = randI.nextInt(100);
-			        jobID = jobID+1;
-			        */
-					
-					Controller.addRenter(name, email, Integer.parseInt(phoneNum), ID, Integer.parseInt(jobDuration), Controller.generateJobID());
+					Controller.addRenter(name, email, Integer.parseInt(phoneNum), ID, Integer.parseInt(jobDuration),
+							Controller.generateJobID());
 					Controller.socketRentFound = true;
 					Controller.socketOwnFound = false;
-					//System.out.println("Added!");
-					//System.out.println(Controller.getJobIDList().toString());
-					
-				//	renters.add(new VehicleRenter(name, email, phoneNum, ID, jobDuration, jobDeadline));
-					//^creates new jframe for some reason. no good
 
-					
-					
-					
 					Thread t = null;
 					try {
 						VehicleRenter currentRenter = Controller.latestRenter;
 						t = new Thread(currentRenter);
-						currentRenter.requestJob(Integer.parseInt(jobDuration), Integer.parseInt(ID));
-						} catch (Exception error) {
+					} catch (Exception error) {
 
-							error.printStackTrace();
+						error.printStackTrace();
 					}
-						
-						t.start();
-					
+
+					t.start();
+
 					clearTextFields();
-					
+
 					popup = new JFrame();
-					JOptionPane.showMessageDialog(popup, "You have successfully registered as a Vehicle Renter", "Account Creation Confirmed",
-							JOptionPane.INFORMATION_MESSAGE);
-					
-					//TEMPORARY, SHOULD BE IN LOGINGUI. SHOULD DIRECT YOU HERE AFTER LOGIN, FOR NOW WE WILL DO THIS.
-					//frame.dispose();
-					//RenterDashboard renterDash = new RenterDashboard();
+					JOptionPane.showMessageDialog(popup, "You have successfully registered as a Vehicle Renter",
+							"Account Creation Confirmed", JOptionPane.INFORMATION_MESSAGE);
 				}
-		
+
 				catch (IOException error) {
 					System.out.println("An error has occured");
 				}
-				 
-					
+
 			}
-			
-			
-			
 
 			else if (!(e.getSource() == createBack)) {
 				popup = new JFrame();
@@ -497,8 +461,7 @@ public class AccountCreation implements ActionListener {
 		jobDeadlineField.setText("");
 		residencyTimeField.setText("");
 	}
-	
-	
+
 	private void createPanel() {
 		panel = new JPanel();
 
@@ -542,5 +505,5 @@ public class AccountCreation implements ActionListener {
 		// adds to current object
 		frame.add(panel);
 	}
-	
+
 }

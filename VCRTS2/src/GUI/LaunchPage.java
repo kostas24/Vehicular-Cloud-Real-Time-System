@@ -25,23 +25,23 @@ public class LaunchPage implements ActionListener{
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setFocusable(true);
 		welcomeLabel = new JLabel("VCRTS"); 
-		welcomeLabel.setBounds(330, 180, 150, 50); //Set location of label
+		welcomeLabel.setBounds(330, 180, 150, 50); 
 		welcomeLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 40));
 		welcomeLabel.setForeground(Color.white);
 		optionLabel = new JLabel("Please login or create an account below");
-		optionLabel.setBounds(110, 300, 600, 50); //Set location of label
+		optionLabel.setBounds(110, 300, 600, 50); 
 		optionLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 32));
 		optionLabel.setForeground(Color.white);
 		cloudImage = new JLabel("");
 		cloudImage.setIcon(new ImageIcon("Images/cloud.png"));
 		cloudImage.setBounds(220, 5, 300, 250);
 		ImageIcon CloudComputingIcon = new ImageIcon("Images/Cloud Computing.jpg");
-		frame.setIconImage(CloudComputingIcon.getImage()); //Changing Frame Icon to cloud computing icon
+		frame.setIconImage(CloudComputingIcon.getImage()); 
 		createButtonAccount(); 
 		createButtonLogin();
 		createPanel();	
 		frame.setVisible(true);
-		frame.setTitle("VCRTS - Launch Page"); //setting Title on top left corner of GUI	
+		frame.setTitle("VCRTS - Launch Page"); 
 		
 	}
 
