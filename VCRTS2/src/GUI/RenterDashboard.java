@@ -63,8 +63,8 @@ public class RenterDashboard extends AccountCreation implements ActionListener {
 		createRefreshButton();
 
 		createPanel();
+		renterFrame.setTitle("VCRTS - Vehicle Renter Dashboard");
 
-		renterFrame.setTitle("VCRTS - Vehicle owner Dashboard");
 		ImageIcon CloudComputingIcon = new ImageIcon("Images/Cloud Computing.jpg");
 		renterFrame.setIconImage(CloudComputingIcon.getImage());
 		renterFrame.setSize(FRAME_WIDTH, FRAME_HEIGHT);

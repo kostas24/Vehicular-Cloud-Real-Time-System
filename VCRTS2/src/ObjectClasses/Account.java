@@ -1,13 +1,10 @@
 package ObjectClasses;
 public class Account {
 
-	//CLASS MIGHT NOT BE Needed? Can't we just Use AccountCreation as the Superclass?
-	
 	private String name;
 	private String email;
 	private int phoneNum;
 	private String id;
-	//private boolean adminStatus;
 	
 	public Account(String name, String email, int phoneNum, String id) {
 		this.name = name;
@@ -48,13 +45,4 @@ public class Account {
 		this.id = id;
 	}
 
-	/*
-	public boolean isAdminStatus() {
-		return adminStatus;
-	}
-
-	public void setAdminStatus(boolean adminStatus) {
-		this.adminStatus = adminStatus;
-	}
-	*/
 }

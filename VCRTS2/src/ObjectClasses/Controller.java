@@ -48,7 +48,7 @@ public class Controller {
 			serverSocketRent = new ServerSocket(1);
 			serverSocketOwn = new ServerSocket(2);
 
-			// sever accepts connection request from client
+			// server accepts connection request from client
 			while (true) {
 				if (socketRentFound = true) {
 					socketRent = serverSocketRent.accept();
@@ -206,7 +206,6 @@ public class Controller {
 	}
 
 	public static int generateJobID() {
-		// Controller controller = new Controller ();
 		jobIDList.add(nextJobID + 1);
 		nextJobID += 1;
 		return nextJobID;

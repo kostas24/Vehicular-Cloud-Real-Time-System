@@ -85,7 +85,6 @@ public class ControllerDashboard implements ActionListener {
 		if (e.getSource() == buttonCompletionTime) {
 
 			ArrayList<Integer> times = new ArrayList<Integer>(Controller.calculateCompletionTime());
-			// System.out.println(times.toString());
 			completionTimeLabel.setText(times.toString());
 			completionIDLabel.setText(Controller.getJobIDList().toString());
 		}
@@ -133,7 +132,7 @@ public class ControllerDashboard implements ActionListener {
 		createBack = new JButton("Back");
 		createBack.setFont(new Font("Comic Sans MS", Font.PLAIN, 20));
 		createBack.setForeground(Color.white);
-		createBack.setBounds(25, 10, 100, 40); // Set location of button
+		createBack.setBounds(25, 10, 100, 40); 
 		createBack.setBackground(Color.BLUE);
 		createBack.setOpaque(true);
 		createBack.setBorderPainted(false);
@@ -168,6 +167,7 @@ public class ControllerDashboard implements ActionListener {
 		ControllerFrame.add(panel);
 
 	}
+
 
 }
 

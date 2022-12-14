@@ -23,8 +23,6 @@ public class VehicleRenter extends Account implements Runnable{
 	public String requestedJob;
 	
 	public void run() {
-		// TODO Auto-generated method stub
-
 		String messageIn = "";
 		String messageOut = "";
 		Scanner keyInput;

@@ -42,11 +42,6 @@ public class Vehicle {
 		return isIdle;
 	}
 
-	/*
-	 * This method changes the status of a vehicle from idling (not assigned to a
-	 * job) to busy (assigned to a job) and vice versa
-	 * @parameter: Boolean isIdle
-	 */
 	public void setAvailability(boolean isIdle) {
 		this.isIdle = isIdle;
 	}
