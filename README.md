@@ -1,10 +1,12 @@
 # VCRTSNEW
 
-### Purpose: to build a management system to hypothetically provide users in need of computational 
+### Purpose: 
+to build a management system to hypothetically provide users in need of computational 
 power with users who are willing to “lend” out their vehicle hardware. 
 An Admin has control over whether to accept or reject a job.
 
-### How to Use: Run Controller.java , then run Runnable.java . 
+### How to Use: 
+Run Controller.java , then run Runnable.java . 
 Create a accounts for vehicle renters and vehicle owners.
 Login to "Admin" by hitting login button, then typing "admin" for both username & password.
 You are able to view Pending jobs with the "view requests button" where you can accept
