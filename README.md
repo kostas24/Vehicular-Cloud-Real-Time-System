@@ -10,7 +10,9 @@ Created an application for managing and organizing computation resources and
 jobs in a vehicular cloud environment.The purpose of this software is to build a
 management system to hypothetically provide users in need of computational power 
 with users who are willing to “lend” out their vehicle hardware. An Admin has 
-control over whether to accept or reject a job.
+control over whether to accept or reject a job. Information for users are 
+stored into a database using MySQL and socket programming was used to
+allow communication between the users.
 
 ### How to Use: 
 Run Controller.java , then run Runnable.java . 
