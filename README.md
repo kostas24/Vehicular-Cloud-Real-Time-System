@@ -1,4 +1,4 @@
-# VCRTSNEW
+# Vehicular Cloud Real Time System
 
 ### Purpose: 
 to build a management system to hypothetically provide users in need of computational 
